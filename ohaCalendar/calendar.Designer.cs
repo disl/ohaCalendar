@@ -56,6 +56,16 @@ namespace ohaCalendar
             generalSplitContainer = new SplitContainer();
             splitContainer9 = new SplitContainer();
             dataGridView1 = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            organizerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            locationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            endDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            outlookColumn = new DataGridViewButtonColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            bodyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            requiredAttendeesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            entryIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             checklist_for_release_answersBindingSource = new BindingSource(components);
             calendarDataSet = new CalendarDataSet();
             tableLayoutPanel5 = new TableLayoutPanel();
@@ -152,16 +162,6 @@ namespace ohaCalendar
             move_calendar_currentToolStripMenuItem = new ToolStripMenuItem();
             close_openToolStripMenuItem = new ToolStripMenuItem();
             pls_waitLabel = new Label();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            organizerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            locationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            endDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            outlookColumn = new DataGridViewButtonColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            bodyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            requiredAttendeesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            entryIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -420,6 +420,76 @@ namespace ohaCalendar
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.CellMouseClick += dataGridView1_CellMouseClick;
             dataGridView1.RowHeaderMouseDoubleClick += dataGridView1_RowHeaderMouseDoubleClick;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "Subject";
+            resources.ApplyResources(dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // organizerDataGridViewTextBoxColumn
+            // 
+            organizerDataGridViewTextBoxColumn.DataPropertyName = "Organizer";
+            resources.ApplyResources(organizerDataGridViewTextBoxColumn, "organizerDataGridViewTextBoxColumn");
+            organizerDataGridViewTextBoxColumn.Name = "organizerDataGridViewTextBoxColumn";
+            organizerDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // locationDataGridViewTextBoxColumn
+            // 
+            locationDataGridViewTextBoxColumn.DataPropertyName = "Location";
+            resources.ApplyResources(locationDataGridViewTextBoxColumn, "locationDataGridViewTextBoxColumn");
+            locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
+            locationDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "Start";
+            resources.ApplyResources(dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // endDataGridViewTextBoxColumn
+            // 
+            endDataGridViewTextBoxColumn.DataPropertyName = "End";
+            resources.ApplyResources(endDataGridViewTextBoxColumn, "endDataGridViewTextBoxColumn");
+            endDataGridViewTextBoxColumn.Name = "endDataGridViewTextBoxColumn";
+            endDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // outlookColumn
+            // 
+            outlookColumn.FillWeight = 50F;
+            resources.ApplyResources(outlookColumn, "outlookColumn");
+            outlookColumn.Name = "outlookColumn";
+            outlookColumn.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "Duration";
+            resources.ApplyResources(dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // bodyDataGridViewTextBoxColumn
+            // 
+            bodyDataGridViewTextBoxColumn.DataPropertyName = "Body";
+            resources.ApplyResources(bodyDataGridViewTextBoxColumn, "bodyDataGridViewTextBoxColumn");
+            bodyDataGridViewTextBoxColumn.Name = "bodyDataGridViewTextBoxColumn";
+            bodyDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // requiredAttendeesDataGridViewTextBoxColumn
+            // 
+            requiredAttendeesDataGridViewTextBoxColumn.DataPropertyName = "RequiredAttendees";
+            resources.ApplyResources(requiredAttendeesDataGridViewTextBoxColumn, "requiredAttendeesDataGridViewTextBoxColumn");
+            requiredAttendeesDataGridViewTextBoxColumn.Name = "requiredAttendeesDataGridViewTextBoxColumn";
+            requiredAttendeesDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // entryIDDataGridViewTextBoxColumn
+            // 
+            entryIDDataGridViewTextBoxColumn.DataPropertyName = "EntryID";
+            resources.ApplyResources(entryIDDataGridViewTextBoxColumn, "entryIDDataGridViewTextBoxColumn");
+            entryIDDataGridViewTextBoxColumn.Name = "entryIDDataGridViewTextBoxColumn";
+            entryIDDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // checklist_for_release_answersBindingSource
             // 
@@ -1004,76 +1074,6 @@ namespace ohaCalendar
             pls_waitLabel.ForeColor = SystemColors.Highlight;
             pls_waitLabel.Name = "pls_waitLabel";
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "Subject";
-            resources.ApplyResources(dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // organizerDataGridViewTextBoxColumn
-            // 
-            organizerDataGridViewTextBoxColumn.DataPropertyName = "Organizer";
-            resources.ApplyResources(organizerDataGridViewTextBoxColumn, "organizerDataGridViewTextBoxColumn");
-            organizerDataGridViewTextBoxColumn.Name = "organizerDataGridViewTextBoxColumn";
-            organizerDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // locationDataGridViewTextBoxColumn
-            // 
-            locationDataGridViewTextBoxColumn.DataPropertyName = "Location";
-            resources.ApplyResources(locationDataGridViewTextBoxColumn, "locationDataGridViewTextBoxColumn");
-            locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
-            locationDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "Start";
-            resources.ApplyResources(dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // endDataGridViewTextBoxColumn
-            // 
-            endDataGridViewTextBoxColumn.DataPropertyName = "End";
-            resources.ApplyResources(endDataGridViewTextBoxColumn, "endDataGridViewTextBoxColumn");
-            endDataGridViewTextBoxColumn.Name = "endDataGridViewTextBoxColumn";
-            endDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // outlookColumn
-            // 
-            outlookColumn.FillWeight = 50F;
-            resources.ApplyResources(outlookColumn, "outlookColumn");
-            outlookColumn.Name = "outlookColumn";
-            outlookColumn.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "Duration";
-            resources.ApplyResources(dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // bodyDataGridViewTextBoxColumn
-            // 
-            bodyDataGridViewTextBoxColumn.DataPropertyName = "Body";
-            resources.ApplyResources(bodyDataGridViewTextBoxColumn, "bodyDataGridViewTextBoxColumn");
-            bodyDataGridViewTextBoxColumn.Name = "bodyDataGridViewTextBoxColumn";
-            bodyDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // requiredAttendeesDataGridViewTextBoxColumn
-            // 
-            requiredAttendeesDataGridViewTextBoxColumn.DataPropertyName = "RequiredAttendees";
-            resources.ApplyResources(requiredAttendeesDataGridViewTextBoxColumn, "requiredAttendeesDataGridViewTextBoxColumn");
-            requiredAttendeesDataGridViewTextBoxColumn.Name = "requiredAttendeesDataGridViewTextBoxColumn";
-            requiredAttendeesDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // entryIDDataGridViewTextBoxColumn
-            // 
-            entryIDDataGridViewTextBoxColumn.DataPropertyName = "EntryID";
-            resources.ApplyResources(entryIDDataGridViewTextBoxColumn, "entryIDDataGridViewTextBoxColumn");
-            entryIDDataGridViewTextBoxColumn.Name = "entryIDDataGridViewTextBoxColumn";
-            entryIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // calendar
             // 
             resources.ApplyResources(this, "$this");
@@ -1085,6 +1085,7 @@ namespace ohaCalendar
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MainMenuStrip = menuStrip1;
             Name = "calendar";
+            WindowState = FormWindowState.Minimized;
             Load += calendar_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);

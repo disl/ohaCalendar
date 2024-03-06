@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Version>1.0.2024.1</Version>
-    <PackageIcon>calendar.png</PackageIcon>
+    <PackageIcon>calendar_128.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\Downloads\calendar.png">
+    <None Include="..\..\..\..\Downloads\calendar_128.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
