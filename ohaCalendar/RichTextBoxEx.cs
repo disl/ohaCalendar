@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace ohaERP_Library
+namespace ohaCalendar
 {
     public class RichTextBoxEx : RichTextBox
 	{

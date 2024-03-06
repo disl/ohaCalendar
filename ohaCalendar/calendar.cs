@@ -615,6 +615,32 @@ namespace ohaCalendar
                 GetData(inputForm_Date.Value);
             }
         }
+
+        private void richTextBoxEx1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBoxEx1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(e.LinkText))
+                {
+
+                    var ps = new ProcessStartInfo(e.LinkText)
+                    {
+                        UseShellExecute = true,
+                        Verb = "open"
+                    };
+                    Process.Start(ps);
+                }
+            }
+            catch (Win32Exception)
+            {
+                Process.Start("IExplore.exe", "http://myurl");
+            }
+        }
     }
 
     public class CalendarItemType

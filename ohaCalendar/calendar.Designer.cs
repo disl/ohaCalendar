@@ -1,5 +1,4 @@
-﻿using ohaERP_Library;
-using System.Data;
+﻿using System.Data;
 
 namespace ohaCalendar
 {
@@ -74,6 +73,7 @@ namespace ohaCalendar
             textBox4 = new TextBox();
             dateTextBox = new TextBox();
             textBox2 = new TextBox();
+            richTextBoxEx1 = new RichTextBoxEx();
             linkLabel1 = new LinkLabel();
             linkLabel2 = new LinkLabel();
             linkLabel3 = new LinkLabel();
@@ -511,6 +511,7 @@ namespace ohaCalendar
             tableLayoutPanel5.Controls.Add(textBox4, 0, 2);
             tableLayoutPanel5.Controls.Add(dateTextBox, 0, 0);
             tableLayoutPanel5.Controls.Add(textBox2, 0, 1);
+            tableLayoutPanel5.Controls.Add(richTextBoxEx1, 0, 5);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
             // textBox5
@@ -546,6 +547,16 @@ namespace ohaCalendar
             resources.ApplyResources(textBox2, "textBox2");
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
+            // 
+            // richTextBoxEx1
+            // 
+            richTextBoxEx1.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Body", true));
+            richTextBoxEx1.DetectUrls = true;
+            resources.ApplyResources(richTextBoxEx1, "richTextBoxEx1");
+            richTextBoxEx1.Name = "richTextBoxEx1";
+            richTextBoxEx1.ReadOnly = true;
+            richTextBoxEx1.LinkClicked += richTextBoxEx1_LinkClicked;
+            richTextBoxEx1.TextChanged += richTextBoxEx1_TextChanged;
             // 
             // linkLabel1
             // 
@@ -1289,5 +1300,6 @@ namespace ohaCalendar
         private DataGridViewTextBoxColumn bodyDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn requiredAttendeesDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn entryIDDataGridViewTextBoxColumn;
+        private RichTextBoxEx richTextBoxEx1;
     }
 }

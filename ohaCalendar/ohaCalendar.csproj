@@ -6,8 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>1.0.2024.1</Version>
+    <Version>1.0.2024.2</Version>
     <PackageIcon>calendar_128.png</PackageIcon>
+    <ApplicationIcon>calendar_month.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,10 @@
     <EmbeddedResource Remove="ohaDateTimePicker.de-DE.resx" />
     <EmbeddedResource Remove="ohaDateTimePicker.hu-HU.resx" />
     <EmbeddedResource Remove="ohaDateTimePicker.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="calendar_month.ico" />
   </ItemGroup>
 
   <ItemGroup>

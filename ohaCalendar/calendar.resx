@@ -1027,13 +1027,13 @@
     <value>Fill</value>
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 93</value>
+    <value>3, 123</value>
   </data>
   <data name="textBox5.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 24</value>
+    <value>614, 44</value>
   </data>
   <data name="textBox5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1054,7 +1054,7 @@
     <value>Fill</value>
   </data>
   <data name="textBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 123</value>
+    <value>3, 93</value>
   </data>
   <data name="textBox3.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1063,7 +1063,7 @@
     <value>Vertical</value>
   </data>
   <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 44</value>
+    <value>614, 24</value>
   </data>
   <data name="textBox3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1161,6 +1161,33 @@
   <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="richTextBoxEx1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="richTextBoxEx1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 173</value>
+  </data>
+  <data name="richTextBoxEx1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 447</value>
+  </data>
+  <data name="richTextBoxEx1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="richTextBoxEx1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;richTextBoxEx1.Name" xml:space="preserve">
+    <value>richTextBoxEx1</value>
+  </data>
+  <data name="&gt;&gt;richTextBoxEx1.Type" xml:space="preserve">
+    <value>ohaCalendar.RichTextBoxEx, ohaCalendar, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;richTextBoxEx1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;richTextBoxEx1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="tableLayoutPanel5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1189,7 +1216,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="textBox5" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox4" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTextBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,30,Absolute,30,Absolute,30,Absolute,30,Absolute,50,Absolute,70,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="textBox5" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox4" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTextBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="richTextBoxEx1" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,30,Absolute,30,Absolute,30,Absolute,30,Absolute,50,Absolute,70,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="&gt;&gt;splitContainer9.Panel2.Name" xml:space="preserve">
     <value>splitContainer9.Panel2</value>
