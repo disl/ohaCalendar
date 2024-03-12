@@ -519,13 +519,13 @@ namespace ohaCalendar
             generalSplitContainer.Panel2Collapsed = !generalSplitContainer.Panel2Collapsed;
             if (generalSplitContainer.Panel2Collapsed)
             {
-                this.Size = new Size(620, 930);  //(697, 930);
+                this.Size = new Size(650, 930);  //(697, 930);
                 close_openToolStripMenuItem.Text = Properties.Resources.calendar_info_show;
                 close_openToolStripMenuItem.Image = Properties.Resources.expand;
             }
             else
             {
-                this.Size = new Size(1394, 930);
+                this.Size = new Size(1275, 930);
                 close_openToolStripMenuItem.Text = Properties.Resources.calendar_info_hidden;
                 close_openToolStripMenuItem.Image = Properties.Resources.collapse;
             }

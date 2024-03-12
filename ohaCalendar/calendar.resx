@@ -160,7 +160,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 155</value>
+    <value>612, 155</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -235,7 +235,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 187</value>
+    <value>612, 187</value>
   </data>
   <data name="splitContainer4.SplitterDistance" type="System.Int32, mscorlib">
     <value>155</value>
@@ -265,7 +265,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 215</value>
+    <value>618, 215</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -316,7 +316,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 155</value>
+    <value>612, 155</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -391,7 +391,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 184</value>
+    <value>612, 184</value>
   </data>
   <data name="splitContainer6.SplitterDistance" type="System.Int32, mscorlib">
     <value>155</value>
@@ -421,7 +421,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 212</value>
+    <value>618, 212</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -451,7 +451,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 431</value>
+    <value>618, 431</value>
   </data>
   <data name="splitContainer2.SplitterDistance" type="System.Int32, mscorlib">
     <value>215</value>
@@ -514,7 +514,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 159</value>
+    <value>612, 159</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -589,7 +589,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 188</value>
+    <value>612, 188</value>
   </data>
   <data name="splitContainer7.SplitterDistance" type="System.Int32, mscorlib">
     <value>159</value>
@@ -619,7 +619,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 216</value>
+    <value>618, 216</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -670,7 +670,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 154</value>
+    <value>612, 154</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -745,7 +745,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 184</value>
+    <value>612, 184</value>
   </data>
   <data name="splitContainer8.SplitterDistance" type="System.Int32, mscorlib">
     <value>154</value>
@@ -775,7 +775,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 212</value>
+    <value>618, 212</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -805,7 +805,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 432</value>
+    <value>618, 432</value>
   </data>
   <data name="splitContainer3.SplitterDistance" type="System.Int32, mscorlib">
     <value>216</value>
@@ -838,7 +838,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 867</value>
+    <value>618, 867</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>431</value>
@@ -991,7 +991,7 @@
     <value>0, 0</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>620, 240</value>
+    <value>594, 240</value>
   </data>
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1033,7 +1033,7 @@
     <value>True</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 44</value>
+    <value>588, 44</value>
   </data>
   <data name="textBox5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1063,7 +1063,7 @@
     <value>Vertical</value>
   </data>
   <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 24</value>
+    <value>588, 24</value>
   </data>
   <data name="textBox3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1090,7 +1090,7 @@
     <value>True</value>
   </data>
   <data name="textBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 24</value>
+    <value>588, 24</value>
   </data>
   <data name="textBox4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1117,7 +1117,7 @@
     <value>True</value>
   </data>
   <data name="dateTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 24</value>
+    <value>588, 24</value>
   </data>
   <data name="dateTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1144,7 +1144,7 @@
     <value>True</value>
   </data>
   <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 24</value>
+    <value>588, 24</value>
   </data>
   <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1168,7 +1168,7 @@
     <value>3, 173</value>
   </data>
   <data name="richTextBoxEx1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 447</value>
+    <value>588, 447</value>
   </data>
   <data name="richTextBoxEx1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1198,7 +1198,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>620, 623</value>
+    <value>594, 623</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1231,7 +1231,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>620, 867</value>
+    <value>594, 867</value>
   </data>
   <data name="splitContainer9.SplitterDistance" type="System.Int32, mscorlib">
     <value>240</value>
@@ -1264,10 +1264,10 @@
     <value>1</value>
   </data>
   <data name="generalSplitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1134, 867</value>
+    <value>1216, 867</value>
   </data>
   <data name="generalSplitContainer.SplitterDistance" type="System.Int32, mscorlib">
-    <value>510</value>
+    <value>618</value>
   </data>
   <data name="generalSplitContainer.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3424,7 +3424,7 @@
     <value>0, 0</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1134, 24</value>
+    <value>1216, 24</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3481,7 +3481,7 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1134, 891</value>
+    <value>1216, 891</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
@@ -3543,66 +3543,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>calendar: Kalender</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn1</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;organizerDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>organizerDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;organizerDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;locationDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>locationDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;locationDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn2</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;endDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>endDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;endDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;outlookColumn.Name" xml:space="preserve">
-    <value>outlookColumn</value>
-  </data>
-  <data name="&gt;&gt;outlookColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn3</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bodyDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>bodyDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;bodyDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;requiredAttendeesDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>requiredAttendeesDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;requiredAttendeesDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;entryIDDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>entryIDDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;entryIDDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checklist_for_release_answersBindingSource.Name" xml:space="preserve">
     <value>checklist_for_release_answersBindingSource</value>
@@ -3669,6 +3609,66 @@
   </data>
   <data name="&gt;&gt;close_openToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;organizerDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>organizerDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;organizerDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;locationDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>locationDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;locationDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;endDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>endDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;endDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;outlookColumn.Name" xml:space="preserve">
+    <value>outlookColumn</value>
+  </data>
+  <data name="&gt;&gt;outlookColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bodyDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>bodyDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;bodyDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;requiredAttendeesDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>requiredAttendeesDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;requiredAttendeesDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;entryIDDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>entryIDDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;entryIDDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>calendar</value>
