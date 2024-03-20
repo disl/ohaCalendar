@@ -1027,13 +1027,16 @@
     <value>Fill</value>
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 123</value>
+    <value>3, 153</value>
   </data>
   <data name="textBox5.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="textBox5.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 44</value>
+    <value>588, 54</value>
   </data>
   <data name="textBox5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1063,7 +1066,7 @@
     <value>Vertical</value>
   </data>
   <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 24</value>
+    <value>588, 54</value>
   </data>
   <data name="textBox3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1165,10 +1168,10 @@
     <value>Fill</value>
   </data>
   <data name="richTextBoxEx1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 173</value>
+    <value>3, 213</value>
   </data>
   <data name="richTextBoxEx1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 447</value>
+    <value>588, 407</value>
   </data>
   <data name="richTextBoxEx1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1216,7 +1219,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="textBox5" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox4" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTextBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="richTextBoxEx1" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,30,Absolute,30,Absolute,30,Absolute,30,Absolute,50,Absolute,70,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="textBox5" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox4" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTextBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="richTextBoxEx1" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,30,Absolute,30,Absolute,30,Absolute,60,Absolute,60,Absolute,70" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="&gt;&gt;splitContainer9.Panel2.Name" xml:space="preserve">
     <value>splitContainer9.Panel2</value>
@@ -3544,6 +3547,66 @@
   <data name="$this.Text" xml:space="preserve">
     <value>calendar: Kalender</value>
   </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;organizerDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>organizerDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;organizerDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;locationDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>locationDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;locationDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;endDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>endDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;endDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;outlookColumn.Name" xml:space="preserve">
+    <value>outlookColumn</value>
+  </data>
+  <data name="&gt;&gt;outlookColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bodyDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>bodyDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;bodyDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;requiredAttendeesDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>requiredAttendeesDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;requiredAttendeesDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;entryIDDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>entryIDDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;entryIDDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;checklist_for_release_answersBindingSource.Name" xml:space="preserve">
     <value>checklist_for_release_answersBindingSource</value>
   </data>
@@ -3609,66 +3672,6 @@
   </data>
   <data name="&gt;&gt;close_openToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn1</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;organizerDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>organizerDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;organizerDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;locationDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>locationDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;locationDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn2</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;endDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>endDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;endDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;outlookColumn.Name" xml:space="preserve">
-    <value>outlookColumn</value>
-  </data>
-  <data name="&gt;&gt;outlookColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn3</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bodyDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>bodyDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;bodyDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;requiredAttendeesDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>requiredAttendeesDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;requiredAttendeesDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;entryIDDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>entryIDDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;entryIDDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>calendar</value>
