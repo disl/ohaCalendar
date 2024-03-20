@@ -32,12 +32,10 @@ namespace ohaCalendar
             if (m_min_date != null)
                 ohaDateTimePicker.MinDate = Convert.ToDateTime (m_min_date);
             
-            if (m_value != null)
+            if (m_value != null && m_value != DateTime.MinValue)
                 ohaDateTimePicker.Value = m_value;
             else
-                ohaDateTimePicker.Value = new DateTime();
-
-            //ohaDateTimePicker.fo;
+                ohaDateTimePicker.Value = DateTime.Today;
         }
 
         private void InputForm_FormClosing(object sender, FormClosingEventArgs e)
