@@ -34,5 +34,17 @@ namespace ohaCalendar.Properties {
                 this["LoggingPerEmail"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string state {
+            get {
+                return ((string)(this["state"]));
+            }
+            set {
+                this["state"] = value;
+            }
+        }
     }
 }

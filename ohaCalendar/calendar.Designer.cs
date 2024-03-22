@@ -161,6 +161,7 @@ namespace ohaCalendar
             toolStripMenuItem2 = new ToolStripSeparator();
             move_calendar_currentToolStripMenuItem = new ToolStripMenuItem();
             close_openToolStripMenuItem = new ToolStripMenuItem();
+            stateToolStripComboBox = new ToolStripComboBox();
             pls_waitLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -1025,7 +1026,7 @@ namespace ohaCalendar
             // menuStrip1
             // 
             resources.ApplyResources(menuStrip1, "menuStrip1");
-            menuStrip1.Items.AddRange(new ToolStripItem[] { getCalendarItemsToolStripMenuItem, moveCalendarToolStripMenuItem, close_openToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { getCalendarItemsToolStripMenuItem, moveCalendarToolStripMenuItem, close_openToolStripMenuItem, stateToolStripComboBox });
             menuStrip1.Name = "menuStrip1";
             // 
             // getCalendarItemsToolStripMenuItem
@@ -1081,6 +1082,11 @@ namespace ohaCalendar
             resources.ApplyResources(close_openToolStripMenuItem, "close_openToolStripMenuItem");
             close_openToolStripMenuItem.Click += close_openToolStripMenuItem_Click;
             // 
+            // stateToolStripComboBox
+            // 
+            stateToolStripComboBox.Name = "stateToolStripComboBox";
+            resources.ApplyResources(stateToolStripComboBox, "stateToolStripComboBox");
+            // 
             // pls_waitLabel
             // 
             resources.ApplyResources(pls_waitLabel, "pls_waitLabel");
@@ -1099,6 +1105,7 @@ namespace ohaCalendar
             MainMenuStrip = menuStrip1;
             Name = "calendar";
             WindowState = FormWindowState.Minimized;
+            FormClosing += calendar_FormClosing;
             Load += calendar_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
@@ -1303,5 +1310,6 @@ namespace ohaCalendar
         private DataGridViewTextBoxColumn bodyDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn requiredAttendeesDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn entryIDDataGridViewTextBoxColumn;
+        private ToolStripComboBox stateToolStripComboBox;
     }
 }
