@@ -1,10 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
 using ohaCalendar.Models;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
-using System.Net;
 using System.Text.Json;
 using System.Xml.Serialization;
 using static ohaCalendar.CalendarDataSet;
@@ -52,34 +52,34 @@ namespace ohaCalendar
         private int year_4;
         private int m_old_year;
         private string m_holidays_file;
+        private string m_current_culture;
+        private bool m_is_started = true;
 
         public calendar()
         {
             InitializeComponent();
         }
 
-        private void calendar_Load(object sender, EventArgs e)
+        private async void calendar_Load(object sender, EventArgs e)
         {
             try
             {
                 getCalendarItemsToolStripMenuItem.Image = Properties.Resources.refresh_icon;
                 moveCalendarToolStripMenuItem.Image = Properties.Resources.dynamic_feed;
 
-                stateToolStripComboBox.ComboBox.SelectedValueChanged += ComboBox_SelectedValueChanged;
+                countriesToolStripComboBox.ComboBox.SelectedValueChanged += CountriesToolStripComboBox_SelectedValueChanged;
+                stateToolStripComboBox.ComboBox.SelectedValueChanged += StateToolStripComboBox_SelectedValueChanged;
 
-                m_holidays_file = Path.Combine(Path.GetTempPath(), "ohaCalendar_holidays.xml");
+                m_current_culture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper();                
 
-                ReadLocalHolidays();
+                await FillCountriesCMB();
+                await ForCalendar_load();
+                
+                countriesToolStripComboBox.ComboBox.SelectedValue = m_current_culture;
 
-                FillStateCMB();
+                await GetData();
 
-                ShowHideInfo();
-
-                GetData();
-
-                bodyTextBox.SetSelectionLink(true);
-
-                SetStartup();
+                m_is_started = false;
             }
             catch (Exception ex)
             {
@@ -89,7 +89,43 @@ namespace ohaCalendar
             }
         }
 
+        private async void CountriesToolStripComboBox_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            if (!m_is_started && 
+                countriesToolStripComboBox.ComboBox.SelectedValue != null && 
+                !string.IsNullOrEmpty(countriesToolStripComboBox.ComboBox.SelectedValue.ToString()) &&
+                countriesToolStripComboBox.ComboBox.SelectedValue is string
+                )
+            {
+                var _current_culture = countriesToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
+                if (_current_culture == null || string.IsNullOrEmpty(_current_culture))
+                    return;
 
+                m_current_culture = _current_culture;
+
+                await RefreshHolidays(true);
+                await ForCalendar_load();
+                await FillStateCMB();                
+            }
+        }
+
+        private async Task ForCalendar_load()
+        {
+            // TEST
+            //m_current_culture = "IT";
+
+            m_holidays_file = Path.Combine(Path.GetTempPath(), "ohaCalendar_holidays.xml");
+
+            //ReadLocalHolidays();
+
+            await FillStateCMB();
+            ShowHideInfo();
+            await GetData();
+
+            bodyTextBox.SetSelectionLink(true);
+
+            SetStartup();
+        }
 
         private static void SetStartup()
         {
@@ -101,12 +137,12 @@ namespace ohaCalendar
             key.SetValue(StartupValue, Application.ExecutablePath.ToString());
         }
 
-        private void GetData(DateTime? actDate = null)
+        private async Task GetData(DateTime? actDate = null)
         {
             try
             {
                 Cursor = Cursors.WaitCursor;
-                System.Windows.Forms.Application.DoEvents();
+                Application.DoEvents();
 
                 DateTime active_date = m_basis_date.AddMonths(m_active_month_no);
                 if (actDate != null)
@@ -124,7 +160,8 @@ namespace ohaCalendar
                 year_4 = active_date_plus_2.Year;
 
                 // Refresh holidays
-                ComboBox_SelectedValueChanged(null, null);
+                //await RefreshHolidays(true);
+                //StateToolStripComboBox_SelectedValueChanged(null, null);
 
                 tableLayoutPanel1.Controls.Clear();
                 tableLayoutPanel2.Controls.Clear();
@@ -173,8 +210,6 @@ namespace ohaCalendar
                 pls_waitLabel.Visible = false;
                 splitContainer1.Visible = true;
                 generalSplitContainer.Visible = true;
-
-
             }
             catch (Exception ex)
             {
@@ -241,8 +276,6 @@ namespace ohaCalendar
                 day_list_full.AddRange(day_list_missing_days_after);
 
                 var weeks_list = date_list.Select(x => x.Week_no).Distinct().ToList();
-
-                //List<CalendarItemType> week_list_tmp = new List<CalendarItemType>();
 
                 bool is_today = false;
                 for (row = 0; row < 6; row++)
@@ -531,9 +564,9 @@ namespace ohaCalendar
             return ret;
         }
 
-        private void getCalendarItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void getCalendarItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GetData();
+            await GetData();
         }
 
         private void close_openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -546,13 +579,13 @@ namespace ohaCalendar
             generalSplitContainer.Panel2Collapsed = !generalSplitContainer.Panel2Collapsed;
             if (generalSplitContainer.Panel2Collapsed)
             {
-                this.Size = new Size(650, 930);  //(697, 930);
+                this.Size = new Size(725, 930);  //(697, 930);
                 close_openToolStripMenuItem.Text = Properties.Resources.calendar_info_show;
                 close_openToolStripMenuItem.Image = Properties.Resources.expand;
             }
             else
             {
-                this.Size = new Size(1275, 930);
+                this.Size = new Size(1400, 930);
                 close_openToolStripMenuItem.Text = Properties.Resources.calendar_info_hidden;
                 close_openToolStripMenuItem.Image = Properties.Resources.collapse;
             }
@@ -561,20 +594,20 @@ namespace ohaCalendar
         private void move_calendar_backToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_active_month_no--;
-            GetData();
+            _ = GetData();
         }
 
         private void move_calendar_forwardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_active_month_no++;
-            GetData();
+            _ = GetData();
         }
 
         private void move_calendar_currentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_basis_date = DateTime.Today;
             m_active_month_no = 0;
-            GetData();
+            _ = GetData();
         }
 
         private void bodyTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -631,7 +664,7 @@ namespace ohaCalendar
             InputForm_date inputForm_Date = new InputForm_date();
             if (inputForm_Date.ShowDialog() == DialogResult.OK)
             {
-                GetData(inputForm_Date.Value);
+                _ = GetData(inputForm_Date.Value);
             }
         }
 
@@ -661,44 +694,57 @@ namespace ohaCalendar
             }
         }
 
-
-
-        private void FillHolidayArray(int year, bool DeleteOld = true)
+        private async Task FillHolidayArray(int year, bool DeleteOld = true, bool DoAlways = false)
         {
-            HolidayType? m_holidays = null;
+            List<HolidayType?> m_holidays = null;            
 
-            //ReadLocalHolidays();
-
-            if (g_holidays.Count > 0 && year == m_old_year)
+            if (!DoAlways || (g_holidays.Count > 0 && year == m_old_year))
                 return;
 
-            if (stateToolStripComboBox.ComboBox.SelectedValue == null)
-                return;
+            //if (stateToolStripComboBox.ComboBox.SelectedValue == null)
+            //    return;
+
+            Cursor = Cursors.WaitCursor;
 
             try
             {
                 if (DeleteOld)
                     g_holidays = new List<structHolidays>();
 
-                using (WebClient wc = new WebClient())
+                using (HttpClient wc = new())
                 {
-                    var url = "https://get.api-feiertage.de/?years=" + year + "&states=" + stateToolStripComboBox.ComboBox.SelectedValue.ToString().ToLower();
-                    var json = wc.DownloadString(url);
+                    var url = "https://openholidaysapi.org/PublicHolidays?countryIsoCode=" + m_current_culture + "&languageIsoCode=" + m_current_culture + "&validFrom=" + year + "-01-01&validTo=" + year + "-12-31";
+                    var json = await wc.GetStringAsync(url);
                     if (json != null)
-                        m_holidays = JsonSerializer.Deserialize<HolidayType>(json);
+                        m_holidays = JsonSerializer.Deserialize<List<HolidayType>>(json);
                 }
                 if (m_holidays != null)
                 {
-                    foreach (var holiday in m_holidays.feiertage)
+                    foreach (var holiday in m_holidays)
                     {
                         structHolidays new_item = default;
-                        new_item.date = Convert.ToDateTime(holiday.date);
-                        new_item.description = holiday.fname;
+                        new_item.date = Convert.ToDateTime(holiday.startDate);
+
+                        var name_obj = holiday.name.FirstOrDefault(x => x.language == m_current_culture);
+                        if (name_obj == null)
+                        {
+                            name_obj = holiday.name.FirstOrDefault(x => x.language == "EN");
+                        }
+                        if (name_obj == null)
+                        {
+                            return;
+                        }
+                        var holiday_name = name_obj.text;
+
+
+                        new_item.description = holiday_name != null ? holiday_name : "";
                         g_holidays.Add(new_item);
                     }
-                }
 
-                SaveLocalHolidays();
+                    await GetData();
+                }
+                //SaveLocalHolidays();
+                //
 
                 m_old_year = year;
             }
@@ -706,87 +752,62 @@ namespace ohaCalendar
             {
                 MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
             }
-        }
-
-        private void SaveLocalHolidays()
-        {
-            if (g_holidays == null || g_holidays.Count == 0)
-                return;
-            try
+            finally
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<structHolidays>));
-                TextWriter writer = new StreamWriter(m_holidays_file);
-                serializer.Serialize(writer, g_holidays);
-                writer.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+                Cursor = Cursors.Default;
             }
         }
 
-        private bool ReadLocalHolidays()
-        {
-            if (!File.Exists(m_holidays_file))
-                return false;
+        //private void SaveLocalHolidays()
+        //{
+        //    if (g_holidays == null || g_holidays.Count == 0)
+        //        return;
+        //    try
+        //    {
+        //        XmlSerializer serializer = new XmlSerializer(typeof(List<structHolidays>));
+        //        TextWriter writer = new StreamWriter(m_holidays_file);
+        //        serializer.Serialize(writer, g_holidays);
+        //        writer.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+        //    }
+        //}
 
-            try
-            {
-                // Create an instance of the XmlSerializer class;
-                // specify the type of object to be deserialized.
-                XmlSerializer serializer = new XmlSerializer(typeof(List<structHolidays>));
-                /* If the XML document has been altered with unknown
-                nodes or attributes, handle them with the
-                UnknownNode and UnknownAttribute events.*/
-                serializer.UnknownNode += new
-                XmlNodeEventHandler(serializer_UnknownNode);
-                serializer.UnknownAttribute += new
-                XmlAttributeEventHandler(serializer_UnknownAttribute);
+        //private bool ReadLocalHolidays()
+        //{
+        //    if (!File.Exists(m_holidays_file))
+        //        return false;
 
-                // A FileStream is needed to read the XML document.
-                using (FileStream fs = new FileStream(m_holidays_file, FileMode.Open))
-                {
-                    //List<structHolidays> po = null;
-                    var po = serializer.Deserialize(fs);
-                    if (po != null)
-                    {
-                        g_holidays = (List<structHolidays>)po;
+        //    try
+        //    {
+        //        XmlSerializer serializer = new XmlSerializer(typeof(List<structHolidays>));
+        //        serializer.UnknownNode += new
+        //        XmlNodeEventHandler(serializer_UnknownNode);
+        //        serializer.UnknownAttribute += new
+        //        XmlAttributeEventHandler(serializer_UnknownAttribute);
 
-                        return true;
-                    }
-                }
-                return false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
-                return false;
-            }
+        //        // A FileStream is needed to read the XML document.
+        //        using (FileStream fs = new FileStream(m_holidays_file, FileMode.Open))
+        //        {
+        //            //List<structHolidays> po = null;
+        //            var po = serializer.Deserialize(fs);
+        //            if (po != null)
+        //            {
+        //                g_holidays = (List<structHolidays>)po;
 
-
-            // Read the order date.
-            //Console.WriteLine("OrderDate: " + po.OrderDate);
-
-            //// Read the shipping address.
-            //Address shipTo = po.ShipTo;
-            //ReadAddress(shipTo, "Ship To:");
-            //// Read the list of ordered items.
-            //OrderedItem[] items = po.OrderedItems;
-            //Console.WriteLine("Items to be shipped:");
-            //foreach (OrderedItem oi in items)
-            //{
-            //    Console.WriteLine("\t" +
-            //    oi.ItemName + "\t" +
-            //    oi.Description + "\t" +
-            //    oi.UnitPrice + "\t" +
-            //    oi.Quantity + "\t" +
-            //    oi.LineTotal);
-            //}
-            //// Read the subtotal, shipping cost, and total cost.
-            //Console.WriteLine("\t\t\t\t\t Subtotal\t" + po.SubTotal);
-            //Console.WriteLine("\t\t\t\t\t Shipping\t" + po.ShipCost);
-            //Console.WriteLine("\t\t\t\t\t Total\t\t" + po.TotalCost);
-        }
+        //                return true;
+        //            }
+        //        }
+        //        return false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+        //        return false;
+        //    }
+        //}
 
         private void serializer_UnknownNode(object sender, XmlNodeEventArgs e)
         {
@@ -800,35 +821,111 @@ namespace ohaCalendar
             attr.Name + "='" + attr.Value + "'");
         }
 
-        private void FillStateCMB()
+        private async Task FillCountriesCMB()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("DisplayMember", typeof(string));
             dt.Columns.Add("ValueMember", typeof(string));
-            AddRow(dt, "", "");
-            AddRow(dt, "Baden-Württemberg", "BW");
-            AddRow(dt, "Bayern", "BY");
-            AddRow(dt, "Berlin", "BW");
-            AddRow(dt, "Brandenburg", "BB");
-            AddRow(dt, "Bremen", "HB");
-            AddRow(dt, "Hamburg", "HH");
-            AddRow(dt, "Hessen", "HE");
-            AddRow(dt, "Mecklenburg-Vorpommern", "MV");
-            AddRow(dt, "Niedersachsen", "NI");
-            AddRow(dt, "Nordrhein-Westfalen", "NW");
-            AddRow(dt, "Rheinland-Pfalz", "RP");
-            AddRow(dt, "Saarland", "SL");
-            AddRow(dt, "Sachsen", "SN");
-            AddRow(dt, "Sachsen-Anhalt", "ST");
-            AddRow(dt, "Schleswig-Holstein", "SH");
-            AddRow(dt, "Thüringen", "TH");
 
-            stateToolStripComboBox.ComboBox.DataSource = dt;
-            stateToolStripComboBox.ComboBox.DisplayMember = "DisplayMember";
-            stateToolStripComboBox.ComboBox.ValueMember = "ValueMember";
+            List<CountriesType> countriesList = new List<CountriesType>();
 
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.state))
-                stateToolStripComboBox.ComboBox.SelectedValue = Properties.Settings.Default.state;
+            using (HttpClient wc = new HttpClient())
+            {
+                var url = "https://openholidaysapi.org/Countries";
+                var json = await wc.GetStringAsync(url);
+                if (json != null)
+                    countriesList = JsonSerializer.Deserialize<List<CountriesType>>(json);
+            }
+
+            AddRow(dt, "<countries>", "");
+            if (countriesList != null)
+            {
+                var countriesList_by_isocode = countriesList.Where(x => x.isoCode != null && !string.IsNullOrEmpty(x.isoCode)).ToList();
+
+                if (countriesList_by_isocode == null || countriesList_by_isocode.Count() == 0)
+                {
+                    countriesToolStripComboBox.Visible = false;
+                    return;
+                }
+                else
+                    countriesToolStripComboBox.Visible = true;
+
+                foreach (var item in countriesList_by_isocode)
+                {
+                    var name_obj = item.name.FirstOrDefault(x => x.language == m_current_culture);
+                    if (name_obj == null)
+                    {
+                        name_obj = item.name.FirstOrDefault(x => x.language == "EN");
+                    }
+                    if (name_obj == null)
+                    {
+                        countriesToolStripComboBox.Visible = false;
+                        return;
+                    }
+                    var displayMember = name_obj.text;
+                    AddRow(dt, displayMember, item.isoCode);
+                }
+                countriesToolStripComboBox.ComboBox.DataSource = dt;
+                countriesToolStripComboBox.ComboBox.DisplayMember = "DisplayMember";
+                countriesToolStripComboBox.ComboBox.ValueMember = "ValueMember";
+                
+                //if (!string.IsNullOrEmpty(Properties.Settings.Default.state))
+                //    countriesToolStripComboBox.ComboBox.SelectedValue = Properties.Settings.Default.state;
+            }
+        }
+
+        private async Task FillStateCMB()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("DisplayMember", typeof(string));
+            dt.Columns.Add("ValueMember", typeof(string));
+
+            List<FederalStateType> federalStateList = new List<FederalStateType>();
+
+            using (HttpClient wc = new HttpClient())
+            {
+                var url = "https://openholidaysapi.org/Subdivisions?countryIsoCode=" + m_current_culture;
+                var json = await wc.GetStringAsync(url);
+                if (json != null)
+                    federalStateList = JsonSerializer.Deserialize<List<FederalStateType>>(json);
+            }
+
+            AddRow(dt, "<federal states>", "");
+            if (federalStateList != null)
+            {
+                var federalStateList_by_isocode = federalStateList.Where(x => x.isoCode != null && !string.IsNullOrEmpty(x.isoCode));
+
+                if (federalStateList_by_isocode == null || federalStateList_by_isocode.Count() == 0)
+                {
+                    stateToolStripComboBox.Visible = false;
+                    return;
+                }
+                else
+                    stateToolStripComboBox.Visible = true;
+
+                foreach (var item in federalStateList_by_isocode)
+                {
+                    var name_obj = item.name.FirstOrDefault(x => x.language == m_current_culture);
+                    if (name_obj == null)
+                    {
+                        name_obj = item.name.FirstOrDefault(x => x.language == "EN");
+                    }
+                    if (name_obj == null)
+                    {
+                        stateToolStripComboBox.Visible = false;
+                        return;
+                    }
+                    var displayMember = name_obj.text;
+                    AddRow(dt, displayMember, item.shortName);
+                }
+                stateToolStripComboBox.ComboBox.DataSource = dt;
+                stateToolStripComboBox.ComboBox.DisplayMember = "DisplayMember";
+                stateToolStripComboBox.ComboBox.ValueMember = "ValueMember";
+
+                stateToolStripComboBox.ComboBox.SelectedIndex = 1;
+                if (!string.IsNullOrEmpty(Properties.Settings.Default.state))
+                    stateToolStripComboBox.ComboBox.SelectedValue = Properties.Settings.Default.state;
+            }
         }
 
         private static void AddRow(DataTable dt, string displayMember, string valueMember)
@@ -848,30 +945,29 @@ namespace ohaCalendar
             }
         }
 
-        private void ComboBox_SelectedValueChanged(object? sender, EventArgs e)
+        private async void StateToolStripComboBox_SelectedValueChanged(object? sender, EventArgs e)
         {
-            if (stateToolStripComboBox.ComboBox.SelectedValue != null && year_1 > 0)
+            //if (!m_is_started &&
+            //    (countriesToolStripComboBox.ComboBox.SelectedValue == null 
+            //    || string.IsNullOrEmpty(countriesToolStripComboBox.ComboBox.SelectedValue.ToString()) 
+            //    || countriesToolStripComboBox.ComboBox.SelectedValue is DataRowView
+            //    || countriesToolStripComboBox.ComboBox.SelectedValue.ToString() == m_current_culture))
+            //    return;
+
+            //await RefreshHolidays(true);
+            
+        }
+
+        private async Task RefreshHolidays(bool doAlways)
+        {
+            if (year_1 > 0)  //stateToolStripComboBox.ComboBox.SelectedValue != null && year_1 > 0)
             {
-                FillHolidayArray(year_1);
+                await FillHolidayArray(year_1, DoAlways: doAlways);
                 if (year_4 > year_1)
-                    FillHolidayArray(year_4, false);
+                    await FillHolidayArray(year_4, false, DoAlways: doAlways);
             }
         }
     }
 
-    public class CalendarItemType
-    {
-        public CalendarItemType(DateTime day, int week_no, bool active, int countOfTermins)
-        {
-            Day = day;
-            Week_no = week_no;
-            Active = active;
-            CountOfTermins = countOfTermins;
-        }
 
-        public DateTime Day { get; set; }
-        public int Week_no { get; set; }
-        public bool Active { get; set; }
-        public int CountOfTermins { get; set; }
-    }
 }

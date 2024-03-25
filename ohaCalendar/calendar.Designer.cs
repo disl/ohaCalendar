@@ -161,6 +161,7 @@ namespace ohaCalendar
             toolStripMenuItem2 = new ToolStripSeparator();
             move_calendar_currentToolStripMenuItem = new ToolStripMenuItem();
             close_openToolStripMenuItem = new ToolStripMenuItem();
+            countriesToolStripComboBox = new ToolStripComboBox();
             stateToolStripComboBox = new ToolStripComboBox();
             pls_waitLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -461,7 +462,7 @@ namespace ohaCalendar
             // 
             // outlookColumn
             // 
-            outlookColumn.FillWeight = 50F;
+            outlookColumn.FillWeight = 60F;
             resources.ApplyResources(outlookColumn, "outlookColumn");
             outlookColumn.Name = "outlookColumn";
             outlookColumn.ReadOnly = true;
@@ -1026,7 +1027,7 @@ namespace ohaCalendar
             // menuStrip1
             // 
             resources.ApplyResources(menuStrip1, "menuStrip1");
-            menuStrip1.Items.AddRange(new ToolStripItem[] { getCalendarItemsToolStripMenuItem, moveCalendarToolStripMenuItem, close_openToolStripMenuItem, stateToolStripComboBox });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { getCalendarItemsToolStripMenuItem, moveCalendarToolStripMenuItem, close_openToolStripMenuItem, countriesToolStripComboBox, stateToolStripComboBox });
             menuStrip1.Name = "menuStrip1";
             // 
             // getCalendarItemsToolStripMenuItem
@@ -1077,10 +1078,14 @@ namespace ohaCalendar
             // 
             // close_openToolStripMenuItem
             // 
-            close_openToolStripMenuItem.Margin = new Padding(0, 0, 40, 0);
             close_openToolStripMenuItem.Name = "close_openToolStripMenuItem";
             resources.ApplyResources(close_openToolStripMenuItem, "close_openToolStripMenuItem");
             close_openToolStripMenuItem.Click += close_openToolStripMenuItem_Click;
+            // 
+            // countriesToolStripComboBox
+            // 
+            countriesToolStripComboBox.Name = "countriesToolStripComboBox";
+            resources.ApplyResources(countriesToolStripComboBox, "countriesToolStripComboBox");
             // 
             // stateToolStripComboBox
             // 
@@ -1300,6 +1305,8 @@ namespace ohaCalendar
         private RichTextBoxEx bodyTextBox = new RichTextBoxEx();
         private CalendarDataSet calendarDataSet;
         private RichTextBoxEx richTextBoxEx1;
+        private ToolStripComboBox stateToolStripComboBox;
+        private ToolStripComboBox countriesToolStripComboBox;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn organizerDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn locationDataGridViewTextBoxColumn;
@@ -1310,6 +1317,5 @@ namespace ohaCalendar
         private DataGridViewTextBoxColumn bodyDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn requiredAttendeesDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn entryIDDataGridViewTextBoxColumn;
-        private ToolStripComboBox stateToolStripComboBox;
     }
 }

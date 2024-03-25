@@ -169,7 +169,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 152</value>
+    <value>693, 151</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -244,10 +244,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 184</value>
+    <value>693, 183</value>
   </data>
   <data name="splitContainer4.SplitterDistance" type="System.Int32, mscorlib">
-    <value>152</value>
+    <value>151</value>
   </data>
   <data name="splitContainer4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -274,7 +274,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 212</value>
+    <value>699, 211</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -328,7 +328,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 154</value>
+    <value>693, 154</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -403,7 +403,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 184</value>
+    <value>693, 185</value>
   </data>
   <data name="splitContainer6.SplitterDistance" type="System.Int32, mscorlib">
     <value>154</value>
@@ -433,7 +433,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 212</value>
+    <value>699, 213</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -463,10 +463,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 428</value>
+    <value>699, 428</value>
   </data>
   <data name="splitContainer2.SplitterDistance" type="System.Int32, mscorlib">
-    <value>212</value>
+    <value>211</value>
   </data>
   <data name="splitContainer2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -532,7 +532,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 157</value>
+    <value>693, 157</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -607,7 +607,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 186</value>
+    <value>693, 186</value>
   </data>
   <data name="splitContainer7.SplitterDistance" type="System.Int32, mscorlib">
     <value>157</value>
@@ -637,7 +637,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 214</value>
+    <value>699, 214</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -691,7 +691,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 154</value>
+    <value>693, 154</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -766,7 +766,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 186</value>
+    <value>693, 186</value>
   </data>
   <data name="splitContainer8.SplitterDistance" type="System.Int32, mscorlib">
     <value>154</value>
@@ -796,7 +796,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 214</value>
+    <value>699, 214</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -826,7 +826,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 432</value>
+    <value>699, 432</value>
   </data>
   <data name="splitContainer3.SplitterDistance" type="System.Int32, mscorlib">
     <value>214</value>
@@ -859,7 +859,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 864</value>
+    <value>699, 864</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>428</value>
@@ -1018,7 +1018,7 @@
     <value>0, 0</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>594, 239</value>
+    <value>675, 239</value>
   </data>
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1063,7 +1063,7 @@
     <value>Vertical</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 54</value>
+    <value>669, 54</value>
   </data>
   <data name="textBox5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1093,7 +1093,7 @@
     <value>Vertical</value>
   </data>
   <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 54</value>
+    <value>669, 54</value>
   </data>
   <data name="textBox3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1120,7 +1120,7 @@
     <value>True</value>
   </data>
   <data name="textBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 24</value>
+    <value>669, 24</value>
   </data>
   <data name="textBox4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1147,7 +1147,7 @@
     <value>True</value>
   </data>
   <data name="dateTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 24</value>
+    <value>669, 24</value>
   </data>
   <data name="dateTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1174,7 +1174,7 @@
     <value>True</value>
   </data>
   <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 24</value>
+    <value>669, 24</value>
   </data>
   <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1198,7 +1198,7 @@
     <value>3, 213</value>
   </data>
   <data name="richTextBoxEx1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 405</value>
+    <value>669, 405</value>
   </data>
   <data name="richTextBoxEx1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1228,7 +1228,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>594, 621</value>
+    <value>675, 621</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1261,7 +1261,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>594, 864</value>
+    <value>675, 864</value>
   </data>
   <data name="splitContainer9.SplitterDistance" type="System.Int32, mscorlib">
     <value>239</value>
@@ -1294,10 +1294,10 @@
     <value>1</value>
   </data>
   <data name="generalSplitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1216, 864</value>
+    <value>1378, 864</value>
   </data>
   <data name="generalSplitContainer.SplitterDistance" type="System.Int32, mscorlib">
-    <value>618</value>
+    <value>699</value>
   </data>
   <data name="generalSplitContainer.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3450,6 +3450,9 @@
   <data name="close_openToolStripMenuItem.Text" xml:space="preserve">
     <value>Show Information</value>
   </data>
+  <data name="countriesToolStripComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
   <data name="stateToolStripComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 23</value>
   </data>
@@ -3457,7 +3460,7 @@
     <value>0, 0</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1216, 27</value>
+    <value>1378, 27</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3510,11 +3513,14 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1216, 891</value>
+    <value>1378, 891</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
@@ -3702,6 +3708,12 @@
   </data>
   <data name="&gt;&gt;close_openToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;countriesToolStripComboBox.Name" xml:space="preserve">
+    <value>countriesToolStripComboBox</value>
+  </data>
+  <data name="&gt;&gt;countriesToolStripComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;stateToolStripComboBox.Name" xml:space="preserve">
     <value>stateToolStripComboBox</value>

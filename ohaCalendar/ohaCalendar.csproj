@@ -12,12 +12,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="HolidayInput.cs" />
+    <Compile Remove="HolidayInput.Designer.cs" />
     <Compile Remove="NextWorkdayCalculator.cs" />
     <Compile Remove="ohaDateTimePicker.cs" />
     <Compile Remove="OutlookCalendarItemType.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="HolidayInput.resx" />
     <EmbeddedResource Remove="ohaDateTimePicker.de-DE.resx" />
     <EmbeddedResource Remove="ohaDateTimePicker.hu-HU.resx" />
     <EmbeddedResource Remove="ohaDateTimePicker.resx" />
