@@ -2,7 +2,7 @@
 
 namespace ohaCalendar
 {
-    partial class calendar
+    partial class Calendar
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace ohaCalendar
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(calendar));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Calendar));
             splitContainer1 = new SplitContainer();
             splitContainer2 = new SplitContainer();
             groupBox1 = new GroupBox();
@@ -163,6 +163,7 @@ namespace ohaCalendar
             close_openToolStripMenuItem = new ToolStripMenuItem();
             countriesToolStripComboBox = new ToolStripComboBox();
             stateToolStripComboBox = new ToolStripComboBox();
+            is_school_holidaysToolStripComboBox = new ToolStripComboBox();
             pls_waitLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -1027,7 +1028,7 @@ namespace ohaCalendar
             // menuStrip1
             // 
             resources.ApplyResources(menuStrip1, "menuStrip1");
-            menuStrip1.Items.AddRange(new ToolStripItem[] { getCalendarItemsToolStripMenuItem, moveCalendarToolStripMenuItem, close_openToolStripMenuItem, countriesToolStripComboBox, stateToolStripComboBox });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { getCalendarItemsToolStripMenuItem, moveCalendarToolStripMenuItem, close_openToolStripMenuItem, countriesToolStripComboBox, stateToolStripComboBox, is_school_holidaysToolStripComboBox });
             menuStrip1.Name = "menuStrip1";
             // 
             // getCalendarItemsToolStripMenuItem
@@ -1092,13 +1093,18 @@ namespace ohaCalendar
             stateToolStripComboBox.Name = "stateToolStripComboBox";
             resources.ApplyResources(stateToolStripComboBox, "stateToolStripComboBox");
             // 
+            // is_school_holidaysToolStripComboBox
+            // 
+            is_school_holidaysToolStripComboBox.Name = "is_school_holidaysToolStripComboBox";
+            resources.ApplyResources(is_school_holidaysToolStripComboBox, "is_school_holidaysToolStripComboBox");
+            // 
             // pls_waitLabel
             // 
             resources.ApplyResources(pls_waitLabel, "pls_waitLabel");
             pls_waitLabel.ForeColor = SystemColors.Highlight;
             pls_waitLabel.Name = "pls_waitLabel";
             // 
-            // calendar
+            // Calendar
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
@@ -1108,7 +1114,7 @@ namespace ohaCalendar
             Cursor = Cursors.WaitCursor;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MainMenuStrip = menuStrip1;
-            Name = "calendar";
+            Name = "Calendar";
             WindowState = FormWindowState.Minimized;
             FormClosing += calendar_FormClosing;
             Load += calendar_Load;
@@ -1317,5 +1323,6 @@ namespace ohaCalendar
         private DataGridViewTextBoxColumn bodyDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn requiredAttendeesDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn entryIDDataGridViewTextBoxColumn;
+        private ToolStripComboBox is_school_holidaysToolStripComboBox;
     }
 }

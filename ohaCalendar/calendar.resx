@@ -3400,10 +3400,10 @@
     <value>Arial, 9pt</value>
   </data>
   <data name="getCalendarItemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 23</value>
+    <value>64, 23</value>
   </data>
   <data name="getCalendarItemsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Retrieve calendar</value>
+    <value>Retrieve</value>
   </data>
   <data name="move_calendar_backToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
@@ -3436,10 +3436,10 @@
     <value>Heute</value>
   </data>
   <data name="moveCalendarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>47, 23</value>
   </data>
   <data name="moveCalendarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Move calendar</value>
+    <value>Move</value>
   </data>
   <data name="close_openToolStripMenuItem.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -3454,6 +3454,9 @@
     <value>121, 23</value>
   </data>
   <data name="stateToolStripComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="is_school_holidaysToolStripComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 23</value>
   </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
@@ -3721,8 +3724,14 @@
   <data name="&gt;&gt;stateToolStripComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;is_school_holidaysToolStripComboBox.Name" xml:space="preserve">
+    <value>is_school_holidaysToolStripComboBox</value>
+  </data>
+  <data name="&gt;&gt;is_school_holidaysToolStripComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>calendar</value>
+    <value>Calendar</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

@@ -1,25 +1,23 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using ohaCalendar.Models;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using static ohaCalendar.CalendarDataSet;
-
-//using static ohaCalendar.CalendarDataSet;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using Label = System.Windows.Forms.Label;
 
 namespace ohaCalendar
 {
-    public partial class calendar : Form
+    public partial class Calendar : Form
     {
         int g_current_culturesysid = 9;
         string g_current_culture = "de-DE";
         private string g_client_name = "Otto Haas KG";
-
         int m_count_of_months = 4;
         List<CalendarItemType> m_dateTimes_1 = new();
         List<CalendarItemType> m_dateTimes_2 = new();
@@ -30,7 +28,6 @@ namespace ohaCalendar
         public DateTime? SelectedDay;
         private bool ShowOutlook = true;
         private List<OutlookCalendarItemType> m_calendar_items;
-        //BindingSource m_bindingSource = new BindingSource();
         int m_active_month_no = 0;
         private CalendarRow? m_selected_calendar;
         private DateTime m_basis_date = DateTime.Today;
@@ -47,39 +44,57 @@ namespace ohaCalendar
         }
         static List<structHolidays> g_holidays = new List<structHolidays>();
         static List<string> g_weekends = new List<string>();
-
         private int year_1;
         private int year_4;
         private int m_old_year;
         private string m_holidays_file;
-        private string m_current_culture;
+        private string m_current_culture_str;
+        private CultureInfo m_current_culture;
+        private CultureInfo m_current_culture_default;
+        private string m_current_school_holiday;
         private bool m_is_started = true;
+        private bool m_is_school_holidays = false;
+        private string m_subdivisionCode;
 
-        public calendar()
+        public Calendar()
         {
             InitializeComponent();
         }
 
-        private async void calendar_Load(object sender, EventArgs e)
+        private void calendar_Load(object sender, EventArgs e)
         {
             try
             {
+                ShowProgress(true);
+
+                m_current_culture_default = CultureInfo.CurrentCulture;
+                pls_waitLabel.Text = Properties.Resources.please_wait;
+
                 getCalendarItemsToolStripMenuItem.Image = Properties.Resources.refresh_icon;
                 moveCalendarToolStripMenuItem.Image = Properties.Resources.dynamic_feed;
 
                 countriesToolStripComboBox.ComboBox.SelectedValueChanged += CountriesToolStripComboBox_SelectedValueChanged;
                 stateToolStripComboBox.ComboBox.SelectedValueChanged += StateToolStripComboBox_SelectedValueChanged;
+                is_school_holidaysToolStripComboBox.ComboBox.SelectedValueChanged += Is_school_holidaysToolStripComboBox_SelectedValueChanged;
 
-                m_current_culture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper();                
+                m_current_culture_str = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper();
 
-                await FillCountriesCMB();
-                await ForCalendar_load();
-                
-                countriesToolStripComboBox.ComboBox.SelectedValue = m_current_culture;
+                FillIs_school_holidays_CMB();
+                is_school_holidaysToolStripComboBox.ComboBox.SelectedIndex = 0;
+                m_current_school_holiday = is_school_holidaysToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
 
-                await GetData();
+                FillCountriesCMB();
+                ForCalendar_load();
+                GetData();
 
                 m_is_started = false;
+
+                countriesToolStripComboBox.ComboBox.SelectedValue = m_current_culture_str;
+
+
+                ShowProgress(false);
+
+                WindowState = FormWindowState.Normal;
             }
             catch (Exception ex)
             {
@@ -89,42 +104,120 @@ namespace ohaCalendar
             }
         }
 
-        private async void CountriesToolStripComboBox_SelectedValueChanged(object? sender, EventArgs e)
+        private void ShowProgress(bool InProgress)
         {
-            if (!m_is_started && 
-                countriesToolStripComboBox.ComboBox.SelectedValue != null && 
-                !string.IsNullOrEmpty(countriesToolStripComboBox.ComboBox.SelectedValue.ToString()) &&
-                countriesToolStripComboBox.ComboBox.SelectedValue is string
-                )
+            pls_waitLabel.Visible = InProgress;
+            splitContainer1.Visible = !InProgress;
+            generalSplitContainer.Visible = !InProgress;
+        }
+
+        private void FillIs_school_holidays_CMB()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("DisplayMember", typeof(string));
+            table.Columns.Add("ValueMember", typeof(string));
+            var new_row = table.NewRow();
+            new_row["DisplayMember"] = "Public holidays";
+            new_row["ValueMember"] = bool.FalseString;
+            table.Rows.Add(new_row);
+            new_row = table.NewRow();
+            new_row["DisplayMember"] = "School holidays";
+            new_row["ValueMember"] = bool.TrueString;
+            table.Rows.Add(new_row);
+
+            is_school_holidaysToolStripComboBox.ComboBox.DisplayMember = "DisplayMember";
+            is_school_holidaysToolStripComboBox.ComboBox.ValueMember = "ValueMember";
+            is_school_holidaysToolStripComboBox.ComboBox.DataSource = table;
+        }
+
+        private async void Is_school_holidaysToolStripComboBox_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            m_is_school_holidays = false;
+            if (is_school_holidaysToolStripComboBox.ComboBox.SelectedValue != null)
+                m_is_school_holidays = is_school_holidaysToolStripComboBox.ComboBox.SelectedValue.ToString() == bool.TrueString;
+
+            //m_subdivisionCode = null;
+
+            if (!m_is_started)
             {
-                var _current_culture = countriesToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
-                if (_current_culture == null || string.IsNullOrEmpty(_current_culture))
+                if (countriesToolStripComboBox.ComboBox.SelectedValue == null
+                    || string.IsNullOrEmpty(countriesToolStripComboBox.ComboBox.SelectedValue.ToString())
+                    || countriesToolStripComboBox.ComboBox.SelectedValue is DataRowView
+                    || stateToolStripComboBox.ComboBox.SelectedValue == null
+                    || is_school_holidaysToolStripComboBox.ComboBox.SelectedValue == null
+                )
                     return;
 
-                m_current_culture = _current_culture;
+                ShowProgress(true);
 
-                await RefreshHolidays(true);
-                await ForCalendar_load();
-                await FillStateCMB();                
+                var _current_school_holiday = is_school_holidaysToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
+                if (_current_school_holiday == null || string.IsNullOrEmpty(_current_school_holiday))
+                    return;
+
+                if (_current_school_holiday != m_current_school_holiday)
+                    g_holidays = new();
+
+                m_current_school_holiday = _current_school_holiday;
+
+                RefreshHolidays(true);
+
+                CollapseInfo();
+
+                ShowProgress(false);
             }
         }
 
-        private async Task ForCalendar_load()
+        private void ForCalendar_load()
         {
-            // TEST
-            //m_current_culture = "IT";
-
             m_holidays_file = Path.Combine(Path.GetTempPath(), "ohaCalendar_holidays.xml");
 
-            //ReadLocalHolidays();
-
-            await FillStateCMB();
             ShowHideInfo();
-            await GetData();
+            GetData();
 
             bodyTextBox.SetSelectionLink(true);
-
             SetStartup();
+        }
+
+        private async void CountriesToolStripComboBox_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            if (!m_is_started)
+            {
+                if (countriesToolStripComboBox.ComboBox.SelectedValue != null &&
+                    !string.IsNullOrEmpty(countriesToolStripComboBox.ComboBox.SelectedValue.ToString()) &&
+                    countriesToolStripComboBox.ComboBox.SelectedValue is string
+                   )
+                {
+                    ShowProgress(true);
+
+                    var _current_culture = countriesToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
+                    if (_current_culture == null || string.IsNullOrEmpty(_current_culture))
+                        return;
+
+                    if (_current_culture != m_current_culture_str)
+                        g_holidays = new();
+
+                    m_current_culture_str = _current_culture;
+                    m_current_culture = new CultureInfo(m_current_culture_str);
+                    //CultureInfo.DefaultThreadCurrentCulture = m_current_culture;
+                    //CultureInfo.DefaultThreadCurrentUICulture = m_current_culture;
+
+                    FillStateCMB();
+                    RefreshHolidays(true);
+                    ForCalendar_load();
+
+                    CollapseInfo();
+
+                    ShowProgress(false);
+                }
+            }
+        }
+
+        private void CollapseInfo()
+        {
+            generalSplitContainer.Panel2Collapsed = true;
+            this.Size = new Size(725, 930);
+            close_openToolStripMenuItem.Text = Properties.Resources.calendar_info_show;
+            close_openToolStripMenuItem.Image = Properties.Resources.expand;
         }
 
         private static void SetStartup()
@@ -133,14 +226,17 @@ namespace ohaCalendar
             string StartupValue = "ohaCalendar";
 
             //Set the application to run at startup
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupKey, true);
-            key.SetValue(StartupValue, Application.ExecutablePath.ToString());
+            RegistryKey _key = Registry.CurrentUser.OpenSubKey(StartupKey, true);
+            if (_key != null)
+                _key.SetValue(StartupValue, Application.ExecutablePath.ToString());
         }
 
-        private async Task GetData(DateTime? actDate = null)
+        private void GetData(DateTime? actDate = null)
         {
             try
             {
+                //ShowProgress(true);
+
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
 
@@ -168,10 +264,10 @@ namespace ohaCalendar
                 tableLayoutPanel3.Controls.Clear();
                 tableLayoutPanel4.Controls.Clear();
 
-                pls_waitLabel.Text = Properties.Resources.please_wait;
-                pls_waitLabel.Visible = true;
-                splitContainer1.Visible = false;
-                generalSplitContainer.Visible = false;
+                //pls_waitLabel.Text = Properties.Resources.please_wait;
+                //pls_waitLabel.Visible = true;
+                //splitContainer1.Visible = false;
+                //generalSplitContainer.Visible = false;
 
                 var info = new System.Globalization.CultureInfo(g_current_culturesysid);
                 m_first_day_of_week = info.DateTimeFormat.FirstDayOfWeek;
@@ -207,9 +303,12 @@ namespace ohaCalendar
                 m_dateTimes_4 = getAllDates(year_4, month_4);
                 FillDataTable(tableLayoutPanel4, m_dateTimes_4, holidays_4Label);
 
-                pls_waitLabel.Visible = false;
-                splitContainer1.Visible = true;
-                generalSplitContainer.Visible = true;
+                //pls_waitLabel.Visible = false;
+                //splitContainer1.Visible = true;
+                //generalSplitContainer.Visible = true;
+
+
+                //ShowProgress(false);
             }
             catch (Exception ex)
             {
@@ -223,7 +322,7 @@ namespace ohaCalendar
             }
         }
 
-        private void DisplayError(calendar calendar, object value, Exception ex, bool loggingPerEmail, string v, string g_client_name)
+        private void DisplayError(Calendar calendar, object value, Exception ex, bool loggingPerEmail, string v, string g_client_name)
         {
             MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
         }
@@ -338,11 +437,27 @@ namespace ohaCalendar
                                 {
                                     if (holiday != null)
                                     {
+
+
                                         var _holiday = (structHolidays)holiday;
                                         toolTip1.SetToolTip(control, _holiday.description);
+
+                                        //string tmp = _holiday.date.ToString("d", ).Replace(_holiday.date.ToString("yyyy"), string.Empty);
+                                        //char last = tmp[tmp.Length - 1];
+                                        //char[] trimmer = char.IsDigit(last) ? new char[] { tmp[0] } : new char[] { last };
+                                        //string dateStr = tmp.Trim(trimmer);
+
+
+
+                                        char[] trimmer = DateTimeFormatInfo.CurrentInfo.DateSeparator.ToCharArray();
+                                        string dateStr = _holiday.date.ToString("d").Replace(_holiday.date.ToString("yyyy"), string.Empty).Trim(trimmer);
+
                                         holidaysLabel.Text += !string.IsNullOrEmpty(holidaysLabel.Text) ?
-                                            ";  " + _holiday.date.ToShortDateString() + " " + _holiday.description :
-                                            _holiday.date.ToShortDateString() + " " + _holiday.description;
+                                           ";  " + dateStr + " " + _holiday.description :
+                                           dateStr + " " + _holiday.description;
+                                        //holidaysLabel.Text += !string.IsNullOrEmpty(holidaysLabel.Text) ?
+                                        //    ";  " + _holiday.date.ToShortDateString() + " " + _holiday.description :
+                                        //    _holiday.date.ToShortDateString() + " " + _holiday.description;
                                     }
                                 }
                                 else
@@ -564,9 +679,9 @@ namespace ohaCalendar
             return ret;
         }
 
-        private async void getCalendarItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void getCalendarItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await GetData();
+            GetData();
         }
 
         private void close_openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -594,20 +709,20 @@ namespace ohaCalendar
         private void move_calendar_backToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_active_month_no--;
-            _ = GetData();
+            GetData();
         }
 
         private void move_calendar_forwardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_active_month_no++;
-            _ = GetData();
+            GetData();
         }
 
         private void move_calendar_currentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_basis_date = DateTime.Today;
             m_active_month_no = 0;
-            _ = GetData();
+            GetData();
         }
 
         private void bodyTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -664,7 +779,7 @@ namespace ohaCalendar
             InputForm_date inputForm_Date = new InputForm_date();
             if (inputForm_Date.ShowDialog() == DialogResult.OK)
             {
-                _ = GetData(inputForm_Date.Value);
+                GetData(inputForm_Date.Value);
             }
         }
 
@@ -694,15 +809,12 @@ namespace ohaCalendar
             }
         }
 
-        private async Task FillHolidayArray(int year, bool DeleteOld = true, bool DoAlways = false)
+        private void FillHolidayArray(int year, bool DeleteOld = true, bool DoAlways = false)
         {
-            List<HolidayType?> m_holidays = null;            
+            List<HolidayType?> m_holidays = null;
 
             if (!DoAlways || (g_holidays.Count > 0 && year == m_old_year))
                 return;
-
-            //if (stateToolStripComboBox.ComboBox.SelectedValue == null)
-            //    return;
 
             Cursor = Cursors.WaitCursor;
 
@@ -713,8 +825,28 @@ namespace ohaCalendar
 
                 using (HttpClient wc = new())
                 {
-                    var url = "https://openholidaysapi.org/PublicHolidays?countryIsoCode=" + m_current_culture + "&languageIsoCode=" + m_current_culture + "&validFrom=" + year + "-01-01&validTo=" + year + "-12-31";
-                    var json = await wc.GetStringAsync(url);
+                    string? url = null;
+                    if (m_is_school_holidays)
+                    {
+                        if (stateToolStripComboBox.Visible && stateToolStripComboBox.ComboBox.SelectedValue != null)
+                            url = "https://openholidaysapi.org/SchoolHolidays?countryIsoCode=" + m_current_culture_str +
+                               "&languageIsoCode=" + m_current_culture_str +
+                               "&subdivisionCode=" + m_current_culture_str + "-" + stateToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper() +
+                               "&validFrom=" + year + "-01-01" +
+                               "&validTo=" + year + "-12-31";
+                        else
+                            url = "https://openholidaysapi.org/SchoolHolidays?countryIsoCode=" + m_current_culture_str +
+                               "&languageIsoCode=" + m_current_culture_str +
+                               "&validFrom=" + year + "-01-01" +
+                               "&validTo=" + year + "-12-31";
+                    }
+                    else
+                        url = "https://openholidaysapi.org/PublicHolidays?countryIsoCode=" + m_current_culture_str +
+                            "&languageIsoCode=" + m_current_culture_str +
+                            "&validFrom=" + year +
+                            "-01-01&validTo=" + year + "-12-31";
+
+                    var json = wc.GetStringAsync(url).Result;
                     if (json != null)
                         m_holidays = JsonSerializer.Deserialize<List<HolidayType>>(json);
                 }
@@ -725,7 +857,7 @@ namespace ohaCalendar
                         structHolidays new_item = default;
                         new_item.date = Convert.ToDateTime(holiday.startDate);
 
-                        var name_obj = holiday.name.FirstOrDefault(x => x.language == m_current_culture);
+                        var name_obj = holiday.name.FirstOrDefault(x => x.language == m_current_culture_str);
                         if (name_obj == null)
                         {
                             name_obj = holiday.name.FirstOrDefault(x => x.language == "EN");
@@ -741,7 +873,7 @@ namespace ohaCalendar
                         g_holidays.Add(new_item);
                     }
 
-                    await GetData();
+                    GetData();
                 }
                 //SaveLocalHolidays();
                 //
@@ -809,19 +941,7 @@ namespace ohaCalendar
         //    }
         //}
 
-        private void serializer_UnknownNode(object sender, XmlNodeEventArgs e)
-        {
-            Console.WriteLine("Unknown Node:" + e.Name + "\t" + e.Text);
-        }
-
-        private void serializer_UnknownAttribute(object sender, XmlAttributeEventArgs e)
-        {
-            System.Xml.XmlAttribute attr = e.Attr;
-            Console.WriteLine("Unknown attribute " +
-            attr.Name + "='" + attr.Value + "'");
-        }
-
-        private async Task FillCountriesCMB()
+        private void FillCountriesCMB()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("DisplayMember", typeof(string));
@@ -832,7 +952,7 @@ namespace ohaCalendar
             using (HttpClient wc = new HttpClient())
             {
                 var url = "https://openholidaysapi.org/Countries";
-                var json = await wc.GetStringAsync(url);
+                var json = wc.GetStringAsync(url).Result;
                 if (json != null)
                     countriesList = JsonSerializer.Deserialize<List<CountriesType>>(json);
             }
@@ -852,7 +972,7 @@ namespace ohaCalendar
 
                 foreach (var item in countriesList_by_isocode)
                 {
-                    var name_obj = item.name.FirstOrDefault(x => x.language == m_current_culture);
+                    var name_obj = item.name.FirstOrDefault(x => x.language == m_current_culture_str);
                     if (name_obj == null)
                     {
                         name_obj = item.name.FirstOrDefault(x => x.language == "EN");
@@ -868,13 +988,10 @@ namespace ohaCalendar
                 countriesToolStripComboBox.ComboBox.DataSource = dt;
                 countriesToolStripComboBox.ComboBox.DisplayMember = "DisplayMember";
                 countriesToolStripComboBox.ComboBox.ValueMember = "ValueMember";
-                
-                //if (!string.IsNullOrEmpty(Properties.Settings.Default.state))
-                //    countriesToolStripComboBox.ComboBox.SelectedValue = Properties.Settings.Default.state;
             }
         }
 
-        private async Task FillStateCMB()
+        private void FillStateCMB()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("DisplayMember", typeof(string));
@@ -882,18 +999,22 @@ namespace ohaCalendar
 
             List<FederalStateType> federalStateList = new List<FederalStateType>();
 
+            stateToolStripComboBox.Visible = false;
+
             using (HttpClient wc = new HttpClient())
             {
-                var url = "https://openholidaysapi.org/Subdivisions?countryIsoCode=" + m_current_culture;
-                var json = await wc.GetStringAsync(url);
+                var url = "https://openholidaysapi.org/Subdivisions?countryIsoCode=" + m_current_culture_str;
+                var json = wc.GetStringAsync(url).Result;
                 if (json != null)
+                {
                     federalStateList = JsonSerializer.Deserialize<List<FederalStateType>>(json);
+                }
             }
 
             AddRow(dt, "<federal states>", "");
             if (federalStateList != null)
             {
-                var federalStateList_by_isocode = federalStateList.Where(x => x.isoCode != null && !string.IsNullOrEmpty(x.isoCode));
+                var federalStateList_by_isocode = federalStateList.Where(x => !string.IsNullOrEmpty(x.shortName)).ToList(); // !string.IsNullOrEmpty(x.isoCode));
 
                 if (federalStateList_by_isocode == null || federalStateList_by_isocode.Count() == 0)
                 {
@@ -901,11 +1022,13 @@ namespace ohaCalendar
                     return;
                 }
                 else
+                {
                     stateToolStripComboBox.Visible = true;
+                }
 
                 foreach (var item in federalStateList_by_isocode)
                 {
-                    var name_obj = item.name.FirstOrDefault(x => x.language == m_current_culture);
+                    var name_obj = item.name.FirstOrDefault(x => x.language == m_current_culture_str);
                     if (name_obj == null)
                     {
                         name_obj = item.name.FirstOrDefault(x => x.language == "EN");
@@ -921,11 +1044,15 @@ namespace ohaCalendar
                 stateToolStripComboBox.ComboBox.DataSource = dt;
                 stateToolStripComboBox.ComboBox.DisplayMember = "DisplayMember";
                 stateToolStripComboBox.ComboBox.ValueMember = "ValueMember";
-
                 stateToolStripComboBox.ComboBox.SelectedIndex = 1;
+
+                stateToolStripComboBox.Visible = true;
+                //is_school_holidaysToolStripComboBox.Visible = true;
+
                 if (!string.IsNullOrEmpty(Properties.Settings.Default.state))
                     stateToolStripComboBox.ComboBox.SelectedValue = Properties.Settings.Default.state;
             }
+
         }
 
         private static void AddRow(DataTable dt, string displayMember, string valueMember)
@@ -947,26 +1074,44 @@ namespace ohaCalendar
 
         private async void StateToolStripComboBox_SelectedValueChanged(object? sender, EventArgs e)
         {
-            //if (!m_is_started &&
-            //    (countriesToolStripComboBox.ComboBox.SelectedValue == null 
-            //    || string.IsNullOrEmpty(countriesToolStripComboBox.ComboBox.SelectedValue.ToString()) 
-            //    || countriesToolStripComboBox.ComboBox.SelectedValue is DataRowView
-            //    || countriesToolStripComboBox.ComboBox.SelectedValue.ToString() == m_current_culture))
-            //    return;
+            m_subdivisionCode = null;
 
-            //await RefreshHolidays(true);
-            
+            if (!m_is_started)
+            {
+                if (countriesToolStripComboBox.ComboBox.SelectedValue == null
+                    || string.IsNullOrEmpty(countriesToolStripComboBox.ComboBox.SelectedValue.ToString())
+                    || countriesToolStripComboBox.ComboBox.SelectedValue is DataRowView
+                    || stateToolStripComboBox.ComboBox.SelectedValue == null
+                )
+                    return;
+
+                ShowProgress(true);
+
+                var _subdivisionCode = stateToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
+
+                if (_subdivisionCode != m_subdivisionCode)
+                    g_holidays = new();
+
+                m_subdivisionCode = _subdivisionCode;
+
+                RefreshHolidays(true);
+
+                CollapseInfo();
+
+                ShowProgress(false);
+            }
         }
 
-        private async Task RefreshHolidays(bool doAlways)
+        private void RefreshHolidays(bool doAlways)
         {
             if (year_1 > 0)  //stateToolStripComboBox.ComboBox.SelectedValue != null && year_1 > 0)
             {
-                await FillHolidayArray(year_1, DoAlways: doAlways);
+                FillHolidayArray(year_1, DoAlways: doAlways);
                 if (year_4 > year_1)
-                    await FillHolidayArray(year_4, false, DoAlways: doAlways);
+                    FillHolidayArray(year_4, false, DoAlways: doAlways);
             }
         }
+
     }
 
 
