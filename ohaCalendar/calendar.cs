@@ -298,14 +298,7 @@ namespace ohaCalendar
                 string month_4_str = new DateTime(year_4, month_4, 1).ToString("MMMM", CultureInfo.CurrentCulture);
                 groupBox4.Text = (month_4_str + " " + year_4).ToUpper();
                 m_dateTimes_4 = getAllDates(year_4, month_4);
-                FillDataTable(tableLayoutPanel4, m_dateTimes_4, holidays_4Label);
-
-                //pls_waitLabel.Visible = false;
-                //splitContainer1.Visible = true;
-                //generalSplitContainer.Visible = true;
-
-
-                //ShowProgress(false);
+                FillDataTable(tableLayoutPanel4, m_dateTimes_4, holidays_4Label);                
             }
             catch (Exception ex)
             {
