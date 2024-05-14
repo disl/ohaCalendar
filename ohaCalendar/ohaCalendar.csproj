@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>1.0.2024.9</Version>
+    <Version>1.0.2024.10</Version>
     <PackageIcon>calendar_128.png</PackageIcon>
     <ApplicationIcon>calendar_month.ico</ApplicationIcon>
   </PropertyGroup>

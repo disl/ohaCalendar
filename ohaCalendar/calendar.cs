@@ -5,10 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
-using System.Text.RegularExpressions;
-using System.Xml.Serialization;
 using static ohaCalendar.CalendarDataSet;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using Label = System.Windows.Forms.Label;
 
 namespace ohaCalendar
@@ -94,7 +91,7 @@ namespace ohaCalendar
 
                 ShowProgress(false);
 
-                WindowState = FormWindowState.Normal;
+                //WindowState = FormWindowState.Normal;
             }
             catch (Exception ex)
             {
