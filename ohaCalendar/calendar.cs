@@ -256,6 +256,7 @@ namespace ohaCalendar
                 //await RefreshHolidays(true);
                 //StateToolStripComboBox_SelectedValueChanged(null, null);
 
+
                 tableLayoutPanel1.Controls.Clear();
                 tableLayoutPanel2.Controls.Clear();
                 tableLayoutPanel3.Controls.Clear();
