@@ -262,6 +262,7 @@ namespace ohaCalendar
                 tableLayoutPanel3.Controls.Clear();
                 tableLayoutPanel4.Controls.Clear();
 
+
                 //pls_waitLabel.Text = Properties.Resources.please_wait;
                 //pls_waitLabel.Visible = true;
                 //splitContainer1.Visible = false;
