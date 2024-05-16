@@ -221,10 +221,12 @@ namespace ohaCalendar
             // 
             // splitContainer1.Panel1
             // 
+            resources.ApplyResources(splitContainer1.Panel1, "splitContainer1.Panel1");
             splitContainer1.Panel1.Controls.Add(splitContainer2);
             // 
             // splitContainer1.Panel2
             // 
+            resources.ApplyResources(splitContainer1.Panel2, "splitContainer1.Panel2");
             splitContainer1.Panel2.Controls.Add(splitContainer3);
             // 
             // splitContainer2
@@ -234,16 +236,18 @@ namespace ohaCalendar
             // 
             // splitContainer2.Panel1
             // 
+            resources.ApplyResources(splitContainer2.Panel1, "splitContainer2.Panel1");
             splitContainer2.Panel1.Controls.Add(groupBox1);
             // 
             // splitContainer2.Panel2
             // 
+            resources.ApplyResources(splitContainer2.Panel2, "splitContainer2.Panel2");
             splitContainer2.Panel2.Controls.Add(groupBox2);
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(splitContainer4);
             resources.ApplyResources(groupBox1, "groupBox1");
+            groupBox1.Controls.Add(splitContainer4);
             groupBox1.Name = "groupBox1";
             groupBox1.TabStop = false;
             // 
@@ -254,10 +258,12 @@ namespace ohaCalendar
             // 
             // splitContainer4.Panel1
             // 
+            resources.ApplyResources(splitContainer4.Panel1, "splitContainer4.Panel1");
             splitContainer4.Panel1.Controls.Add(tableLayoutPanel1);
             // 
             // splitContainer4.Panel2
             // 
+            resources.ApplyResources(splitContainer4.Panel2, "splitContainer4.Panel2");
             splitContainer4.Panel2.Controls.Add(holidays_1Label);
             // 
             // tableLayoutPanel1
@@ -273,8 +279,8 @@ namespace ohaCalendar
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(splitContainer6);
             resources.ApplyResources(groupBox2, "groupBox2");
+            groupBox2.Controls.Add(splitContainer6);
             groupBox2.Name = "groupBox2";
             groupBox2.TabStop = false;
             // 
@@ -285,10 +291,12 @@ namespace ohaCalendar
             // 
             // splitContainer6.Panel1
             // 
+            resources.ApplyResources(splitContainer6.Panel1, "splitContainer6.Panel1");
             splitContainer6.Panel1.Controls.Add(tableLayoutPanel2);
             // 
             // splitContainer6.Panel2
             // 
+            resources.ApplyResources(splitContainer6.Panel2, "splitContainer6.Panel2");
             splitContainer6.Panel2.Controls.Add(holidays_2Label);
             // 
             // tableLayoutPanel2
@@ -309,16 +317,18 @@ namespace ohaCalendar
             // 
             // splitContainer3.Panel1
             // 
+            resources.ApplyResources(splitContainer3.Panel1, "splitContainer3.Panel1");
             splitContainer3.Panel1.Controls.Add(groupBox3);
             // 
             // splitContainer3.Panel2
             // 
+            resources.ApplyResources(splitContainer3.Panel2, "splitContainer3.Panel2");
             splitContainer3.Panel2.Controls.Add(groupBox4);
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(splitContainer7);
             resources.ApplyResources(groupBox3, "groupBox3");
+            groupBox3.Controls.Add(splitContainer7);
             groupBox3.Name = "groupBox3";
             groupBox3.TabStop = false;
             // 
@@ -329,10 +339,12 @@ namespace ohaCalendar
             // 
             // splitContainer7.Panel1
             // 
+            resources.ApplyResources(splitContainer7.Panel1, "splitContainer7.Panel1");
             splitContainer7.Panel1.Controls.Add(tableLayoutPanel3);
             // 
             // splitContainer7.Panel2
             // 
+            resources.ApplyResources(splitContainer7.Panel2, "splitContainer7.Panel2");
             splitContainer7.Panel2.Controls.Add(holidays_3Label);
             // 
             // tableLayoutPanel3
@@ -348,8 +360,8 @@ namespace ohaCalendar
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(splitContainer8);
             resources.ApplyResources(groupBox4, "groupBox4");
+            groupBox4.Controls.Add(splitContainer8);
             groupBox4.Name = "groupBox4";
             groupBox4.TabStop = false;
             // 
@@ -360,10 +372,12 @@ namespace ohaCalendar
             // 
             // splitContainer8.Panel1
             // 
+            resources.ApplyResources(splitContainer8.Panel1, "splitContainer8.Panel1");
             splitContainer8.Panel1.Controls.Add(tableLayoutPanel4);
             // 
             // splitContainer8.Panel2
             // 
+            resources.ApplyResources(splitContainer8.Panel2, "splitContainer8.Panel2");
             splitContainer8.Panel2.Controls.Add(holidays_4Label);
             // 
             // tableLayoutPanel4
@@ -382,6 +396,14 @@ namespace ohaCalendar
             resources.ApplyResources(splitContainer5, "splitContainer5");
             splitContainer5.Name = "splitContainer5";
             // 
+            // splitContainer5.Panel1
+            // 
+            resources.ApplyResources(splitContainer5.Panel1, "splitContainer5.Panel1");
+            // 
+            // splitContainer5.Panel2
+            // 
+            resources.ApplyResources(splitContainer5.Panel2, "splitContainer5.Panel2");
+            // 
             // generalSplitContainer
             // 
             resources.ApplyResources(generalSplitContainer, "generalSplitContainer");
@@ -389,10 +411,12 @@ namespace ohaCalendar
             // 
             // generalSplitContainer.Panel1
             // 
+            resources.ApplyResources(generalSplitContainer.Panel1, "generalSplitContainer.Panel1");
             generalSplitContainer.Panel1.Controls.Add(splitContainer1);
             // 
             // generalSplitContainer.Panel2
             // 
+            resources.ApplyResources(generalSplitContainer.Panel2, "generalSplitContainer.Panel2");
             generalSplitContainer.Panel2.Controls.Add(splitContainer9);
             // 
             // splitContainer9
@@ -402,14 +426,17 @@ namespace ohaCalendar
             // 
             // splitContainer9.Panel1
             // 
+            resources.ApplyResources(splitContainer9.Panel1, "splitContainer9.Panel1");
             splitContainer9.Panel1.Controls.Add(dataGridView1);
             // 
             // splitContainer9.Panel2
             // 
+            resources.ApplyResources(splitContainer9.Panel2, "splitContainer9.Panel2");
             splitContainer9.Panel2.Controls.Add(tableLayoutPanel5);
             // 
             // dataGridView1
             // 
+            resources.ApplyResources(dataGridView1, "dataGridView1");
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AutoGenerateColumns = false;
@@ -417,10 +444,8 @@ namespace ohaCalendar
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, organizerDataGridViewTextBoxColumn, locationDataGridViewTextBoxColumn, dataGridViewTextBoxColumn2, endDataGridViewTextBoxColumn, outlookColumn, dataGridViewTextBoxColumn3, bodyDataGridViewTextBoxColumn, requiredAttendeesDataGridViewTextBoxColumn, entryIDDataGridViewTextBoxColumn });
             dataGridView1.DataSource = checklist_for_release_answersBindingSource;
-            resources.ApplyResources(dataGridView1, "dataGridView1");
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.RowTemplate.Height = 25;
             dataGridView1.CellMouseClick += dataGridView1_CellMouseClick;
             dataGridView1.RowHeaderMouseDoubleClick += dataGridView1_RowHeaderMouseDoubleClick;
             // 
@@ -521,22 +546,22 @@ namespace ohaCalendar
             // 
             // textBox5
             // 
-            textBox5.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Location", true));
             resources.ApplyResources(textBox5, "textBox5");
+            textBox5.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Location", true));
             textBox5.Name = "textBox5";
             textBox5.ReadOnly = true;
             // 
             // textBox3
             // 
-            textBox3.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "RequiredAttendees", true));
             resources.ApplyResources(textBox3, "textBox3");
+            textBox3.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "RequiredAttendees", true));
             textBox3.Name = "textBox3";
             textBox3.ReadOnly = true;
             // 
             // textBox4
             // 
-            textBox4.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Organizer", true));
             resources.ApplyResources(textBox4, "textBox4");
+            textBox4.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Organizer", true));
             textBox4.Name = "textBox4";
             textBox4.ReadOnly = true;
             // 
@@ -548,16 +573,16 @@ namespace ohaCalendar
             // 
             // textBox2
             // 
-            textBox2.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Subject", true));
             resources.ApplyResources(textBox2, "textBox2");
+            textBox2.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Subject", true));
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
             // 
             // richTextBoxEx1
             // 
+            resources.ApplyResources(richTextBoxEx1, "richTextBoxEx1");
             richTextBoxEx1.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Body", true));
             richTextBoxEx1.DetectUrls = true;
-            resources.ApplyResources(richTextBoxEx1, "richTextBoxEx1");
             richTextBoxEx1.Name = "richTextBoxEx1";
             richTextBoxEx1.ReadOnly = true;
             richTextBoxEx1.LinkClicked += richTextBoxEx1_LinkClicked;
@@ -1033,70 +1058,70 @@ namespace ohaCalendar
             // 
             // getCalendarItemsToolStripMenuItem
             // 
-            getCalendarItemsToolStripMenuItem.Name = "getCalendarItemsToolStripMenuItem";
             resources.ApplyResources(getCalendarItemsToolStripMenuItem, "getCalendarItemsToolStripMenuItem");
+            getCalendarItemsToolStripMenuItem.Name = "getCalendarItemsToolStripMenuItem";
             getCalendarItemsToolStripMenuItem.Click += getCalendarItemsToolStripMenuItem_Click;
             // 
             // moveCalendarToolStripMenuItem
             // 
+            resources.ApplyResources(moveCalendarToolStripMenuItem, "moveCalendarToolStripMenuItem");
             moveCalendarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { move_calendar_backToolStripMenuItem, move_calendar_forwardToolStripMenuItem, toolStripMenuItem1, byDateToolStripMenuItem, toolStripMenuItem2, move_calendar_currentToolStripMenuItem });
             moveCalendarToolStripMenuItem.Name = "moveCalendarToolStripMenuItem";
-            resources.ApplyResources(moveCalendarToolStripMenuItem, "moveCalendarToolStripMenuItem");
             // 
             // move_calendar_backToolStripMenuItem
             // 
-            move_calendar_backToolStripMenuItem.Name = "move_calendar_backToolStripMenuItem";
             resources.ApplyResources(move_calendar_backToolStripMenuItem, "move_calendar_backToolStripMenuItem");
+            move_calendar_backToolStripMenuItem.Name = "move_calendar_backToolStripMenuItem";
             move_calendar_backToolStripMenuItem.Click += move_calendar_backToolStripMenuItem_Click;
             // 
             // move_calendar_forwardToolStripMenuItem
             // 
-            move_calendar_forwardToolStripMenuItem.Name = "move_calendar_forwardToolStripMenuItem";
             resources.ApplyResources(move_calendar_forwardToolStripMenuItem, "move_calendar_forwardToolStripMenuItem");
+            move_calendar_forwardToolStripMenuItem.Name = "move_calendar_forwardToolStripMenuItem";
             move_calendar_forwardToolStripMenuItem.Click += move_calendar_forwardToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
             resources.ApplyResources(toolStripMenuItem1, "toolStripMenuItem1");
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
             // 
             // byDateToolStripMenuItem
             // 
-            byDateToolStripMenuItem.Name = "byDateToolStripMenuItem";
             resources.ApplyResources(byDateToolStripMenuItem, "byDateToolStripMenuItem");
+            byDateToolStripMenuItem.Name = "byDateToolStripMenuItem";
             byDateToolStripMenuItem.Click += byDateToolStripMenuItem_Click;
             // 
             // toolStripMenuItem2
             // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
             resources.ApplyResources(toolStripMenuItem2, "toolStripMenuItem2");
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
             // 
             // move_calendar_currentToolStripMenuItem
             // 
-            move_calendar_currentToolStripMenuItem.Name = "move_calendar_currentToolStripMenuItem";
             resources.ApplyResources(move_calendar_currentToolStripMenuItem, "move_calendar_currentToolStripMenuItem");
+            move_calendar_currentToolStripMenuItem.Name = "move_calendar_currentToolStripMenuItem";
             move_calendar_currentToolStripMenuItem.Click += move_calendar_currentToolStripMenuItem_Click;
             // 
             // close_openToolStripMenuItem
             // 
-            close_openToolStripMenuItem.Name = "close_openToolStripMenuItem";
             resources.ApplyResources(close_openToolStripMenuItem, "close_openToolStripMenuItem");
+            close_openToolStripMenuItem.Name = "close_openToolStripMenuItem";
             close_openToolStripMenuItem.Click += close_openToolStripMenuItem_Click;
             // 
             // countriesToolStripComboBox
             // 
-            countriesToolStripComboBox.Name = "countriesToolStripComboBox";
             resources.ApplyResources(countriesToolStripComboBox, "countriesToolStripComboBox");
+            countriesToolStripComboBox.Name = "countriesToolStripComboBox";
             // 
             // stateToolStripComboBox
             // 
-            stateToolStripComboBox.Name = "stateToolStripComboBox";
             resources.ApplyResources(stateToolStripComboBox, "stateToolStripComboBox");
+            stateToolStripComboBox.Name = "stateToolStripComboBox";
             // 
             // is_school_holidaysToolStripComboBox
             // 
-            is_school_holidaysToolStripComboBox.Name = "is_school_holidaysToolStripComboBox";
             resources.ApplyResources(is_school_holidaysToolStripComboBox, "is_school_holidaysToolStripComboBox");
+            is_school_holidaysToolStripComboBox.Name = "is_school_holidaysToolStripComboBox";
             // 
             // pls_waitLabel
             // 
