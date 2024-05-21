@@ -297,6 +297,10 @@ namespace ohaCalendar {
             
             private global::System.Data.DataColumn columnEntryID;
             
+            private global::System.Data.DataColumn columnAllDayEvent;
+            
+            private global::System.Data.DataColumn columnBusyStatus;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public CalendarDataTable() {
@@ -404,6 +408,22 @@ namespace ohaCalendar {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn AllDayEventColumn {
+                get {
+                    return this.columnAllDayEvent;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn BusyStatusColumn {
+                get {
+                    return this.columnBusyStatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -439,7 +459,7 @@ namespace ohaCalendar {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public CalendarRow AddCalendarRow(string Subject, System.DateTime Start, int Duration, string Location, string Body, System.DateTime End, string Organizer, string RequiredAttendees, string EntryID) {
+            public CalendarRow AddCalendarRow(string Subject, System.DateTime Start, int Duration, string Location, string Body, System.DateTime End, string Organizer, string RequiredAttendees, string EntryID, bool AllDayEvent, int BusyStatus) {
                 CalendarRow rowCalendarRow = ((CalendarRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Subject,
@@ -450,7 +470,9 @@ namespace ohaCalendar {
                         End,
                         Organizer,
                         RequiredAttendees,
-                        EntryID};
+                        EntryID,
+                        AllDayEvent,
+                        BusyStatus};
                 rowCalendarRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCalendarRow);
                 return rowCalendarRow;
@@ -482,6 +504,8 @@ namespace ohaCalendar {
                 this.columnOrganizer = base.Columns["Organizer"];
                 this.columnRequiredAttendees = base.Columns["RequiredAttendees"];
                 this.columnEntryID = base.Columns["EntryID"];
+                this.columnAllDayEvent = base.Columns["AllDayEvent"];
+                this.columnBusyStatus = base.Columns["BusyStatus"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -505,6 +529,10 @@ namespace ohaCalendar {
                 base.Columns.Add(this.columnRequiredAttendees);
                 this.columnEntryID = new global::System.Data.DataColumn("EntryID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEntryID);
+                this.columnAllDayEvent = new global::System.Data.DataColumn("AllDayEvent", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAllDayEvent);
+                this.columnBusyStatus = new global::System.Data.DataColumn("BusyStatus", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBusyStatus);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -791,6 +819,38 @@ namespace ohaCalendar {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool AllDayEvent {
+                get {
+                    try {
+                        return ((bool)(this[this.tableCalendar.AllDayEventColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte AllDayEvent in Tabelle Calendar ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalendar.AllDayEventColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int BusyStatus {
+                get {
+                    try {
+                        return ((int)(this[this.tableCalendar.BusyStatusColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte BusyStatus in Tabelle Calendar ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalendar.BusyStatusColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsSubjectNull() {
                 return this.IsNull(this.tableCalendar.SubjectColumn);
             }
@@ -895,6 +955,30 @@ namespace ohaCalendar {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetEntryIDNull() {
                 this[this.tableCalendar.EntryIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsAllDayEventNull() {
+                return this.IsNull(this.tableCalendar.AllDayEventColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetAllDayEventNull() {
+                this[this.tableCalendar.AllDayEventColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsBusyStatusNull() {
+                return this.IsNull(this.tableCalendar.BusyStatusColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetBusyStatusNull() {
+                this[this.tableCalendar.BusyStatusColumn] = global::System.Convert.DBNull;
             }
         }
         

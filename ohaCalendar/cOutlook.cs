@@ -1,13 +1,11 @@
-﻿//using Microsoft.Graph.Beta;
-//using Microsoft.Graph.Beta.Models;
-//using Microsoft.Identity.Client;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using ohaCalendar.Properties;
 using System.DirectoryServices;
 using System.Globalization;
 using System.Net.Mail;
 using System.Reflection;
 using System.Text;
+using static ohaCalendar.cOutlook;
 
 namespace ohaCalendar
 {
@@ -21,7 +19,8 @@ namespace ohaCalendar
             olFree = 0,
             olTentative = 1,
             olBusy = 2,
-            olOutOfOffice = 3
+            olOutOfOffice = 3,
+            olWorkingElsewhere = 4
         }
 
         // s. http://msdn.microsoft.com/en-us/library/aa911624.aspx
@@ -854,89 +853,89 @@ namespace ohaCalendar
         }
 
 
-    //    public static void GetEMails(emailsDataTable emailsDataTable
-    //        , attachmentsDataTable attachmentsDataTable
-    //        , string EntryIDFolder
-    //        , string EntryIDStore
-    //        , ref dynamic Mails
-    //        , bool ShowAll
-    //)
-    //    {
-    //        dynamic Application;
-    //        dynamic oNameSpace;
-    //        dynamic oMails;
-    //        dynamic oAttachments;
-    //        dynamic oMailItem;
+        //    public static void GetEMails(emailsDataTable emailsDataTable
+        //        , attachmentsDataTable attachmentsDataTable
+        //        , string EntryIDFolder
+        //        , string EntryIDStore
+        //        , ref dynamic Mails
+        //        , bool ShowAll
+        //)
+        //    {
+        //        dynamic Application;
+        //        dynamic oNameSpace;
+        //        dynamic oMails;
+        //        dynamic oAttachments;
+        //        dynamic oMailItem;
 
-    //        try
-    //        {
-    //            //Application = Interaction.CreateObject("Outlook.Application", "");
-    //            Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
-    //            Application = Activator.CreateInstance(OutlookType);
+        //        try
+        //        {
+        //            //Application = Interaction.CreateObject("Outlook.Application", "");
+        //            Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
+        //            Application = Activator.CreateInstance(OutlookType);
 
-    //            emailsDataTable.Rows.Clear();
-    //            attachmentsDataTable.Rows.Clear();
+        //            emailsDataTable.Rows.Clear();
+        //            attachmentsDataTable.Rows.Clear();
 
-    //            oNameSpace = Application.GetNamespace("MAPI");
-    //            oMails = oNameSpace.GetFolderFromID(EntryIDFolder, EntryIDStore).Items;
+        //            oNameSpace = Application.GetNamespace("MAPI");
+        //            oMails = oNameSpace.GetFolderFromID(EntryIDFolder, EntryIDStore).Items;
 
-    //            if (oMails != null)
-    //            {
-    //                for (Int32 i = 1; i <= oMails.Count; i++)
-    //                {
-    //                    try
-    //                    {
-    //                        oMailItem = oMails(i);
-    //                    }
-    //                    catch
-    //                    {
-    //                        oMailItem = DBNull.Value;
-    //                    }
+        //            if (oMails != null)
+        //            {
+        //                for (Int32 i = 1; i <= oMails.Count; i++)
+        //                {
+        //                    try
+        //                    {
+        //                        oMailItem = oMails(i);
+        //                    }
+        //                    catch
+        //                    {
+        //                        oMailItem = DBNull.Value;
+        //                    }
 
-    //                    // If Not IsDBNull(oMailItem) And oMailItem.Attachments.Count > 0 Then
-    //                    emailsRow emailsRow = emailsDataTable.NewemailsRow();
+        //                    // If Not IsDBNull(oMailItem) And oMailItem.Attachments.Count > 0 Then
+        //                    emailsRow emailsRow = emailsDataTable.NewemailsRow();
 
-    //                    try
-    //                    {
-    //                        emailsRow.from = oMailItem.SenderName;
-    //                        emailsRow.subject = oMailItem.Subject;
-    //                        emailsRow.body = oMailItem.Body;
-    //                        emailsRow.recived = oMailItem.ReceivedTime;
-    //                        emailsRow.id = oMailItem.EntryID;
+        //                    try
+        //                    {
+        //                        emailsRow.from = oMailItem.SenderName;
+        //                        emailsRow.subject = oMailItem.Subject;
+        //                        emailsRow.body = oMailItem.Body;
+        //                        emailsRow.recived = oMailItem.ReceivedTime;
+        //                        emailsRow.id = oMailItem.EntryID;
 
-    //                        // EMails
-    //                        emailsDataTable.AddemailsRow(emailsRow);
+        //                        // EMails
+        //                        emailsDataTable.AddemailsRow(emailsRow);
 
-    //                        // Attachments
-    //                        oAttachments = oMailItem.Attachments;
+        //                        // Attachments
+        //                        oAttachments = oMailItem.Attachments;
 
-    //                        for (Int32 j = 1; j <= oAttachments.Count; j++)
-    //                        {
-    //                            dynamic oAttachment = oAttachments(j);
+        //                        for (Int32 j = 1; j <= oAttachments.Count; j++)
+        //                        {
+        //                            dynamic oAttachment = oAttachments(j);
 
-    //                            try
-    //                            {
-    //                                attachmentsDataTable.AddattachmentsRow(oAttachment.DisplayName, oAttachment.FileName, oAttachment.Index, emailsRow);
-    //                            }
-    //                            catch (Exception ex)
-    //                            {
-    //                            }
-    //                        }
-    //                    }
-    //                    catch (Exception ex)
-    //                    {
-    //                    }
-    //                }
+        //                            try
+        //                            {
+        //                                attachmentsDataTable.AddattachmentsRow(oAttachment.DisplayName, oAttachment.FileName, oAttachment.Index, emailsRow);
+        //                            }
+        //                            catch (Exception ex)
+        //                            {
+        //                            }
+        //                        }
+        //                    }
+        //                    catch (Exception ex)
+        //                    {
+        //                    }
+        //                }
 
-    //                Mails = oMails;
-    //            }
-    //        }
+        //                Mails = oMails;
+        //            }
+        //        }
 
-    //        catch (Exception ex)
-    //        {
-    //            MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    //        }
-    //    }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //    }
 
         public void GetOutlookMessageFile(ref string FileName
                  , ref string Subject)
@@ -1373,6 +1372,32 @@ namespace ohaCalendar
                     m_importance = value;
                 }
             }
+
+            private OlBusyStatus m_busy_status;
+            public OlBusyStatus BusyStatus
+            {
+                get
+                {
+                    return m_busy_status;
+                }
+                set
+                {
+                    m_busy_status = value;
+                }
+            }
+
+            bool m_all_day_event;
+            public bool AllDayEvent
+            {
+                get
+                {
+                    return m_all_day_event;
+                }
+                set
+                {
+                    m_all_day_event = value;
+                }
+            }
         }
 
 
@@ -1578,8 +1603,9 @@ namespace ohaCalendar
                     apt.ReminderSet = true;
                     apt.ReminderMinutesBeforeStart = 10;
                     apt.Importance = OutlookDate.Importance;
-                    apt.BusyStatus = OlBusyStatus.olTentative;
+                    apt.BusyStatus = OutlookDate.BusyStatus; // OlBusyStatus.olTentative;
                     apt.Location = OutlookDate.Location;
+                    apt.AllDayEvent = OutlookDate.AllDayEvent;
                     apt.Save();
                     apt.Display();
                     EntryID = apt.EntryID;
@@ -1599,8 +1625,9 @@ namespace ohaCalendar
                             Item.ReminderSet = true;
                             Item.ReminderMinutesBeforeStart = 10;
                             Item.Importance = OutlookDate.Importance;
-                            Item.BusyStatus = OlBusyStatus.olTentative;
+                            Item.BusyStatus = OutlookDate.BusyStatus; // OlBusyStatus.olTentative;
                             Item.Location = OutlookDate.Location;
+                            Item.AllDayEvent = OutlookDate.AllDayEvent;
                             Item.Save();
                             Item.Display();
                             exists = true;
@@ -1723,181 +1750,139 @@ namespace ohaCalendar
             const string oUserPropertName = "ItemID";
             string oItemID = null;
 
-            try
+            //try
+            //{
+            oResultItems_obj = new List<OutlookCalendarItemType>();
+
+            if (Ende == new DateTime?() || Ende == DateTime.MinValue)
+                Ende = DateTime.Now;
+
+            //Application = Interaction.CreateObject("Outlook.Application", "");
+            Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
+            Application = Activator.CreateInstance(OutlookType);
+            mpnNamespace = Application.GetNamespace("MAPI");
+
+
+            if (Calendar == null && string.IsNullOrEmpty(CalendarName))
+                Calendar = mpnNamespace.GetDefaultFolder(OlFolderType.olFolderCalendar);
+            //    Calendar = GetOutlookFolder(CalendarName, OlFolderType.olFolderCalendar, CalendarNameAlternate);
+
+
+            if (Calendar == null)
+                throw new Exception("Kein Kalender '" + CalendarName + "' wurde gefunden!");
+
+            oItems = Calendar.Items;
+            oItems.IncludeRecurrences = true;
+            oItems.Sort("[Start]", Type.Missing);
+            //if (OnlyUnRead)
+            //    oResultItems = oItems.Find("[UnRead] = true");
+            //else
+            //    oResultItems = oItems;
+            //string filter = "[Start] >= '" + Start.ToString("g") + "' AND [End] <= '" + ((DateTime)Ende).ToString("g") + "'";
+            string filter = "[Start] <= '" + ((DateTime)Ende).ToString("g") + "' AND [End] >= '" + Start.ToString("g") + "'";
+            var restrictItems = oItems.Restrict(filter);
+
+            foreach (var item in restrictItems)
             {
-                oResultItems_obj = new List<OutlookCalendarItemType>();
+                bool to_add = false;
 
-                if (Ende == new DateTime?() || Ende == DateTime.MinValue)
-                    Ende = DateTime.Now;
+                DateTime _creationTime = Convert.ToDateTime(item.CreationTime.ToString("g").Replace("#", ""));
+                DateTime _start = Convert.ToDateTime(item.Start.ToString("g").Replace("#", ""));
+                DateTime _end = Convert.ToDateTime(item.End.ToString("g").Replace("#", ""));
 
-                //Application = Interaction.CreateObject("Outlook.Application", "");
-                Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
-                Application = Activator.CreateInstance(OutlookType);
-                mpnNamespace = Application.GetNamespace("MAPI");
-
-
-                if (Calendar == null && string.IsNullOrEmpty(CalendarName))
-                    Calendar = mpnNamespace.GetDefaultFolder(OlFolderType.olFolderCalendar);
-                //    Calendar = GetOutlookFolder(CalendarName, OlFolderType.olFolderCalendar, CalendarNameAlternate);
-
-
-                if (Calendar == null)
-                    throw new Exception("Kein Kalender '" + CalendarName + "' wurde gefunden!");
-
-                oItems = Calendar.Items;
-                oItems.IncludeRecurrences = true;
-                oItems.Sort("[Start]", Type.Missing);
-                //if (OnlyUnRead)
-                //    oResultItems = oItems.Find("[UnRead] = true");
-                //else
-                //    oResultItems = oItems;
-                //string filter = "[Start] >= '" + Start.ToString("g") + "' AND [End] <= '" + ((DateTime)Ende).ToString("g") + "'";
-                string filter = "[Start] <= '" + ((DateTime)Ende).ToString("g") + "' AND [End] >= '" + Start.ToString("g") + "'";
-                var restrictItems = oItems.Restrict(filter);
-
-                foreach (var item in restrictItems)
+                if (!string.IsNullOrEmpty(SearchInSubject))
                 {
-                    bool to_add = false;
+                    if (!item.Subject == null && item.Subject.ToString().Contains(SearchInSubject))
+                        to_add = true;
+                }
 
-                    DateTime _creationTime = Convert.ToDateTime(item.CreationTime.ToString("g").Replace("#", ""));
-                    DateTime _start = Convert.ToDateTime(item.Start.ToString("g").Replace("#", ""));
-                    DateTime _end = Convert.ToDateTime(item.End.ToString("g").Replace("#", ""));
+                if (!string.IsNullOrEmpty(SearchInBody) && to_add == false)
+                {
+                    if (!item.Body == null && item.Body.ToString().Contains(SearchInBody))
+                        to_add = true;
+                }
 
-                    if (!string.IsNullOrEmpty(SearchInSubject))
+                if (Start != null && Ende != null)
+                {
+                    if (_start >= Start && _end <= Ende)
+                        to_add = true;
+                }
+
+                List<string> Attachments = new List<string>();
+
+                try
+                {
+                    if (item.Attachments.Count > 0)
                     {
-                        if (!item.Subject == null && item.Subject.ToString().Contains(SearchInSubject))
-                            to_add = true;
-                    }
-
-                    if (!string.IsNullOrEmpty(SearchInBody) && to_add == false)
-                    {
-                        if (!item.Body == null && item.Body.ToString().Contains(SearchInBody))
-                            to_add = true;
-                    }
-
-                    if (Start != null && Ende != null)
-                    {
-                        if (_start >= Start && _end <= Ende)
-                            to_add = true;
-                    }
-
-                    List<string> Attachments = new List<string>();
-
-                    try
-                    {
-                        if (item.Attachments.Count > 0)
+                        foreach (var attachment in item.Attachments)
                         {
-                            foreach (var attachment in item.Attachments)
+                            if (!attachment == null && !attachment.FileName == null && !string.IsNullOrEmpty(attachment.FileName))
                             {
-                                if (!attachment == null && !attachment.FileName == null && !string.IsNullOrEmpty(attachment.FileName))
+                                if (attachment.FileName.ToString().ToLower().Equals("item_info.xml"))
                                 {
-                                    if (attachment.FileName.ToString().ToLower().Equals("item_info.xml"))
-                                    {
-                                        var new_guid = Guid.NewGuid().ToString();
-                                        var file_name = Path.Combine(Path.GetTempPath(), "item_info_" + new_guid + ".xml");
-                                        attachment.SaveAsFile(file_name);
-                                        Attachments.Add(file_name);
-                                    }
+                                    var new_guid = Guid.NewGuid().ToString();
+                                    var file_name = Path.Combine(Path.GetTempPath(), "item_info_" + new_guid + ".xml");
+                                    attachment.SaveAsFile(file_name);
+                                    Attachments.Add(file_name);
                                 }
                             }
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-
-                    if (to_add)
-                    {
-                        var itemID_prop = item.UserProperties.Find(oUserPropertName);
-                        if (itemID_prop == null)
-                        {
-                            // Save new GUID for old item
-                            item.UserProperties.Add(oUserPropertName, OlUserPropertyType.olText);
-                            oItemID = Guid.NewGuid().ToString();
-                            item.UserProperties["ItemID"] = oItemID;
-                            item.Save();
-                        }
-                        else
-                            oItemID = itemID_prop.Value;
-
-                        string telephone = null;
-                        // Try
-                        // telephone = IIf(item.Telephone Is Nothing, Nothing, item.Telephone)
-                        // Catch ex As Exception
-                        // End Try
-
-                        string Mobile_phone = null;
-                        // Try
-                        // Mobile_phone = IIf(item.Mobile_phone Is Nothing, Nothing, item.Mobile_phone)
-                        // Catch ex As Exception
-                        // End Try
-
-                        string Email = null;
-                        // Try
-                        // Email = IIf(item.Email Is Nothing, Nothing, item.Email)
-                        // Catch ex As Exception
-                        // End Try
-
-                        string Contact_person = null;
-                        // Try
-                        // Contact_person = IIf(item.Contact_person Is Nothing, Nothing, item.Contact_person)
-                        // Catch ex As Exception
-                        // End Try
-
-                        string Companyname1 = null;
-                        // Try
-                        // Companyname1 = IIf(item.Companyname1 Is Nothing, Nothing, item.Companyname1)
-                        // Catch ex As Exception
-                        // End Try
-
-                        string Street = null;
-                        // Try
-                        // Street = IIf(item.Street Is Nothing, Nothing, item.Street)
-                        // Catch ex As Exception
-                        // End Try
-
-                        string City = null;
-                        // Try
-                        // City = IIf(item.City Is Nothing, Nothing, item.City)
-                        // Catch ex As Exception
-                        // End Try
-
-                        string Postcode = null;
-                        // Try
-                        // Postcode = IIf(item.Postcode Is Nothing, Nothing, item.Postcode)
-                        // Catch ex As Exception
-                        // End Try
-
-                        string Nation = null;
-
-                        string Organizer = item.Organizer;
-
-                        string RequiredAttendees = item.RequiredAttendees;
-                        // Try
-                        // Nation = IIf(item.Nation Is Nothing, Nothing, item.Nation)
-                        // Catch ex As Exception
-                        // End Try
-
-                        outlookCalendarItemType_obj = new OutlookCalendarItemType(
-                            item.Subject, item.Body, oItemID, _creationTime, _start, _end,
-                            item.Duration, item.Location, telephone, Mobile_phone, Email,
-                            Contact_person, Companyname1, Street, City, Postcode, Nation, Attachments, Organizer, RequiredAttendees, null);
-                        oResultItems_obj.Add(outlookCalendarItemType_obj);
-                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
 
-                return oResultItems_obj;
+                if (to_add)
+                {
+                    var itemID_prop = item.UserProperties.Find(oUserPropertName);
+                    if (itemID_prop == null)
+                    {
+                        // Save new GUID for old item
+                        item.UserProperties.Add(oUserPropertName, OlUserPropertyType.olText);
+                        oItemID = Guid.NewGuid().ToString();
+                        item.UserProperties["ItemID"] = oItemID;
+                        item.Save();
+                    }
+                    else
+                        oItemID = itemID_prop.Value;
+
+                    string telephone = null;
+                    string Mobile_phone = null;
+                    string Email = null;
+                    string Contact_person = null;
+                    string Companyname1 = null;
+                    string Street = null;
+                    string City = null;
+                    string Postcode = null;
+                    string Nation = null;
+                    string Organizer = item.Organizer;
+                    string RequiredAttendees = item.RequiredAttendees;
+
+
+                    outlookCalendarItemType_obj = new OutlookCalendarItemType(
+                        item.Subject, item.Body, oItemID, _creationTime, _start, _end,
+                        item.Duration, item.Location, telephone, Mobile_phone, Email,
+                        Contact_person, Companyname1, Street, City, Postcode, Nation, Attachments, Organizer, RequiredAttendees, null,
+                        item.AllDayEvent
+                    , item.BusyStatus
+                    );
+                    oResultItems_obj.Add(outlookCalendarItemType_obj);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-            finally
-            {
-                Application = null;
-            }
+
+            return oResultItems_obj;
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return null;
+            //}
+            //finally
+            //{
+            //    Application = null;
+            //}
         }
 
         public static void CreateAppointment(string title, string body, DateTime start, string location, bool display = false, bool allDayEvent = true)
@@ -2314,6 +2299,12 @@ namespace ohaCalendar
                     string RequiredAttendees = null;
                     RequiredAttendees = Get(item, "RequiredAttendees");
 
+                    bool AllDayEvent;
+                    AllDayEvent = Get(item, "AllDayEvent");
+
+                    int BusyStatus;
+                    BusyStatus = Get(item, "BusyStatus");
+
                     if (string.IsNullOrEmpty(Email1DisplayName))
                         continue;
 
@@ -2338,7 +2329,9 @@ namespace ohaCalendar
                         null,
                         Organizer,
                         RequiredAttendees,
-                        null
+                        null,
+                        AllDayEvent
+                        , BusyStatus
                         );
                     oResultItems_obj.Add(outlookCalendarItemType_obj);
                 }
@@ -2548,7 +2541,9 @@ namespace ohaCalendar
                                     null,
                                     null, //Organizer,
                                     null, //RequiredAttendees
-                                    null
+                                    null,
+                                    false
+                                    , (int)OlBusyStatus.olFree
                                     );
                                 oResultItems_obj.Add(outlookCalendarItemType_obj);
                             }
@@ -2797,6 +2792,8 @@ namespace ohaCalendar
         public string Organizer;
         public string RequiredAttendees;
         public string Availability;
+        public bool AllDayEvent;
+        public int BusyStatus;
 
         public OutlookCalendarItemType(string subject,
             string body,
@@ -2818,7 +2815,9 @@ namespace ohaCalendar
             List<string> Attachments,
             string Organizer,
             string RequiredAttendees,
-            string Availability
+            string Availability,
+            bool AllDayEvent
+            , int BusyStatus
             )
         {
             {
@@ -2844,6 +2843,8 @@ namespace ohaCalendar
                 withBlock.Organizer = Organizer;
                 withBlock.RequiredAttendees = RequiredAttendees;
                 withBlock.Availability = Availability;
+                withBlock.AllDayEvent = AllDayEvent;
+                withBlock.BusyStatus = BusyStatus;
             }
         }
 

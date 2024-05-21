@@ -4,8 +4,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Text.Json;
 using static ohaCalendar.CalendarDataSet;
+using static ohaCalendar.cOutlook;
 using Label = System.Windows.Forms.Label;
 
 namespace ohaCalendar
@@ -30,14 +32,17 @@ namespace ohaCalendar
         private DateTime m_basis_date = DateTime.Today;
         public struct structHolidays
         {
-            public structHolidays(DateTime Date, string Description)
+            public structHolidays(DateTime Date, string Description, bool IsPublicHoliday, bool IsHoliday)
             {
                 date = Date;
                 description = Description;
+                is_public_holiday = IsPublicHoliday;
+                is_holiday = IsHoliday;
             }
-
             public DateTime date;
             public string description;
+            public bool is_public_holiday;
+            public bool is_holiday;
         }
         static List<structHolidays> g_holidays = new List<structHolidays>();
         static List<string> g_weekends = new List<string>();
@@ -133,8 +138,6 @@ namespace ohaCalendar
             if (is_school_holidaysToolStripComboBox.ComboBox.SelectedValue != null)
                 m_is_school_holidays = is_school_holidaysToolStripComboBox.ComboBox.SelectedValue.ToString() == bool.TrueString;
 
-            //m_subdivisionCode = null;
-
             if (!m_is_started)
             {
                 if (countriesToolStripComboBox.ComboBox.SelectedValue == null
@@ -195,15 +198,11 @@ namespace ohaCalendar
 
                     m_current_culture_str = _current_culture;
                     m_current_culture = new CultureInfo(m_current_culture_str);
-                    //CultureInfo.DefaultThreadCurrentCulture = m_current_culture;
-                    //CultureInfo.DefaultThreadCurrentUICulture = m_current_culture;
 
                     FillStateCMB();
                     RefreshHolidays(true);
                     ForCalendar_load();
-
                     CollapseInfo();
-
                     ShowProgress(false);
                 }
             }
@@ -232,8 +231,6 @@ namespace ohaCalendar
         {
             try
             {
-                //ShowProgress(true);
-
                 Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
 
@@ -261,19 +258,12 @@ namespace ohaCalendar
                 tableLayoutPanel3.Controls.Clear();
                 tableLayoutPanel4.Controls.Clear();
 
-
-                //pls_waitLabel.Text = Properties.Resources.please_wait;
-                //pls_waitLabel.Visible = true;
-                //splitContainer1.Visible = false;
-                //generalSplitContainer.Visible = false;
-
                 var info = new System.Globalization.CultureInfo(g_current_culturesysid);
                 m_first_day_of_week = info.DateTimeFormat.FirstDayOfWeek;
                 m_list_of_days = GetDaysByWeek(m_basis_date);
 
                 FillCalendarItems();
 
-                //year_1 = active_date_minus_1.Year;
                 int month_1 = active_date_minus_1.Month;
                 string month_1_str = new DateTime(year_1, month_1, 1).ToString("MMMM", CultureInfo.CurrentCulture);
                 groupBox1.Text = (month_1_str + " " + year_1).ToUpper();
@@ -299,7 +289,7 @@ namespace ohaCalendar
                 string month_4_str = new DateTime(year_4, month_4, 1).ToString("MMMM", CultureInfo.CurrentCulture);
                 groupBox4.Text = (month_4_str + " " + year_4).ToUpper();
                 m_dateTimes_4 = getAllDates(year_4, month_4);
-                FillDataTable(tableLayoutPanel4, m_dateTimes_4, holidays_4Label);                
+                FillDataTable(tableLayoutPanel4, m_dateTimes_4, holidays_4Label);
             }
             catch (Exception ex)
             {
@@ -339,6 +329,8 @@ namespace ohaCalendar
             panel.ControlAdded += Panel_ControlAdded;
             structHolidays? holiday = null;
             List<CalendarItemType> week_list_tmp = new List<CalendarItemType>();
+            bool is_my_holiday = false;
+            List<DateTime> myholiday_list = new List<DateTime>();
 
             try
             {
@@ -402,17 +394,39 @@ namespace ohaCalendar
                             holiday = IsHoliday(week_list_tmp[col - 1].Day);
                             is_today = week_list_tmp[col - 1].Day == m_basis_date;
 
-                            // Calendar items
-                            var calendar_items = m_calendar_items.Count(
-                                x => x.Start > week_list_tmp[col - 1].Day.AddDays(-1).AddHours(23).AddMinutes(59) && x.Start < week_list_tmp[col - 1].Day.AddDays(1));
-                            if (calendar_items > 0)
-                            {
-                                week_list_tmp[col - 1].CountOfTermins = calendar_items;
 
-                                //if (control is LinkLabel)
-                                control.Text = week_list_tmp[col - 1].Day.Day.ToString() + GetPotenz(calendar_items); // + calendar_items ;
-                                //else
-                                //    control.Text = week_list_tmp[col - 1].Day.Day.ToString();
+                            var calendar_item = m_calendar_items.FirstOrDefault(
+                                     x => x.Start.ToShortDateString() == week_list_tmp[col - 1].Day.ToShortDateString());
+
+                            if (calendar_item != null)
+                            {
+                                is_my_holiday = calendar_item.AllDayEvent && calendar_item.BusyStatus == (int)OlBusyStatus.olOutOfOffice;
+
+                                if (is_my_holiday)
+                                {
+                                    var start_day = m_calendar_items.FirstOrDefault(
+                                        x => x.Start.ToShortDateString() == week_list_tmp[col - 1].Day.ToShortDateString()).Start;
+                                    var end_day = m_calendar_items.FirstOrDefault(
+                                        x => x.Start.ToShortDateString() == week_list_tmp[col - 1].Day.ToShortDateString()).End_;
+
+                                    myholiday_list = new List<DateTime>();
+                                    for (DateTime d = start_day; d < end_day; d = d.AddDays(1))
+                                    {
+                                        myholiday_list.Add(d);
+                                    }
+
+
+                                }
+                            }
+
+
+                            // Calendar items
+                            var countOfTermins = m_calendar_items.Count(
+                                x => x.Start > week_list_tmp[col - 1].Day.AddDays(-1).AddHours(23).AddMinutes(59) && x.Start < week_list_tmp[col - 1].Day.AddDays(1));
+                            if (countOfTermins > 0)
+                            {
+                                week_list_tmp[col - 1].CountOfTermins = countOfTermins;
+                                control.Text = week_list_tmp[col - 1].Day.Day.ToString() + GetPotenz(countOfTermins);
                             }
                             else
                                 control.Text = week_list_tmp[col - 1].Day.Day.ToString();
@@ -428,17 +442,8 @@ namespace ohaCalendar
                                 {
                                     if (holiday != null)
                                     {
-
-
                                         var _holiday = (structHolidays)holiday;
                                         toolTip1.SetToolTip(control, _holiday.description);
-
-                                        //string tmp = _holiday.date.ToString("d", ).Replace(_holiday.date.ToString("yyyy"), string.Empty);
-                                        //char last = tmp[tmp.Length - 1];
-                                        //char[] trimmer = char.IsDigit(last) ? new char[] { tmp[0] } : new char[] { last };
-                                        //string dateStr = tmp.Trim(trimmer);
-
-
 
                                         char[] trimmer = DateTimeFormatInfo.CurrentInfo.DateSeparator.ToCharArray();
                                         string dateStr = _holiday.date.ToString("d").Replace(_holiday.date.ToString("yyyy"), string.Empty).Trim(trimmer);
@@ -446,20 +451,39 @@ namespace ohaCalendar
                                         holidaysLabel.Text += !string.IsNullOrEmpty(holidaysLabel.Text) ?
                                            ";  " + dateStr + " " + _holiday.description :
                                            dateStr + " " + _holiday.description;
-                                        //holidaysLabel.Text += !string.IsNullOrEmpty(holidaysLabel.Text) ?
-                                        //    ";  " + _holiday.date.ToShortDateString() + " " + _holiday.description :
-                                        //    _holiday.date.ToShortDateString() + " " + _holiday.description;
                                     }
                                 }
                                 else
-                                    control.ForeColor = week_list_tmp[col - 1].Active ? Color.Red : Color.Gray;
+                                    control.ForeColor = is_my_holiday ? Color.Green : week_list_tmp[col - 1].Active ? Color.Red : Color.Gray;
                             }
                             else if (col > 0 && col <= 5)
                             {
                                 if (control is LinkLabel)
-                                    ((LinkLabel)control).LinkColor = week_list_tmp[col - 1].Active ? Color.Red : Color.Gray;
+                                {
+                                    if(Is_my_holiday(control, myholiday_list))
+                                    {
+                                        var label = new Label();
+                                        label.Text = control.Text;
+                                        if (week_list_tmp[col - 1].Active)
+                                        {
+                                            label.ForeColor = Color.LimeGreen;
+                                            label.Font  = new Font(label.Font, FontStyle.Bold);
+                                            label.Tag = week_list_tmp[col - 1];
+                                            label.Click += Label_Click;
+                                            label.Cursor = Cursors.Hand;
+                                        }
+                                        control = label;
+                                    }
+                                    //else
+                                    //    ((LinkLabel)control).LinkColor = week_list_tmp[col - 1].Active ? Color.Red : Color.Gray;
+                                }
                                 else
-                                    control.ForeColor = Color.Gray;
+                                    control.ForeColor = Is_my_holiday(control, myholiday_list) ? Color.Green : week_list_tmp[col - 1].Active ? Color.Red : Color.Gray;
+
+                                //else
+                                //    control.ForeColor = Color.Gray;
+
+
                             }
                         }
                         control.Font = row == 0 || col == 0 ? new Font("Arial", 9) : new Font("Arial", 14);
@@ -479,7 +503,7 @@ namespace ohaCalendar
                                 label.Text = control.Text;
                                 if (week_list_tmp[col - 1].Active)
                                 {
-                                    label.ForeColor = Color.Red;
+                                    label.ForeColor = is_my_holiday ? Color.Green : Color.Red;
                                     label.Tag = week_list_tmp[col - 1];
                                     label.Click += Label_Click;
                                     label.Cursor = Cursors.Hand;
@@ -489,10 +513,9 @@ namespace ohaCalendar
                             else
                             {
                                 if (col > 0 && week_list_tmp[col - 1].Active)
-                                    control.ForeColor = Color.Red;
+                                    control.ForeColor = is_my_holiday ? Color.Green : Color.Red;
                             }
                         }
-
                         panel.Controls.Add(control, col, row);
                     }
                 }
@@ -503,6 +526,20 @@ namespace ohaCalendar
                     Properties.Settings.Default.LoggingPerEmail,
                     Properties.Resources.msgCaptionError + " in: " + ToString(), g_client_name);
             }
+        }
+
+        private bool Is_my_holiday(Control control, List<DateTime> myholiday_list)
+        {
+            bool ret_val = false;
+
+            if (control.Tag == null)
+                ret_val = false;
+
+            var tag = control.Tag as CalendarItemType;
+
+            ret_val = myholiday_list.Contains(tag.Day);
+
+            return ret_val;
         }
 
         private void Label_Click(object? sender, EventArgs e)
@@ -605,7 +642,7 @@ namespace ohaCalendar
                     }
                     else
                     {
-                        foreach (var item in m_calendar_items)
+                        foreach (OutlookCalendarItemType item in m_calendar_items)
                         {
                             calendarDataSet.Calendar.AddCalendarRow(
                                 item.Subject,
@@ -616,7 +653,9 @@ namespace ohaCalendar
                                 item.End_,
                                 item.Organizer,
                                 item.RequiredAttendees,
-                                item.EntryID
+                                item.EntryID,
+                                item.AllDayEvent,
+                                item.BusyStatus
                                 );
                         }
                     }
@@ -848,7 +887,7 @@ namespace ohaCalendar
                         structHolidays new_item = default;
                         new_item.date = Convert.ToDateTime(holiday.startDate);
 
-                        var name_obj = holiday.name.FirstOrDefault(x => x.language == m_current_culture_str);
+                        Name? name_obj = holiday.name.FirstOrDefault(x => x.language == m_current_culture_str);
                         if (name_obj == null)
                         {
                             name_obj = holiday.name.FirstOrDefault(x => x.language == "EN");
@@ -858,17 +897,15 @@ namespace ohaCalendar
                             return;
                         }
                         var holiday_name = name_obj.text;
-
-
                         new_item.description = holiday_name != null ? holiday_name : "";
+                        new_item.is_public_holiday = true;
+                        new_item.is_holiday = false;
+
                         g_holidays.Add(new_item);
                     }
 
                     GetData();
                 }
-                //SaveLocalHolidays();
-                //
-
                 m_old_year = year;
             }
             catch (Exception ex)
@@ -880,57 +917,6 @@ namespace ohaCalendar
                 Cursor = Cursors.Default;
             }
         }
-
-        //private void SaveLocalHolidays()
-        //{
-        //    if (g_holidays == null || g_holidays.Count == 0)
-        //        return;
-        //    try
-        //    {
-        //        XmlSerializer serializer = new XmlSerializer(typeof(List<structHolidays>));
-        //        TextWriter writer = new StreamWriter(m_holidays_file);
-        //        serializer.Serialize(writer, g_holidays);
-        //        writer.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
-        //    }
-        //}
-
-        //private bool ReadLocalHolidays()
-        //{
-        //    if (!File.Exists(m_holidays_file))
-        //        return false;
-
-        //    try
-        //    {
-        //        XmlSerializer serializer = new XmlSerializer(typeof(List<structHolidays>));
-        //        serializer.UnknownNode += new
-        //        XmlNodeEventHandler(serializer_UnknownNode);
-        //        serializer.UnknownAttribute += new
-        //        XmlAttributeEventHandler(serializer_UnknownAttribute);
-
-        //        // A FileStream is needed to read the XML document.
-        //        using (FileStream fs = new FileStream(m_holidays_file, FileMode.Open))
-        //        {
-        //            //List<structHolidays> po = null;
-        //            var po = serializer.Deserialize(fs);
-        //            if (po != null)
-        //            {
-        //                g_holidays = (List<structHolidays>)po;
-
-        //                return true;
-        //            }
-        //        }
-        //        return false;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
-        //        return false;
-        //    }
-        //}
 
         private void FillCountriesCMB()
         {
@@ -1095,7 +1081,7 @@ namespace ohaCalendar
 
         private void RefreshHolidays(bool doAlways)
         {
-            if (year_1 > 0)  //stateToolStripComboBox.ComboBox.SelectedValue != null && year_1 > 0)
+            if (year_1 > 0)
             {
                 FillHolidayArray(year_1, DoAlways: doAlways);
                 if (year_4 > year_1)
