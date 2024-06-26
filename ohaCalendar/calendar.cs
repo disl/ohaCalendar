@@ -1,10 +1,10 @@
 ﻿using Microsoft.Win32;
+using ohaCalendar.CalendarDataSetTableAdapters;
 using ohaCalendar.Models;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Text.Json;
 using static ohaCalendar.CalendarDataSet;
 using static ohaCalendar.cOutlook;
@@ -14,6 +14,7 @@ namespace ohaCalendar
 {
     public partial class Calendar : Form
     {
+        int g_clientsysid = 1;
         int g_current_culturesysid = 9;
         string g_current_culture = "de-DE";
         private string g_client_name = "Otto Haas KG";
@@ -57,6 +58,8 @@ namespace ohaCalendar
         private bool m_is_started = true;
         private bool m_is_school_holidays = false;
         private string m_subdivisionCode;
+        private int maxRowHeight = 100;
+        private rp_staff_jubileeDataTable? m_all_birthdays = null;
 
         public Calendar()
         {
@@ -65,8 +68,14 @@ namespace ohaCalendar
 
         private void calendar_Load(object sender, EventArgs e)
         {
+            rp_staff_jubileeTableAdapter.Connection =
+                new Microsoft.Data.SqlClient.SqlConnection("Data Source=V-SRV-MSSQL;Initial Catalog=ohaERP;Integrated Security=True;Encrypt=False;TrustServerCertificate=True");
+
             try
             {
+                int? res_row_count = null;
+                m_all_birthdays = rp_staff_jubileeTableAdapter.GetDataByAll(g_clientsysid, g_current_culturesysid);
+
                 ShowProgress(true);
 
                 m_current_culture_default = CultureInfo.CurrentCulture;
@@ -93,6 +102,13 @@ namespace ohaCalendar
 
                 countriesToolStripComboBox.ComboBox.SelectedValue = m_current_culture_str;
 
+                rp_staff_jubileeTableAdapter.Fill(calendarDataSet.rp_staff_jubilee, g_clientsysid, g_current_culturesysid, DateTime.Today);
+                if (calendarDataSet.rp_staff_jubilee.Rows.Count > 0)
+                {
+                    SetImageThambnails();
+                    ShowHideInfo();
+                    tabControl1.SelectedTab = birthdaysTabPage;
+                }
 
                 ShowProgress(false);
 
@@ -390,7 +406,7 @@ namespace ohaCalendar
                             // Days
                             if (row < 6)
                                 week_list_tmp = day_list_full.Take(new Range((row - 1) * 7, ((row - 1) * 7 + 7))).ToList();
-                            control = week_list_tmp[col - 1].Active && col <= 6 ? new LinkLabel() : new Label();
+                            control = week_list_tmp[col - 1].Active && col <= 6 ? new LinkLabel() : new LinkLabel();
                             holiday = IsHoliday(week_list_tmp[col - 1].Day);
                             is_today = week_list_tmp[col - 1].Day == m_basis_date;
 
@@ -414,12 +430,8 @@ namespace ohaCalendar
                                     {
                                         myholiday_list.Add(d);
                                     }
-
-
                                 }
                             }
-
-
                             // Calendar items
                             var countOfTermins = m_calendar_items.Count(
                                 x => x.Start > week_list_tmp[col - 1].Day.AddDays(-1).AddHours(23).AddMinutes(59) && x.Start < week_list_tmp[col - 1].Day.AddDays(1));
@@ -430,6 +442,10 @@ namespace ohaCalendar
                             }
                             else
                                 control.Text = week_list_tmp[col - 1].Day.Day.ToString();
+
+                            var has_birthdays = IsContainsDayInBirthdaysArray(week_list_tmp[col - 1].Day);
+                            control.Text += has_birthdays ? "\U0001F382" : "   ";
+
                             control.Tag = week_list_tmp[col - 1];
                             if (control is LinkLabel)
                             {
@@ -460,30 +476,23 @@ namespace ohaCalendar
                             {
                                 if (control is LinkLabel)
                                 {
-                                    if(Is_my_holiday(control, myholiday_list))
+                                    if (Is_my_holiday(control, myholiday_list))
                                     {
                                         var label = new Label();
                                         label.Text = control.Text;
                                         if (week_list_tmp[col - 1].Active)
                                         {
                                             label.ForeColor = Color.LimeGreen;
-                                            label.Font  = new Font(label.Font, FontStyle.Bold);
+                                            label.Font = new Font(label.Font, FontStyle.Bold);
                                             label.Tag = week_list_tmp[col - 1];
                                             label.Click += Label_Click;
                                             label.Cursor = Cursors.Hand;
                                         }
                                         control = label;
                                     }
-                                    //else
-                                    //    ((LinkLabel)control).LinkColor = week_list_tmp[col - 1].Active ? Color.Red : Color.Gray;
                                 }
                                 else
                                     control.ForeColor = Is_my_holiday(control, myholiday_list) ? Color.Green : week_list_tmp[col - 1].Active ? Color.Red : Color.Gray;
-
-                                //else
-                                //    control.ForeColor = Color.Gray;
-
-
                             }
                         }
                         control.Font = row == 0 || col == 0 ? new Font("Arial", 9) : new Font("Arial", 14);
@@ -617,6 +626,8 @@ namespace ohaCalendar
                 var sel_obj = SelectedItem; //((LinkLabel)sender).Tag as CalendarItemType;
                 SelectedDay = sel_obj.Day;
 
+                rp_staff_jubileeTableAdapter.Fill(calendarDataSet.rp_staff_jubilee, g_clientsysid, g_current_culturesysid, (DateTime)SelectedDay);  //, "G", ref res_row_count);
+
                 dateTextBox.Text = ((DateTime)SelectedDay).ToLongDateString();
 
                 if (ShowOutlook)
@@ -635,12 +646,7 @@ namespace ohaCalendar
 
                     Cursor = Cursors.WaitCursor;
 
-                    if (m_calendar_items == null || m_calendar_items.Count == 0)
-                    {
-                        MessageBox.Show(Properties.Resources.No_dates_found_in_the_calendar);
-                        return;
-                    }
-                    else
+                    if (m_calendar_items != null && m_calendar_items.Count > 0)
                     {
                         foreach (OutlookCalendarItemType item in m_calendar_items)
                         {
@@ -661,6 +667,8 @@ namespace ohaCalendar
                     }
                     if (generalSplitContainer.Panel2Collapsed)
                         ShowHideInfo();
+
+                    SetImageThambnails();
                 }
             }
             catch (Exception ex)
@@ -673,6 +681,35 @@ namespace ohaCalendar
             {
                 Cursor = Cursors.Default;
             }
+        }
+
+        private void SetImageThambnails()
+        {
+            foreach (DataGridViewRow row in birthdaysDataGridView.Rows)
+            {
+                Image img = null;
+
+                if(row.Cells[staffimageDataGridViewImageColumn.Name].Value == DBNull.Value)
+                {
+                    continue;
+                }
+
+                using (var ms = new MemoryStream((byte[])row.Cells[staffimageDataGridViewImageColumn.Name].Value))
+                {
+                    img = Image.FromStream(ms);
+                }
+                if (img != null)
+                {
+                    var image_height = 200;
+                    var image_width = image_height * img.Width / img.Height;
+                    var m_thumbnail = (Bitmap)img.GetThumbnailImage(image_width, image_height, null, IntPtr.Zero);
+                    if (m_thumbnail != null)
+                        row.Cells[staff_thumbnail.Name].Value = m_thumbnail;
+                    else
+                        row.Cells[staff_thumbnail.Name].Value = img;
+                }
+            }
+            staffimageDataGridViewImageColumn.Visible = false;
         }
 
         public int GetWeekNumber(DateTime dt)
@@ -1087,6 +1124,14 @@ namespace ohaCalendar
                 if (year_4 > year_1)
                     FillHolidayArray(year_4, false, DoAlways: doAlways);
             }
+        }
+
+        private bool IsContainsDayInBirthdaysArray(DateTime testDay)
+        {
+            if (m_all_birthdays == null || m_all_birthdays.Count == 0)
+                return false;
+
+            return m_all_birthdays.Count(x => x.birthday.Day == testDay.Day && x.birthday.Month == testDay.Month) > 0;
         }
 
     }

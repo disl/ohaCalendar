@@ -157,7 +157,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 145</value>
+    <value>687, 155</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -202,10 +202,13 @@
     <value>3, 8</value>
   </data>
   <data name="holidays_1Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
+    <value>13, 13</value>
   </data>
   <data name="holidays_1Label.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="holidays_1Label.Text" xml:space="preserve">
+    <value>[]</value>
   </data>
   <data name="&gt;&gt;holidays_1Label.Name" xml:space="preserve">
     <value>holidays_1Label</value>
@@ -232,10 +235,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 177</value>
+    <value>687, 186</value>
   </data>
   <data name="splitContainer4.SplitterDistance" type="System.Int32, mscorlib">
-    <value>145</value>
+    <value>155</value>
   </data>
   <data name="splitContainer4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -262,7 +265,7 @@
     <value>3, 3</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 205</value>
+    <value>693, 214</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -320,7 +323,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 148</value>
+    <value>687, 156</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -365,10 +368,13 @@
     <value>3, 8</value>
   </data>
   <data name="holidays_2Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
+    <value>13, 13</value>
   </data>
   <data name="holidays_2Label.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="holidays_2Label.Text" xml:space="preserve">
+    <value>[]</value>
   </data>
   <data name="&gt;&gt;holidays_2Label.Name" xml:space="preserve">
     <value>holidays_2Label</value>
@@ -395,10 +401,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 179</value>
+    <value>687, 189</value>
   </data>
   <data name="splitContainer6.SplitterDistance" type="System.Int32, mscorlib">
-    <value>148</value>
+    <value>156</value>
   </data>
   <data name="splitContainer6.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -425,7 +431,7 @@
     <value>3, 3</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 207</value>
+    <value>693, 217</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -458,10 +464,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 428</value>
+    <value>699, 447</value>
   </data>
   <data name="splitContainer2.SplitterDistance" type="System.Int32, mscorlib">
-    <value>211</value>
+    <value>220</value>
   </data>
   <data name="splitContainer2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -515,7 +521,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 150</value>
+    <value>687, 158</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -560,10 +566,13 @@
     <value>3, 8</value>
   </data>
   <data name="holidays_3Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
+    <value>13, 13</value>
   </data>
   <data name="holidays_3Label.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="holidays_3Label.Text" xml:space="preserve">
+    <value>[]</value>
   </data>
   <data name="&gt;&gt;holidays_3Label.Name" xml:space="preserve">
     <value>holidays_3Label</value>
@@ -590,10 +599,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 180</value>
+    <value>687, 190</value>
   </data>
   <data name="splitContainer7.SplitterDistance" type="System.Int32, mscorlib">
-    <value>150</value>
+    <value>158</value>
   </data>
   <data name="splitContainer7.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -620,7 +629,7 @@
     <value>3, 3</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 208</value>
+    <value>693, 218</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -677,7 +686,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 148</value>
+    <value>687, 157</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -722,10 +731,13 @@
     <value>3, 8</value>
   </data>
   <data name="holidays_4Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
+    <value>13, 13</value>
   </data>
   <data name="holidays_4Label.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="holidays_4Label.Text" xml:space="preserve">
+    <value>[]</value>
   </data>
   <data name="&gt;&gt;holidays_4Label.Name" xml:space="preserve">
     <value>holidays_4Label</value>
@@ -752,10 +764,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 180</value>
+    <value>687, 191</value>
   </data>
   <data name="splitContainer8.SplitterDistance" type="System.Int32, mscorlib">
-    <value>148</value>
+    <value>157</value>
   </data>
   <data name="splitContainer8.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -782,7 +794,7 @@
     <value>3, 3</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 208</value>
+    <value>693, 219</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -815,10 +827,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 432</value>
+    <value>699, 453</value>
   </data>
   <data name="splitContainer3.SplitterDistance" type="System.Int32, mscorlib">
-    <value>214</value>
+    <value>224</value>
   </data>
   <data name="splitContainer3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -872,10 +884,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 864</value>
+    <value>699, 904</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>428</value>
+    <value>447</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -968,7 +980,7 @@
     <value>True</value>
   </data>
   <data name="splitContainer9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>3, 3</value>
   </data>
   <data name="splitContainer9.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
@@ -1019,7 +1031,7 @@
     <value>False</value>
   </data>
   <metadata name="checklist_for_release_answersBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>348, 15</value>
+    <value>22, 18</value>
   </metadata>
   <metadata name="calendarDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1045, 17</value>
@@ -1031,7 +1043,7 @@
     <value>0, 0</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>675, 239</value>
+    <value>661, 240</value>
   </data>
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1076,7 +1088,7 @@
     <value>Vertical</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 54</value>
+    <value>655, 54</value>
   </data>
   <data name="textBox5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1106,7 +1118,7 @@
     <value>Vertical</value>
   </data>
   <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 54</value>
+    <value>655, 54</value>
   </data>
   <data name="textBox3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1133,7 +1145,7 @@
     <value>True</value>
   </data>
   <data name="textBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 24</value>
+    <value>655, 24</value>
   </data>
   <data name="textBox4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1160,7 +1172,7 @@
     <value>True</value>
   </data>
   <data name="dateTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 24</value>
+    <value>655, 24</value>
   </data>
   <data name="dateTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1187,7 +1199,7 @@
     <value>True</value>
   </data>
   <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 24</value>
+    <value>655, 24</value>
   </data>
   <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1211,7 +1223,7 @@
     <value>3, 213</value>
   </data>
   <data name="richTextBoxEx1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 405</value>
+    <value>655, 410</value>
   </data>
   <data name="richTextBoxEx1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1241,7 +1253,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>675, 621</value>
+    <value>661, 626</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1274,10 +1286,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>675, 864</value>
+    <value>661, 870</value>
   </data>
   <data name="splitContainer9.SplitterDistance" type="System.Int32, mscorlib">
-    <value>239</value>
+    <value>240</value>
   </data>
   <data name="splitContainer9.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1289,9 +1301,156 @@
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer9.Parent" xml:space="preserve">
-    <value>generalSplitContainer.Panel2</value>
+    <value>calendarTabPage</value>
   </data>
   <data name="&gt;&gt;splitContainer9.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="calendarTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="calendarTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="calendarTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>667, 876</value>
+  </data>
+  <data name="calendarTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="calendarTabPage.Text" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="&gt;&gt;calendarTabPage.Name" xml:space="preserve">
+    <value>calendarTabPage</value>
+  </data>
+  <data name="&gt;&gt;calendarTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;calendarTabPage.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;calendarTabPage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="birthdaysDataGridView.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="staffimageDataGridViewImageColumn.HeaderText" xml:space="preserve">
+    <value>image</value>
+  </data>
+  <data name="staffimageDataGridViewImageColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="staff_thumbnail.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="staff_thumbnail.HeaderText" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="fullnameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>staff</value>
+  </data>
+  <data name="birthdayDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>birthday</value>
+  </data>
+  <data name="birthdayDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="calcinyearsDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>calc_in_years</value>
+  </data>
+  <data name="calcinyearsDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="calcmeldungvorschauintagenDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>calc_meldung_vorschau_in_tagen</value>
+  </data>
+  <data name="calcmeldungvorschauintagenDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="calcmeldedatumDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>calc_meldedatum</value>
+  </data>
+  <data name="calcmeldedatumDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="rp_staff_jubileeBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>348, 15</value>
+  </metadata>
+  <data name="birthdaysDataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="birthdaysDataGridView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="birthdaysDataGridView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>661, 870</value>
+  </data>
+  <data name="birthdaysDataGridView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;birthdaysDataGridView.Name" xml:space="preserve">
+    <value>birthdaysDataGridView</value>
+  </data>
+  <data name="&gt;&gt;birthdaysDataGridView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;birthdaysDataGridView.Parent" xml:space="preserve">
+    <value>birthdaysTabPage</value>
+  </data>
+  <data name="&gt;&gt;birthdaysDataGridView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="birthdaysTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="birthdaysTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="birthdaysTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>667, 876</value>
+  </data>
+  <data name="birthdaysTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="birthdaysTabPage.Text" xml:space="preserve">
+    <value>Birthdays</value>
+  </data>
+  <data name="&gt;&gt;birthdaysTabPage.Name" xml:space="preserve">
+    <value>birthdaysTabPage</value>
+  </data>
+  <data name="&gt;&gt;birthdaysTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;birthdaysTabPage.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;birthdaysTabPage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>675, 904</value>
+  </data>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>generalSplitContainer.Panel2</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;generalSplitContainer.Panel2.Name" xml:space="preserve">
@@ -1307,7 +1466,7 @@
     <value>1</value>
   </data>
   <data name="generalSplitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1378, 864</value>
+    <value>1378, 904</value>
   </data>
   <data name="generalSplitContainer.SplitterDistance" type="System.Int32, mscorlib">
     <value>699</value>
@@ -3526,17 +3685,23 @@
   <data name="&gt;&gt;pls_waitLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="rp_staff_jubileeTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 54</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>120</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1378, 891</value>
+    <value>1378, 931</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
@@ -3588,7 +3753,7 @@
 </value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1394, 930</value>
+    <value>1394, 970</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>620, 930</value>
@@ -3671,6 +3836,54 @@
   <data name="&gt;&gt;calendarDataSet.Type" xml:space="preserve">
     <value>ohaCalendar.CalendarDataSet, ohaCalendar, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;staffimageDataGridViewImageColumn.Name" xml:space="preserve">
+    <value>staffimageDataGridViewImageColumn</value>
+  </data>
+  <data name="&gt;&gt;staffimageDataGridViewImageColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;staff_thumbnail.Name" xml:space="preserve">
+    <value>staff_thumbnail</value>
+  </data>
+  <data name="&gt;&gt;staff_thumbnail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fullnameDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>fullnameDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;fullnameDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;birthdayDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>birthdayDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;birthdayDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;calcinyearsDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>calcinyearsDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;calcinyearsDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;calcmeldungvorschauintagenDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>calcmeldungvorschauintagenDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;calcmeldungvorschauintagenDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;calcmeldedatumDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>calcmeldedatumDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;calcmeldedatumDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rp_staff_jubileeBindingSource.Name" xml:space="preserve">
+    <value>rp_staff_jubileeBindingSource</value>
+  </data>
+  <data name="&gt;&gt;rp_staff_jubileeBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;getCalendarItemsToolStripMenuItem.Name" xml:space="preserve">
     <value>getCalendarItemsToolStripMenuItem</value>
   </data>
@@ -3742,6 +3955,12 @@
   </data>
   <data name="&gt;&gt;is_school_holidaysToolStripComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rp_staff_jubileeTableAdapter.Name" xml:space="preserve">
+    <value>rp_staff_jubileeTableAdapter</value>
+  </data>
+  <data name="&gt;&gt;rp_staff_jubileeTableAdapter.Type" xml:space="preserve">
+    <value>ohaCalendar.CalendarDataSetTableAdapters.rp_staff_jubileeTableAdapter, ohaCalendar, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Calendar</value>

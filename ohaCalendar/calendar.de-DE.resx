@@ -117,18 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="calendarTabPage.Text" xml:space="preserve">
+    <value>Terminen</value>
+  </data>
+  <data name="staffimageDataGridViewImageColumn.HeaderText" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+  <data name="staff_thumbnail.HeaderText" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+  <data name="fullnameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>Mitarbeiter</value>
+  </data>
+  <data name="birthdayDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>Geburtstag</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="birthdayDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="birthdaysTabPage.Text" xml:space="preserve">
+    <value>Geburtstage</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="getCalendarItemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 23</value>
   </data>
   <data name="getCalendarItemsToolStripMenuItem.Text" xml:space="preserve">
     <value>Abrufen</value>
-  </data>
-  <data name="moveCalendarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 23</value>
-  </data>
-  <data name="moveCalendarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Verschieben</value>
   </data>
   <data name="move_calendar_backToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -159,6 +175,12 @@
   </data>
   <data name="move_calendar_currentToolStripMenuItem.Text" xml:space="preserve">
     <value>Aktuell</value>
+  </data>
+  <data name="moveCalendarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 23</value>
+  </data>
+  <data name="moveCalendarToolStripMenuItem.Text" xml:space="preserve">
+    <value>Verschieben</value>
   </data>
   <data name="close_openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 23</value>

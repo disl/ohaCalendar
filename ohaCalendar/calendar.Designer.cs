@@ -53,6 +53,8 @@ namespace ohaCalendar
             splitContainer1 = new SplitContainer();
             splitContainer5 = new SplitContainer();
             generalSplitContainer = new SplitContainer();
+            tabControl1 = new TabControl();
+            calendarTabPage = new TabPage();
             splitContainer9 = new SplitContainer();
             dataGridView1 = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -74,6 +76,16 @@ namespace ohaCalendar
             dateTextBox = new TextBox();
             textBox2 = new TextBox();
             richTextBoxEx1 = new RichTextBoxEx();
+            birthdaysTabPage = new TabPage();
+            birthdaysDataGridView = new DataGridView();
+            staffimageDataGridViewImageColumn = new DataGridViewImageColumn();
+            staff_thumbnail = new DataGridViewImageColumn();
+            fullnameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            birthdayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            calcinyearsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            calcmeldungvorschauintagenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            calcmeldedatumDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            rp_staff_jubileeBindingSource = new BindingSource(components);
             linkLabel1 = new LinkLabel();
             linkLabel2 = new LinkLabel();
             linkLabel3 = new LinkLabel();
@@ -165,6 +177,7 @@ namespace ohaCalendar
             stateToolStripComboBox = new ToolStripComboBox();
             is_school_holidaysToolStripComboBox = new ToolStripComboBox();
             pls_waitLabel = new Label();
+            rp_staff_jubileeTableAdapter = new CalendarDataSetTableAdapters.rp_staff_jubileeTableAdapter();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
@@ -203,6 +216,8 @@ namespace ohaCalendar
             generalSplitContainer.Panel1.SuspendLayout();
             generalSplitContainer.Panel2.SuspendLayout();
             generalSplitContainer.SuspendLayout();
+            tabControl1.SuspendLayout();
+            calendarTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer9).BeginInit();
             splitContainer9.Panel1.SuspendLayout();
             splitContainer9.Panel2.SuspendLayout();
@@ -211,6 +226,9 @@ namespace ohaCalendar
             ((System.ComponentModel.ISupportInitialize)checklist_for_release_answersBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)calendarDataSet).BeginInit();
             tableLayoutPanel5.SuspendLayout();
+            birthdaysTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)birthdaysDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)rp_staff_jubileeBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -397,7 +415,22 @@ namespace ohaCalendar
             // 
             // generalSplitContainer.Panel2
             // 
-            generalSplitContainer.Panel2.Controls.Add(splitContainer9);
+            generalSplitContainer.Panel2.Controls.Add(tabControl1);
+            // 
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(calendarTabPage);
+            tabControl1.Controls.Add(birthdaysTabPage);
+            resources.ApplyResources(tabControl1, "tabControl1");
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            // 
+            // calendarTabPage
+            // 
+            calendarTabPage.Controls.Add(splitContainer9);
+            resources.ApplyResources(calendarTabPage, "calendarTabPage");
+            calendarTabPage.Name = "calendarTabPage";
+            calendarTabPage.UseVisualStyleBackColor = true;
             // 
             // splitContainer9
             // 
@@ -565,6 +598,74 @@ namespace ohaCalendar
             richTextBoxEx1.ReadOnly = true;
             richTextBoxEx1.LinkClicked += richTextBoxEx1_LinkClicked;
             richTextBoxEx1.TextChanged += richTextBoxEx1_TextChanged;
+            // 
+            // birthdaysTabPage
+            // 
+            birthdaysTabPage.Controls.Add(birthdaysDataGridView);
+            resources.ApplyResources(birthdaysTabPage, "birthdaysTabPage");
+            birthdaysTabPage.Name = "birthdaysTabPage";
+            birthdaysTabPage.UseVisualStyleBackColor = true;
+            // 
+            // birthdaysDataGridView
+            // 
+            birthdaysDataGridView.AllowUserToAddRows = false;
+            birthdaysDataGridView.AllowUserToDeleteRows = false;
+            birthdaysDataGridView.AutoGenerateColumns = false;
+            birthdaysDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            birthdaysDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            resources.ApplyResources(birthdaysDataGridView, "birthdaysDataGridView");
+            birthdaysDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            birthdaysDataGridView.Columns.AddRange(new DataGridViewColumn[] { staffimageDataGridViewImageColumn, staff_thumbnail, fullnameDataGridViewTextBoxColumn, birthdayDataGridViewTextBoxColumn, calcinyearsDataGridViewTextBoxColumn, calcmeldungvorschauintagenDataGridViewTextBoxColumn, calcmeldedatumDataGridViewTextBoxColumn });
+            birthdaysDataGridView.DataSource = rp_staff_jubileeBindingSource;
+            birthdaysDataGridView.Name = "birthdaysDataGridView";
+            birthdaysDataGridView.RowTemplate.Height = 70;
+            // 
+            // staffimageDataGridViewImageColumn
+            // 
+            staffimageDataGridViewImageColumn.DataPropertyName = "staff_image";
+            resources.ApplyResources(staffimageDataGridViewImageColumn, "staffimageDataGridViewImageColumn");
+            staffimageDataGridViewImageColumn.Name = "staffimageDataGridViewImageColumn";
+            // 
+            // staff_thumbnail
+            // 
+            staff_thumbnail.DataPropertyName = "staff_thumbnail";
+            resources.ApplyResources(staff_thumbnail, "staff_thumbnail");
+            staff_thumbnail.Name = "staff_thumbnail";
+            // 
+            // fullnameDataGridViewTextBoxColumn
+            // 
+            fullnameDataGridViewTextBoxColumn.DataPropertyName = "full_name";
+            resources.ApplyResources(fullnameDataGridViewTextBoxColumn, "fullnameDataGridViewTextBoxColumn");
+            fullnameDataGridViewTextBoxColumn.Name = "fullnameDataGridViewTextBoxColumn";
+            // 
+            // birthdayDataGridViewTextBoxColumn
+            // 
+            birthdayDataGridViewTextBoxColumn.DataPropertyName = "birthday";
+            resources.ApplyResources(birthdayDataGridViewTextBoxColumn, "birthdayDataGridViewTextBoxColumn");
+            birthdayDataGridViewTextBoxColumn.Name = "birthdayDataGridViewTextBoxColumn";
+            // 
+            // calcinyearsDataGridViewTextBoxColumn
+            // 
+            calcinyearsDataGridViewTextBoxColumn.DataPropertyName = "calc_in_years";
+            resources.ApplyResources(calcinyearsDataGridViewTextBoxColumn, "calcinyearsDataGridViewTextBoxColumn");
+            calcinyearsDataGridViewTextBoxColumn.Name = "calcinyearsDataGridViewTextBoxColumn";
+            // 
+            // calcmeldungvorschauintagenDataGridViewTextBoxColumn
+            // 
+            calcmeldungvorschauintagenDataGridViewTextBoxColumn.DataPropertyName = "calc_meldung_vorschau_in_tagen";
+            resources.ApplyResources(calcmeldungvorschauintagenDataGridViewTextBoxColumn, "calcmeldungvorschauintagenDataGridViewTextBoxColumn");
+            calcmeldungvorschauintagenDataGridViewTextBoxColumn.Name = "calcmeldungvorschauintagenDataGridViewTextBoxColumn";
+            // 
+            // calcmeldedatumDataGridViewTextBoxColumn
+            // 
+            calcmeldedatumDataGridViewTextBoxColumn.DataPropertyName = "calc_meldedatum";
+            resources.ApplyResources(calcmeldedatumDataGridViewTextBoxColumn, "calcmeldedatumDataGridViewTextBoxColumn");
+            calcmeldedatumDataGridViewTextBoxColumn.Name = "calcmeldedatumDataGridViewTextBoxColumn";
+            // 
+            // rp_staff_jubileeBindingSource
+            // 
+            rp_staff_jubileeBindingSource.DataMember = "rp_staff_jubilee";
+            rp_staff_jubileeBindingSource.DataSource = calendarDataSet;
             // 
             // linkLabel1
             // 
@@ -1107,6 +1208,10 @@ namespace ohaCalendar
             pls_waitLabel.ForeColor = SystemColors.Highlight;
             pls_waitLabel.Name = "pls_waitLabel";
             // 
+            // rp_staff_jubileeTableAdapter
+            // 
+            rp_staff_jubileeTableAdapter.ClearBeforeFill = true;
+            // 
             // Calendar
             // 
             resources.ApplyResources(this, "$this");
@@ -1163,6 +1268,8 @@ namespace ohaCalendar
             generalSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)generalSplitContainer).EndInit();
             generalSplitContainer.ResumeLayout(false);
+            tabControl1.ResumeLayout(false);
+            calendarTabPage.ResumeLayout(false);
             splitContainer9.Panel1.ResumeLayout(false);
             splitContainer9.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer9).EndInit();
@@ -1172,6 +1279,9 @@ namespace ohaCalendar
             ((System.ComponentModel.ISupportInitialize)calendarDataSet).EndInit();
             tableLayoutPanel5.ResumeLayout(false);
             tableLayoutPanel5.PerformLayout();
+            birthdaysTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)birthdaysDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)rp_staff_jubileeBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -1327,5 +1437,18 @@ namespace ohaCalendar
         private DataGridViewTextBoxColumn requiredAttendeesDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn entryIDDataGridViewTextBoxColumn;
         private ToolStripComboBox is_school_holidaysToolStripComboBox;
+        private CalendarDataSetTableAdapters.rp_staff_jubileeTableAdapter rp_staff_jubileeTableAdapter;
+        private TabControl tabControl1;
+        private TabPage calendarTabPage;
+        private TabPage birthdaysTabPage;
+        private DataGridView birthdaysDataGridView;
+        private BindingSource rp_staff_jubileeBindingSource;
+        private DataGridViewImageColumn staffimageDataGridViewImageColumn;
+        private DataGridViewImageColumn staff_thumbnail;
+        private DataGridViewTextBoxColumn fullnameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn birthdayDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn calcinyearsDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn calcmeldungvorschauintagenDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn calcmeldedatumDataGridViewTextBoxColumn;
     }
 }
