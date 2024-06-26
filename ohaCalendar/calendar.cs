@@ -68,8 +68,7 @@ namespace ohaCalendar
 
         private void calendar_Load(object sender, EventArgs e)
         {
-            rp_staff_jubileeTableAdapter.Connection =
-                new Microsoft.Data.SqlClient.SqlConnection("Data Source=V-SRV-MSSQL;Initial Catalog=ohaERP;Integrated Security=True;Encrypt=False;TrustServerCertificate=True");
+            rp_staff_jubileeTableAdapter.Connection = new Microsoft.Data.SqlClient.SqlConnection("...");
 
             try
             {
@@ -689,7 +688,7 @@ namespace ohaCalendar
             {
                 Image img = null;
 
-                if(row.Cells[staffimageDataGridViewImageColumn.Name].Value == DBNull.Value)
+                if (row.Cells[staffimageDataGridViewImageColumn.Name].Value == DBNull.Value)
                 {
                     continue;
                 }
