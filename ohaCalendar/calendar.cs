@@ -68,7 +68,7 @@ namespace ohaCalendar
 
         private void calendar_Load(object sender, EventArgs e)
         {
-            rp_staff_jubileeTableAdapter.Connection = new Microsoft.Data.SqlClient.SqlConnection("...");
+            //rp_staff_jubileeTableAdapter.Connection = new Microsoft.Data.SqlClient.SqlConnection("...");
 
             try
             {
