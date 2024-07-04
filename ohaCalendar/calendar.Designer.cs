@@ -1422,6 +1422,11 @@ namespace ohaCalendar
         private DataSet1 calendarDataSet;
         private DataGridView dataGridView2;
         private DataSet1TableAdapters.rp_staff_jubileeTableAdapter rp_staff_jubileeTableAdapter;
+        private TextBox startTextBox;
+        private DataGridViewImageColumn staff_image;
+        private DataGridViewImageColumn staff_thumbnail;
+        private DataGridViewTextBoxColumn full_name;
+        private DataGridViewTextBoxColumn birthday;
         private DataGridViewTextBoxColumn subjectDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn organizerDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn locationDataGridViewTextBoxColumn;
@@ -1434,10 +1439,5 @@ namespace ohaCalendar
         private DataGridViewTextBoxColumn entryIDDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn allDayEventDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn busyStatusDataGridViewTextBoxColumn;
-        private TextBox startTextBox;
-        private DataGridViewImageColumn staff_image;
-        private DataGridViewImageColumn staff_thumbnail;
-        private DataGridViewTextBoxColumn full_name;
-        private DataGridViewTextBoxColumn birthday;
     }
 }

@@ -1009,6 +1009,9 @@
   <data name="outlookColumn.HeaderText" xml:space="preserve">
     <value>Outlook</value>
   </data>
+  <data name="outlookColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="bodyDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>Body</value>
   </data>
