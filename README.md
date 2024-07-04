@@ -5,3 +5,10 @@
 5. black dates - normal working days, red - public/school holidays, green - personal holidays.
 6. ohaCalender supports display of birthdays as icons and a list in TabControl on the right.
 
+
+![image](https://github.com/disl/ohaCalendar/assets/1278236/53fff7d0-f466-4d51-8c9a-b224d28b2439)
+
+
+
+![image](https://github.com/disl/ohaCalendar/assets/1278236/74010b84-a5fb-482d-a054-d77a91c1c8b7)
+
