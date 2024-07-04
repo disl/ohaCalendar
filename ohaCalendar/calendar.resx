@@ -985,7 +985,7 @@
   <data name="splitContainer9.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
-  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+  <data name="subjectDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>Subject</value>
   </data>
   <data name="organizerDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
@@ -994,23 +994,20 @@
   <data name="locationDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>Location</value>
   </data>
-  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+  <data name="startDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="endDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>End</value>
+  </data>
+  <data name="durationDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>Duration</value>
   </data>
   <metadata name="outlookColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="outlookColumn.HeaderText" xml:space="preserve">
     <value>Outlook</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
-    <value>Duration</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn3.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="bodyDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>Body</value>
@@ -1030,11 +1027,23 @@
   <data name="entryIDDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="allDayEventDataGridViewCheckBoxColumn.HeaderText" xml:space="preserve">
+    <value>AllDayEvent</value>
+  </data>
+  <data name="allDayEventDataGridViewCheckBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="busyStatusDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>BusyStatus</value>
+  </data>
+  <data name="busyStatusDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <metadata name="checklist_for_release_answersBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>22, 18</value>
   </metadata>
   <metadata name="calendarDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1045, 17</value>
+    <value>770, 17</value>
   </metadata>
   <data name="dataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1079,7 +1088,7 @@
     <value>Fill</value>
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 153</value>
+    <value>3, 93</value>
   </data>
   <data name="textBox5.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1109,7 +1118,7 @@
     <value>Fill</value>
   </data>
   <data name="textBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 93</value>
+    <value>3, 153</value>
   </data>
   <data name="textBox3.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1162,33 +1171,6 @@
   <data name="&gt;&gt;textBox4.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="dateTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dateTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="dateTextBox.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="dateTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>655, 24</value>
-  </data>
-  <data name="dateTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dateTextBox.Name" xml:space="preserve">
-    <value>dateTextBox</value>
-  </data>
-  <data name="&gt;&gt;dateTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dateTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel5</value>
-  </data>
-  <data name="&gt;&gt;dateTextBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="textBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1214,7 +1196,7 @@
     <value>tableLayoutPanel5</value>
   </data>
   <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="richTextBoxEx1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1241,6 +1223,30 @@
     <value>tableLayoutPanel5</value>
   </data>
   <data name="&gt;&gt;richTextBoxEx1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="startTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="startTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="startTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>655, 21</value>
+  </data>
+  <data name="startTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;startTextBox.Name" xml:space="preserve">
+    <value>startTextBox</value>
+  </data>
+  <data name="&gt;&gt;startTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;startTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;startTextBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1271,7 +1277,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="textBox5" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox4" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTextBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="richTextBoxEx1" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,30,Absolute,30,Absolute,30,Absolute,60,Absolute,60,Absolute,70" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="textBox5" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox4" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="richTextBoxEx1" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="startTextBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,30,Absolute,30,Absolute,30,Absolute,60,Absolute,60,Absolute,70,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="&gt;&gt;splitContainer9.Panel2.Name" xml:space="preserve">
     <value>splitContainer9.Panel2</value>
@@ -1333,73 +1339,46 @@
   <data name="&gt;&gt;calendarTabPage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="birthdaysDataGridView.ColumnHeadersHeight" type="System.Int32, mscorlib">
-    <value>70</value>
+  <data name="staff_image.HeaderText" xml:space="preserve">
+    <value>Image</value>
   </data>
-  <data name="staffimageDataGridViewImageColumn.HeaderText" xml:space="preserve">
-    <value>image</value>
-  </data>
-  <data name="staffimageDataGridViewImageColumn.Visible" type="System.Boolean, mscorlib">
+  <data name="staff_image.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="staff_thumbnail.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="staff_thumbnail.HeaderText" xml:space="preserve">
     <value>Image</value>
   </data>
-  <data name="fullnameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>staff</value>
+  <data name="full_name.HeaderText" xml:space="preserve">
+    <value>name</value>
   </data>
-  <data name="birthdayDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+  <data name="birthday.HeaderText" xml:space="preserve">
     <value>birthday</value>
-  </data>
-  <data name="birthdayDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="calcinyearsDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>calc_in_years</value>
-  </data>
-  <data name="calcinyearsDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="calcmeldungvorschauintagenDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>calc_meldung_vorschau_in_tagen</value>
-  </data>
-  <data name="calcmeldungvorschauintagenDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="calcmeldedatumDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>calc_meldedatum</value>
-  </data>
-  <data name="calcmeldedatumDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <metadata name="rp_staff_jubileeBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>348, 15</value>
   </metadata>
-  <data name="birthdaysDataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="dataGridView2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="birthdaysDataGridView.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="dataGridView2.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="birthdaysDataGridView.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dataGridView2.Size" type="System.Drawing.Size, System.Drawing">
     <value>661, 870</value>
   </data>
-  <data name="birthdaysDataGridView.TabIndex" type="System.Int32, mscorlib">
+  <data name="dataGridView2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;birthdaysDataGridView.Name" xml:space="preserve">
-    <value>birthdaysDataGridView</value>
+  <data name="&gt;&gt;dataGridView2.Name" xml:space="preserve">
+    <value>dataGridView2</value>
   </data>
-  <data name="&gt;&gt;birthdaysDataGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;birthdaysDataGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView2.Parent" xml:space="preserve">
     <value>birthdaysTabPage</value>
   </data>
-  <data name="&gt;&gt;birthdaysDataGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridView2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="birthdaysTabPage.Location" type="System.Drawing.Point, System.Drawing">
@@ -3686,7 +3665,7 @@
     <value>1</value>
   </data>
   <metadata name="rp_staff_jubileeTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 54</value>
+    <value>869, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3706,52 +3685,6 @@
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
   </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAGBgAAAEAIACICQAAFgAAACgAAAAYAAAAMAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA1AAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
-        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA1AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAC/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
-        AP8AAAD/AAAA/wAAAL8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAA
-        AAAAAAAAAAAAvwAAAL8AAAAAAAAAAAAAAL8AAAC/AAAAAAAAAAAAAAC/AAAAvwAAAAAAAAAAAAAA/wAA
-        AP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAvwAAAL8AAAAAAAAAAAAA
-        AL8AAAC/AAAAAAAAAAAAAAC/AAAAvwAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAvwAAAL8AAAAAAAAAAAAAAL8AAAC/AAAAAAAA
-        AAAAAAC/AAAAvwAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAA
-        AAAAAAAAAAAAvwAAAL8AAAAAAAAAAAAAAL8AAAC/AAAAAAAAAAAAAAC/AAAAvwAAAAAAAAAAAAAA/wAA
-        AP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAP8AAAD/AAAA/wAA
-        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
-        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAA
-        AP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAADUAAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
-        AP8AAAD/AAAA/wAAANQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAvwAAAP8AAAD/AAAA/wAA
-        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAvwAAAIAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AOAABwDgAAcA5//nAOf/5wDmZmcA5mZnAOf/
-        5wDn/+cA5mZnAOZmZwDn/+cA5//nAOAABwDgAAcA5//nAOf/5wDgAAcA4AAHAPz/PwD8/z8A////AP//
-        /wA=
-</value>
-  </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>1394, 970</value>
   </data>
@@ -3764,10 +3697,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>ohaCalendar: Kalender</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn1</value>
+  <data name="&gt;&gt;subjectDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>subjectDataGridViewTextBoxColumn</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+  <data name="&gt;&gt;subjectDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;organizerDataGridViewTextBoxColumn.Name" xml:space="preserve">
@@ -3782,10 +3715,10 @@
   <data name="&gt;&gt;locationDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn2</value>
+  <data name="&gt;&gt;startDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>startDataGridViewTextBoxColumn</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+  <data name="&gt;&gt;startDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;endDataGridViewTextBoxColumn.Name" xml:space="preserve">
@@ -3794,17 +3727,17 @@
   <data name="&gt;&gt;endDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;durationDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>durationDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;durationDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;outlookColumn.Name" xml:space="preserve">
     <value>outlookColumn</value>
   </data>
   <data name="&gt;&gt;outlookColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn3</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bodyDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>bodyDataGridViewTextBoxColumn</value>
@@ -3824,6 +3757,18 @@
   <data name="&gt;&gt;entryIDDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;allDayEventDataGridViewCheckBoxColumn.Name" xml:space="preserve">
+    <value>allDayEventDataGridViewCheckBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;allDayEventDataGridViewCheckBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;busyStatusDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>busyStatusDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;busyStatusDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;checklist_for_release_answersBindingSource.Name" xml:space="preserve">
     <value>checklist_for_release_answersBindingSource</value>
   </data>
@@ -3834,12 +3779,12 @@
     <value>calendarDataSet</value>
   </data>
   <data name="&gt;&gt;calendarDataSet.Type" xml:space="preserve">
-    <value>ohaCalendar.CalendarDataSet, ohaCalendar, Culture=neutral, PublicKeyToken=null</value>
+    <value>ohaCalendar.DataSet1, ohaCalendar, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;staffimageDataGridViewImageColumn.Name" xml:space="preserve">
-    <value>staffimageDataGridViewImageColumn</value>
+  <data name="&gt;&gt;staff_image.Name" xml:space="preserve">
+    <value>staff_image</value>
   </data>
-  <data name="&gt;&gt;staffimageDataGridViewImageColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;staff_image.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;staff_thumbnail.Name" xml:space="preserve">
@@ -3848,34 +3793,16 @@
   <data name="&gt;&gt;staff_thumbnail.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;fullnameDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>fullnameDataGridViewTextBoxColumn</value>
+  <data name="&gt;&gt;full_name.Name" xml:space="preserve">
+    <value>full_name</value>
   </data>
-  <data name="&gt;&gt;fullnameDataGridViewTextBoxColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;full_name.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;birthdayDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>birthdayDataGridViewTextBoxColumn</value>
+  <data name="&gt;&gt;birthday.Name" xml:space="preserve">
+    <value>birthday</value>
   </data>
-  <data name="&gt;&gt;birthdayDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;calcinyearsDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>calcinyearsDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;calcinyearsDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;calcmeldungvorschauintagenDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>calcmeldungvorschauintagenDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;calcmeldungvorschauintagenDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;calcmeldedatumDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>calcmeldedatumDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;calcmeldedatumDataGridViewTextBoxColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;birthday.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rp_staff_jubileeBindingSource.Name" xml:space="preserve">
@@ -3960,7 +3887,7 @@
     <value>rp_staff_jubileeTableAdapter</value>
   </data>
   <data name="&gt;&gt;rp_staff_jubileeTableAdapter.Type" xml:space="preserve">
-    <value>ohaCalendar.CalendarDataSetTableAdapters.rp_staff_jubileeTableAdapter, ohaCalendar, Culture=neutral, PublicKeyToken=null</value>
+    <value>ohaCalendar.DataSet1TableAdapters.rp_staff_jubileeTableAdapter, ohaCalendar, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Calendar</value>

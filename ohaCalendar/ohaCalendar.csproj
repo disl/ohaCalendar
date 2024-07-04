@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>1.0.2024.15</Version>
+    <Version>1.0.2024.18</Version>
     <PackageIcon>calendar_128.png</PackageIcon>
-    <ApplicationIcon>calendar_month.ico</ApplicationIcon>
+    <ApplicationIcon>calendar_16.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="calendar_month.ico" />
+    <Content Include="calendar_16.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,10 +42,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CalendarDataSet.Designer.cs">
+    <Compile Update="DataSet1.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CalendarDataSet.xsd</DependentUpon>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -67,9 +67,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CalendarDataSet.xsd">
+    <None Update="DataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CalendarDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
     </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

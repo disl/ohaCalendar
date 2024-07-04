@@ -1,13 +1,12 @@
 ﻿using Microsoft.Win32;
-using ohaCalendar.CalendarDataSetTableAdapters;
 using ohaCalendar.Models;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
-using static ohaCalendar.CalendarDataSet;
 using static ohaCalendar.cOutlook;
+using static ohaCalendar.DataSet1;
 using Label = System.Windows.Forms.Label;
 
 namespace ohaCalendar
@@ -627,7 +626,7 @@ namespace ohaCalendar
 
                 rp_staff_jubileeTableAdapter.Fill(calendarDataSet.rp_staff_jubilee, g_clientsysid, g_current_culturesysid, (DateTime)SelectedDay);  //, "G", ref res_row_count);
 
-                dateTextBox.Text = ((DateTime)SelectedDay).ToLongDateString();
+                startTextBox.Text = ((DateTime)SelectedDay).ToLongDateString();
 
                 if (ShowOutlook)
                 {
@@ -684,18 +683,26 @@ namespace ohaCalendar
 
         private void SetImageThambnails()
         {
-            foreach (DataGridViewRow row in birthdaysDataGridView.Rows)
+
+            foreach (DataGridViewRow row in dataGridView2.Rows)
             {
                 Image img = null;
 
-                if (row.Cells[staffimageDataGridViewImageColumn.Name].Value == DBNull.Value)
+                if (row.Cells[staff_image.Name].Value == DBNull.Value)
                 {
                     continue;
                 }
 
-                using (var ms = new MemoryStream((byte[])row.Cells[staffimageDataGridViewImageColumn.Name].Value))
+                try
                 {
-                    img = Image.FromStream(ms);
+                    using (var ms = new MemoryStream((byte[])row.Cells[staff_image.Name].Value))
+                    {
+                        img = Image.FromStream(ms);
+                    }
+                }
+                catch (Exception ex)
+                {
+
                 }
                 if (img != null)
                 {
@@ -708,7 +715,7 @@ namespace ohaCalendar
                         row.Cells[staff_thumbnail.Name].Value = img;
                 }
             }
-            staffimageDataGridViewImageColumn.Visible = false;
+            staff_image.Visible = false;
         }
 
         public int GetWeekNumber(DateTime dt)

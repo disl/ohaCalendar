@@ -57,34 +57,33 @@ namespace ohaCalendar
             calendarTabPage = new TabPage();
             splitContainer9 = new SplitContainer();
             dataGridView1 = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            subjectDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             organizerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             locationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            startDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             endDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            durationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             outlookColumn = new DataGridViewButtonColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             bodyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             requiredAttendeesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             entryIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            allDayEventDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            busyStatusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             checklist_for_release_answersBindingSource = new BindingSource(components);
-            calendarDataSet = new CalendarDataSet();
+            calendarDataSet = new DataSet1();
             tableLayoutPanel5 = new TableLayoutPanel();
             textBox5 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
-            dateTextBox = new TextBox();
             textBox2 = new TextBox();
             richTextBoxEx1 = new RichTextBoxEx();
+            startTextBox = new TextBox();
             birthdaysTabPage = new TabPage();
-            birthdaysDataGridView = new DataGridView();
-            staffimageDataGridViewImageColumn = new DataGridViewImageColumn();
+            dataGridView2 = new DataGridView();
+            staff_image = new DataGridViewImageColumn();
             staff_thumbnail = new DataGridViewImageColumn();
-            fullnameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            birthdayDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            calcinyearsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            calcmeldungvorschauintagenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            calcmeldedatumDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            full_name = new DataGridViewTextBoxColumn();
+            birthday = new DataGridViewTextBoxColumn();
             rp_staff_jubileeBindingSource = new BindingSource(components);
             linkLabel1 = new LinkLabel();
             linkLabel2 = new LinkLabel();
@@ -177,7 +176,7 @@ namespace ohaCalendar
             stateToolStripComboBox = new ToolStripComboBox();
             is_school_holidaysToolStripComboBox = new ToolStripComboBox();
             pls_waitLabel = new Label();
-            rp_staff_jubileeTableAdapter = new CalendarDataSetTableAdapters.rp_staff_jubileeTableAdapter();
+            rp_staff_jubileeTableAdapter = new DataSet1TableAdapters.rp_staff_jubileeTableAdapter();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
@@ -227,7 +226,7 @@ namespace ohaCalendar
             ((System.ComponentModel.ISupportInitialize)calendarDataSet).BeginInit();
             tableLayoutPanel5.SuspendLayout();
             birthdaysTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)birthdaysDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)rp_staff_jubileeBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -452,7 +451,7 @@ namespace ohaCalendar
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, organizerDataGridViewTextBoxColumn, locationDataGridViewTextBoxColumn, dataGridViewTextBoxColumn2, endDataGridViewTextBoxColumn, outlookColumn, dataGridViewTextBoxColumn3, bodyDataGridViewTextBoxColumn, requiredAttendeesDataGridViewTextBoxColumn, entryIDDataGridViewTextBoxColumn });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { subjectDataGridViewTextBoxColumn, organizerDataGridViewTextBoxColumn, locationDataGridViewTextBoxColumn, startDataGridViewTextBoxColumn, endDataGridViewTextBoxColumn, durationDataGridViewTextBoxColumn, outlookColumn, bodyDataGridViewTextBoxColumn, requiredAttendeesDataGridViewTextBoxColumn, entryIDDataGridViewTextBoxColumn, allDayEventDataGridViewCheckBoxColumn, busyStatusDataGridViewTextBoxColumn });
             dataGridView1.DataSource = checklist_for_release_answersBindingSource;
             resources.ApplyResources(dataGridView1, "dataGridView1");
             dataGridView1.Name = "dataGridView1";
@@ -460,13 +459,12 @@ namespace ohaCalendar
             dataGridView1.CellMouseClick += dataGridView1_CellMouseClick;
             dataGridView1.RowHeaderMouseDoubleClick += dataGridView1_RowHeaderMouseDoubleClick;
             // 
-            // dataGridViewTextBoxColumn1
+            // subjectDataGridViewTextBoxColumn
             // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "Subject";
-            dataGridViewTextBoxColumn1.FillWeight = 80F;
-            resources.ApplyResources(dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
+            subjectDataGridViewTextBoxColumn.DataPropertyName = "Subject";
+            resources.ApplyResources(subjectDataGridViewTextBoxColumn, "subjectDataGridViewTextBoxColumn");
+            subjectDataGridViewTextBoxColumn.Name = "subjectDataGridViewTextBoxColumn";
+            subjectDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // organizerDataGridViewTextBoxColumn
             // 
@@ -478,17 +476,16 @@ namespace ohaCalendar
             // locationDataGridViewTextBoxColumn
             // 
             locationDataGridViewTextBoxColumn.DataPropertyName = "Location";
-            locationDataGridViewTextBoxColumn.FillWeight = 80F;
             resources.ApplyResources(locationDataGridViewTextBoxColumn, "locationDataGridViewTextBoxColumn");
             locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
             locationDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn2
+            // startDataGridViewTextBoxColumn
             // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "Start";
-            resources.ApplyResources(dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
+            startDataGridViewTextBoxColumn.DataPropertyName = "Start";
+            resources.ApplyResources(startDataGridViewTextBoxColumn, "startDataGridViewTextBoxColumn");
+            startDataGridViewTextBoxColumn.Name = "startDataGridViewTextBoxColumn";
+            startDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // endDataGridViewTextBoxColumn
             // 
@@ -497,19 +494,19 @@ namespace ohaCalendar
             endDataGridViewTextBoxColumn.Name = "endDataGridViewTextBoxColumn";
             endDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // durationDataGridViewTextBoxColumn
+            // 
+            durationDataGridViewTextBoxColumn.DataPropertyName = "Duration";
+            resources.ApplyResources(durationDataGridViewTextBoxColumn, "durationDataGridViewTextBoxColumn");
+            durationDataGridViewTextBoxColumn.Name = "durationDataGridViewTextBoxColumn";
+            durationDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // outlookColumn
             // 
             outlookColumn.FillWeight = 60F;
             resources.ApplyResources(outlookColumn, "outlookColumn");
             outlookColumn.Name = "outlookColumn";
             outlookColumn.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "Duration";
-            resources.ApplyResources(dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // bodyDataGridViewTextBoxColumn
             // 
@@ -532,6 +529,20 @@ namespace ohaCalendar
             entryIDDataGridViewTextBoxColumn.Name = "entryIDDataGridViewTextBoxColumn";
             entryIDDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // allDayEventDataGridViewCheckBoxColumn
+            // 
+            allDayEventDataGridViewCheckBoxColumn.DataPropertyName = "AllDayEvent";
+            resources.ApplyResources(allDayEventDataGridViewCheckBoxColumn, "allDayEventDataGridViewCheckBoxColumn");
+            allDayEventDataGridViewCheckBoxColumn.Name = "allDayEventDataGridViewCheckBoxColumn";
+            allDayEventDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // busyStatusDataGridViewTextBoxColumn
+            // 
+            busyStatusDataGridViewTextBoxColumn.DataPropertyName = "BusyStatus";
+            resources.ApplyResources(busyStatusDataGridViewTextBoxColumn, "busyStatusDataGridViewTextBoxColumn");
+            busyStatusDataGridViewTextBoxColumn.Name = "busyStatusDataGridViewTextBoxColumn";
+            busyStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // checklist_for_release_answersBindingSource
             // 
             checklist_for_release_answersBindingSource.DataMember = "Calendar";
@@ -540,8 +551,8 @@ namespace ohaCalendar
             // 
             // calendarDataSet
             // 
-            calendarDataSet.DataSetName = "CalendarDataSet";
-            calendarDataSet.Namespace = "http://tempuri.org/CalendarDataSet.xsd";
+            calendarDataSet.DataSetName = "DataSet1";
+            calendarDataSet.Namespace = "http://tempuri.org/DataSet1.xsd";
             calendarDataSet.SchemaSerializationMode = SchemaSerializationMode.IncludeSchema;
             // 
             // tableLayoutPanel5
@@ -550,9 +561,9 @@ namespace ohaCalendar
             tableLayoutPanel5.Controls.Add(textBox5, 0, 3);
             tableLayoutPanel5.Controls.Add(textBox3, 0, 3);
             tableLayoutPanel5.Controls.Add(textBox4, 0, 2);
-            tableLayoutPanel5.Controls.Add(dateTextBox, 0, 0);
             tableLayoutPanel5.Controls.Add(textBox2, 0, 1);
             tableLayoutPanel5.Controls.Add(richTextBoxEx1, 0, 5);
+            tableLayoutPanel5.Controls.Add(startTextBox, 0, 0);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
             // textBox5
@@ -576,12 +587,6 @@ namespace ohaCalendar
             textBox4.Name = "textBox4";
             textBox4.ReadOnly = true;
             // 
-            // dateTextBox
-            // 
-            resources.ApplyResources(dateTextBox, "dateTextBox");
-            dateTextBox.Name = "dateTextBox";
-            dateTextBox.ReadOnly = true;
-            // 
             // textBox2
             // 
             textBox2.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Subject", true));
@@ -596,35 +601,38 @@ namespace ohaCalendar
             resources.ApplyResources(richTextBoxEx1, "richTextBoxEx1");
             richTextBoxEx1.Name = "richTextBoxEx1";
             richTextBoxEx1.ReadOnly = true;
-            richTextBoxEx1.LinkClicked += richTextBoxEx1_LinkClicked;
-            richTextBoxEx1.TextChanged += richTextBoxEx1_TextChanged;
+            // 
+            // startTextBox
+            // 
+            resources.ApplyResources(startTextBox, "startTextBox");
+            startTextBox.Name = "startTextBox";
+            startTextBox.ReadOnly = true;
             // 
             // birthdaysTabPage
             // 
-            birthdaysTabPage.Controls.Add(birthdaysDataGridView);
+            birthdaysTabPage.Controls.Add(dataGridView2);
             resources.ApplyResources(birthdaysTabPage, "birthdaysTabPage");
             birthdaysTabPage.Name = "birthdaysTabPage";
             birthdaysTabPage.UseVisualStyleBackColor = true;
             // 
-            // birthdaysDataGridView
+            // dataGridView2
             // 
-            birthdaysDataGridView.AllowUserToAddRows = false;
-            birthdaysDataGridView.AllowUserToDeleteRows = false;
-            birthdaysDataGridView.AutoGenerateColumns = false;
-            birthdaysDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            birthdaysDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            resources.ApplyResources(birthdaysDataGridView, "birthdaysDataGridView");
-            birthdaysDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            birthdaysDataGridView.Columns.AddRange(new DataGridViewColumn[] { staffimageDataGridViewImageColumn, staff_thumbnail, fullnameDataGridViewTextBoxColumn, birthdayDataGridViewTextBoxColumn, calcinyearsDataGridViewTextBoxColumn, calcmeldungvorschauintagenDataGridViewTextBoxColumn, calcmeldedatumDataGridViewTextBoxColumn });
-            birthdaysDataGridView.DataSource = rp_staff_jubileeBindingSource;
-            birthdaysDataGridView.Name = "birthdaysDataGridView";
-            birthdaysDataGridView.RowTemplate.Height = 70;
+            dataGridView2.AllowUserToAddRows = false;
+            dataGridView2.AllowUserToDeleteRows = false;
+            dataGridView2.AutoGenerateColumns = false;
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { staff_image, staff_thumbnail, full_name, birthday });
+            dataGridView2.DataSource = rp_staff_jubileeBindingSource;
+            resources.ApplyResources(dataGridView2, "dataGridView2");
+            dataGridView2.Name = "dataGridView2";
             // 
-            // staffimageDataGridViewImageColumn
+            // staff_image
             // 
-            staffimageDataGridViewImageColumn.DataPropertyName = "staff_image";
-            resources.ApplyResources(staffimageDataGridViewImageColumn, "staffimageDataGridViewImageColumn");
-            staffimageDataGridViewImageColumn.Name = "staffimageDataGridViewImageColumn";
+            staff_image.DataPropertyName = "staff_image";
+            resources.ApplyResources(staff_image, "staff_image");
+            staff_image.Name = "staff_image";
             // 
             // staff_thumbnail
             // 
@@ -632,35 +640,17 @@ namespace ohaCalendar
             resources.ApplyResources(staff_thumbnail, "staff_thumbnail");
             staff_thumbnail.Name = "staff_thumbnail";
             // 
-            // fullnameDataGridViewTextBoxColumn
+            // full_name
             // 
-            fullnameDataGridViewTextBoxColumn.DataPropertyName = "full_name";
-            resources.ApplyResources(fullnameDataGridViewTextBoxColumn, "fullnameDataGridViewTextBoxColumn");
-            fullnameDataGridViewTextBoxColumn.Name = "fullnameDataGridViewTextBoxColumn";
+            full_name.DataPropertyName = "full_name";
+            resources.ApplyResources(full_name, "full_name");
+            full_name.Name = "full_name";
             // 
-            // birthdayDataGridViewTextBoxColumn
+            // birthday
             // 
-            birthdayDataGridViewTextBoxColumn.DataPropertyName = "birthday";
-            resources.ApplyResources(birthdayDataGridViewTextBoxColumn, "birthdayDataGridViewTextBoxColumn");
-            birthdayDataGridViewTextBoxColumn.Name = "birthdayDataGridViewTextBoxColumn";
-            // 
-            // calcinyearsDataGridViewTextBoxColumn
-            // 
-            calcinyearsDataGridViewTextBoxColumn.DataPropertyName = "calc_in_years";
-            resources.ApplyResources(calcinyearsDataGridViewTextBoxColumn, "calcinyearsDataGridViewTextBoxColumn");
-            calcinyearsDataGridViewTextBoxColumn.Name = "calcinyearsDataGridViewTextBoxColumn";
-            // 
-            // calcmeldungvorschauintagenDataGridViewTextBoxColumn
-            // 
-            calcmeldungvorschauintagenDataGridViewTextBoxColumn.DataPropertyName = "calc_meldung_vorschau_in_tagen";
-            resources.ApplyResources(calcmeldungvorschauintagenDataGridViewTextBoxColumn, "calcmeldungvorschauintagenDataGridViewTextBoxColumn");
-            calcmeldungvorschauintagenDataGridViewTextBoxColumn.Name = "calcmeldungvorschauintagenDataGridViewTextBoxColumn";
-            // 
-            // calcmeldedatumDataGridViewTextBoxColumn
-            // 
-            calcmeldedatumDataGridViewTextBoxColumn.DataPropertyName = "calc_meldedatum";
-            resources.ApplyResources(calcmeldedatumDataGridViewTextBoxColumn, "calcmeldedatumDataGridViewTextBoxColumn");
-            calcmeldedatumDataGridViewTextBoxColumn.Name = "calcmeldedatumDataGridViewTextBoxColumn";
+            birthday.DataPropertyName = "birthday";
+            resources.ApplyResources(birthday, "birthday");
+            birthday.Name = "birthday";
             // 
             // rp_staff_jubileeBindingSource
             // 
@@ -1223,6 +1213,7 @@ namespace ohaCalendar
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MainMenuStrip = menuStrip1;
             Name = "Calendar";
+            ShowIcon = false;
             WindowState = FormWindowState.Minimized;
             FormClosing += calendar_FormClosing;
             Load += calendar_Load;
@@ -1280,7 +1271,7 @@ namespace ohaCalendar
             tableLayoutPanel5.ResumeLayout(false);
             tableLayoutPanel5.PerformLayout();
             birthdaysTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)birthdaysDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)rp_staff_jubileeBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -1401,10 +1392,6 @@ namespace ohaCalendar
         private ToolStripMenuItem move_calendar_forwardToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem move_calendar_currentToolStripMenuItem;
-        //private RichTextBoxEx bodyTextBox;
-        private DataGridViewTextBoxColumn subjectDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn startDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn durationDataGridViewTextBoxColumn;
         private ToolStripMenuItem byDateToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem2;
         private ErrorProvider errorProvider1 = new ErrorProvider();
@@ -1414,41 +1401,43 @@ namespace ohaCalendar
         private Button infoButton = new Button();
         private ToolTip toolTip1= new ToolTip();
         private RichTextBoxEx bodyTextBox = new RichTextBoxEx();
-        private CalendarDataSet calendarDataSet;
         private ToolStripComboBox stateToolStripComboBox;
         private ToolStripComboBox countriesToolStripComboBox;
         private ToolStripComboBox is_school_holidaysToolStripComboBox;
-        private CalendarDataSetTableAdapters.rp_staff_jubileeTableAdapter rp_staff_jubileeTableAdapter;
         private BindingSource rp_staff_jubileeBindingSource;
         private TabControl tabControl1;
         private TabPage calendarTabPage;
         private SplitContainer splitContainer9;
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn organizerDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn locationDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn endDataGridViewTextBoxColumn;
-        private DataGridViewButtonColumn outlookColumn;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn bodyDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn requiredAttendeesDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn entryIDDataGridViewTextBoxColumn;
         private TableLayoutPanel tableLayoutPanel5;
         private TextBox textBox5;
         private TextBox textBox3;
         private TextBox textBox4;
-        private TextBox dateTextBox;
         private TextBox textBox2;
         private RichTextBoxEx richTextBoxEx1;
         private TabPage birthdaysTabPage;
-        private DataGridView birthdaysDataGridView;
-        private DataGridViewImageColumn staffimageDataGridViewImageColumn;
+        private DataSet1 calendarDataSet;
+        private DataGridView dataGridView2;
+        private DataSet1TableAdapters.rp_staff_jubileeTableAdapter rp_staff_jubileeTableAdapter;
+        private DataGridViewTextBoxColumn subjectDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn organizerDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn locationDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn startDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn endDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn durationDataGridViewTextBoxColumn;
+        private DataGridViewButtonColumn outlookColumn;
+        private DataGridViewTextBoxColumn bodyDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn requiredAttendeesDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn entryIDDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn allDayEventDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn busyStatusDataGridViewTextBoxColumn;
+        private TextBox startTextBox;
+        private DataGridViewImageColumn staff_image;
         private DataGridViewImageColumn staff_thumbnail;
-        private DataGridViewTextBoxColumn fullnameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn birthdayDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn calcinyearsDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn calcmeldungvorschauintagenDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn calcmeldedatumDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn full_name;
+        private DataGridViewTextBoxColumn birthday;
     }
 }
