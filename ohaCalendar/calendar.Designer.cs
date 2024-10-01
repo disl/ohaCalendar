@@ -177,6 +177,7 @@ namespace ohaCalendar
             is_school_holidaysToolStripComboBox = new ToolStripComboBox();
             pls_waitLabel = new Label();
             rp_staff_jubileeTableAdapter = new DataSet1TableAdapters.rp_staff_jubileeTableAdapter();
+            holidaysTableAdapter = new DataSet1TableAdapters.holidaysTableAdapter();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
@@ -1202,6 +1203,10 @@ namespace ohaCalendar
             // 
             rp_staff_jubileeTableAdapter.ClearBeforeFill = true;
             // 
+            // holidaysTableAdapter
+            // 
+            holidaysTableAdapter.ClearBeforeFill = true;
+            // 
             // Calendar
             // 
             resources.ApplyResources(this, "$this");
@@ -1439,5 +1444,6 @@ namespace ohaCalendar
         private DataGridViewTextBoxColumn entryIDDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn allDayEventDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn busyStatusDataGridViewTextBoxColumn;
+        private DataSet1TableAdapters.holidaysTableAdapter holidaysTableAdapter;
     }
 }

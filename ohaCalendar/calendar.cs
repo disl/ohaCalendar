@@ -59,6 +59,7 @@ namespace ohaCalendar
         private string m_subdivisionCode;
         private int maxRowHeight = 100;
         private rp_staff_jubileeDataTable? m_all_birthdays = null;
+        private List<holidaysRow> m_betriebsurlaub_list;
 
         public Calendar()
         {
@@ -73,6 +74,11 @@ namespace ohaCalendar
             {
                 int? res_row_count = null;
                 m_all_birthdays = rp_staff_jubileeTableAdapter.GetDataByAll(g_clientsysid, g_current_culturesysid);
+
+
+                // Verwenden !!!!!
+                m_betriebsurlaub_list = holidaysTableAdapter.GetData(g_clientsysid).ToList(); //.Where(x=>x.description.ToLower().Contains("betriebs")).ToList();
+
 
                 ShowProgress(true);
 
@@ -945,6 +951,21 @@ namespace ohaCalendar
                         new_item.is_holiday = false;
 
                         g_holidays.Add(new_item);
+                    }
+
+                    // Betriebsurlaube
+                    if(m_betriebsurlaub_list != null)
+                    {
+                        foreach(var item in m_betriebsurlaub_list)
+                        {
+                            structHolidays new_item = default;
+                            new_item.date = Convert.ToDateTime(item.date);
+                            new_item.description = item.description;
+                            new_item.is_public_holiday = true;
+                            new_item.is_holiday = true;
+
+                            g_holidays.Add(new_item);
+                        }
                     }
 
                     GetData();
