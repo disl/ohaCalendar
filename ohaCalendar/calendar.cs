@@ -954,10 +954,13 @@ namespace ohaCalendar
                     }
 
                     // Betriebsurlaube
-                    if(m_betriebsurlaub_list != null)
+                    if (m_betriebsurlaub_list != null)
                     {
-                        foreach(var item in m_betriebsurlaub_list)
+                        foreach (var item in m_betriebsurlaub_list)
                         {
+                            if (g_holidays.Count(x => x.date == item.date) > 0)
+                                continue;
+
                             structHolidays new_item = default;
                             new_item.date = Convert.ToDateTime(item.date);
                             new_item.description = item.description;
