@@ -128,6 +128,24 @@ namespace ohaCalendar.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alles Gute zum Geburtstag – viel Glück, Gesundheit und ein langes Leben! ähnelt.
+        /// </summary>
+        internal static string Happy_birthday {
+            get {
+                return ResourceManager.GetString("Happy_birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alles Gute zum Geburtstag ähnelt.
+        /// </summary>
+        internal static string Happy_birthday_subject {
+            get {
+                return ResourceManager.GetString("Happy_birthday_subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Wollen Sie Termin wiederherstellen ? ähnelt.
         /// </summary>
         internal static string msg1120_01 {

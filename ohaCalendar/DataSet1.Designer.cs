@@ -367,6 +367,8 @@ namespace ohaCalendar {
             
             private global::System.Data.DataColumn columnDataColumn1;
             
+            private global::System.Data.DataColumn columnemail;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public rp_staff_jubileeDataTable() {
@@ -468,6 +470,14 @@ namespace ohaCalendar {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn emailColumn {
+                get {
+                    return this.columnemail;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -503,7 +513,7 @@ namespace ohaCalendar {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public rp_staff_jubileeRow Addrp_staff_jubileeRow(string full_name, System.DateTime birthday, int calc_in_years, int calc_meldung_vorschau_in_tagen, System.DateTime calc_meldedatum, byte[] staff_image, byte[] staff_thumbnail, string DataColumn1) {
+            public rp_staff_jubileeRow Addrp_staff_jubileeRow(string full_name, System.DateTime birthday, int calc_in_years, int calc_meldung_vorschau_in_tagen, System.DateTime calc_meldedatum, byte[] staff_image, byte[] staff_thumbnail, string DataColumn1, string email) {
                 rp_staff_jubileeRow rowrp_staff_jubileeRow = ((rp_staff_jubileeRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         full_name,
@@ -513,7 +523,8 @@ namespace ohaCalendar {
                         calc_meldedatum,
                         staff_image,
                         staff_thumbnail,
-                        DataColumn1};
+                        DataColumn1,
+                        email};
                 rowrp_staff_jubileeRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrp_staff_jubileeRow);
                 return rowrp_staff_jubileeRow;
@@ -544,6 +555,7 @@ namespace ohaCalendar {
                 this.columnstaff_image = base.Columns["staff_image"];
                 this.columnstaff_thumbnail = base.Columns["staff_thumbnail"];
                 this.columnDataColumn1 = base.Columns["DataColumn1"];
+                this.columnemail = base.Columns["email"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -565,6 +577,8 @@ namespace ohaCalendar {
                 base.Columns.Add(this.columnstaff_thumbnail);
                 this.columnDataColumn1 = new global::System.Data.DataColumn("DataColumn1", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDataColumn1);
+                this.columnemail = new global::System.Data.DataColumn("email", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnemail);
                 this.columnstaff_thumbnail.Caption = "staff_image";
             }
             
@@ -1550,6 +1564,22 @@ namespace ohaCalendar {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string email {
+                get {
+                    try {
+                        return ((string)(this[this.tablerp_staff_jubilee.emailColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte email in Tabelle rp_staff_jubilee ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablerp_staff_jubilee.emailColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isfull_nameNull() {
                 return this.IsNull(this.tablerp_staff_jubilee.full_nameColumn);
             }
@@ -1642,6 +1672,18 @@ namespace ohaCalendar {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetDataColumn1Null() {
                 this[this.tablerp_staff_jubilee.DataColumn1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsemailNull() {
+                return this.IsNull(this.tablerp_staff_jubilee.emailColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetemailNull() {
+                this[this.tablerp_staff_jubilee.emailColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2320,20 +2362,13 @@ namespace ohaCalendar.DataSet1TableAdapters {
             this._commandCollection = new global::Microsoft.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::Microsoft.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT	
-			concat (staf.full_name, case when stafftype_description like '%Zeit%' then Char(10)+Char(10) + 'Abteilung: ' + division_description else '' end) as full_name,
-			birthday,
-			staff_image.staff_image
-	FROM	ohaHr.fu_staff(@clientsysid,@languagesysid) as staF
-	OUTER APPLY
-	(
-		SELECT TOP 1 image as staff_image
-		FROM ohaHR.staff_image with (nolock)
-		WHERE clientsysid = @clientsysid AND
-				staffsysid = staf.sysid
-		order by versionid desc
-	) as staff_image
-WHERE DATEPART(day, birthday) = DATEPART(day, @actDate) AND DATEPART(month, birthday) = DATEPART(month, @actDate) AND sysactive = 1	";
+            this._commandCollection[0].CommandText = @"SELECT        concat(staf.full_name, CASE WHEN stafftype_description LIKE '%Zeit%' THEN Char(10) + Char(10) + 'Abteilung: ' + division_description ELSE '' END) AS full_name, birthday, staff_image.staff_image, email
+FROM            ohaHr.fu_staff(@clientsysid, @languagesysid) AS staF OUTER APPLY
+                             (SELECT        TOP 1 image AS staff_image
+                               FROM            ohaHR.staff_image WITH (nolock)
+                               WHERE        clientsysid = @clientsysid AND staffsysid = staf.sysid
+                               ORDER BY versionid DESC) AS staff_image
+WHERE        DATEPART(day, birthday) = DATEPART(day, @actDate) AND DATEPART(month, birthday) = DATEPART(month, @actDate) AND sysactive = 1";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::Microsoft.Data.SqlClient.SqlParameter param = new global::Microsoft.Data.SqlClient.SqlParameter();
             param.ParameterName = "@RETURN_VALUE";
@@ -2371,7 +2406,7 @@ WHERE DATEPART(day, birthday) = DATEPART(day, @actDate) AND DATEPART(month, birt
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = @"SELECT	
 			concat (staf.full_name, case when stafftype_description like '%Zeit%' then Char(10)+Char(10) + 'Abteilung: ' + division_description else '' end) as full_name,
-			birthday
+			birthday, email
 	FROM	ohaHr.fu_staff(@clientsysid,@languagesysid) as staF	
 WHERE  sysactive = 1";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;

@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Net.Mail;
 using System.Reflection;
 using System.Text;
-using static ohaCalendar.cOutlook;
 
 namespace ohaCalendar
 {
@@ -440,7 +439,7 @@ namespace ohaCalendar
              string pTo,
              string Subject,
              string Body,
-             List<string>? AttachmentsPath,
+             List<string>? AttachmentsPath = null,
              string Staff_EMail = "",
              string BCC = "",
              bool Display = false,

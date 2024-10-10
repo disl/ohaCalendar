@@ -13,6 +13,7 @@ namespace ohaCalendar
 {
     public partial class Calendar : Form
     {
+        public enum enumTransferMode { BAS, SCM, CRM_UBI, CRM_UBS, QS, Unknown };
         int g_clientsysid = 1;
         int g_current_culturesysid = 9;
         string g_current_culture = "de-DE";
@@ -60,6 +61,8 @@ namespace ohaCalendar
         private int maxRowHeight = 100;
         private rp_staff_jubileeDataTable? m_all_birthdays = null;
         private List<holidaysRow> m_betriebsurlaub_list;
+        private string m_email;
+        private ohaCalendar.cOutlook m_outlook = new cOutlook();
 
         public Calendar()
         {
@@ -1163,6 +1166,157 @@ namespace ohaCalendar
 
             return m_all_birthdays.Count(x => x.birthday.Day == testDay.Day && x.birthday.Month == testDay.Month) > 0;
         }
+
+        private void dataGridView2_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex == send_emailColumn.Index)
+            {
+                if (!string.IsNullOrEmpty(m_email))
+                {
+                    m_outlook.SendEmailPerOutlook(
+                        m_email,
+                        Properties.Resources.Happy_birthday_subject,
+                        Properties.Resources.Happy_birthday,
+                        Display: true
+                        );
+                }
+            }
+        }
+
+        private void rp_staff_jubileeBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            m_email = GetDBValue_String(rp_staff_jubileeBindingSource, "email");
+        }
+
+        protected string GetDBValue_String(
+            BindingSource bindingSource,
+            string FieldName)
+        {
+            if (bindingSource.Current != null &&
+                           ((DataRowView)bindingSource.Current).Row.Table.Columns.Contains(FieldName) &&
+                           !((DataRowView)bindingSource.Current).Row.IsNull(FieldName))
+            {
+                try
+                {
+                    return ((DataRowView)bindingSource.Current)[FieldName].ToString();
+                }
+                catch
+                {
+                    return String.Empty;
+                }
+            }
+            else
+                return String.Empty;
+        }
+
+        private Int32 GetDBValue_Int(
+           BindingSource bindingSource,
+           string FieldName)
+        {
+            Int32 tmp_int = -1;
+
+            try
+            {
+                if (bindingSource.Current != null &&
+                    bindingSource.Current is DataRowView &&
+                    ((DataRowView)bindingSource.Current).Row.Table.Columns.Contains(FieldName) &&
+                    !((DataRowView)bindingSource.Current).Row.IsNull(FieldName))
+                {
+                    object tmp_obj = ((DataRowView)bindingSource.Current)[FieldName];
+
+                    if (tmp_obj != null && tmp_obj.GetType() == typeof(Decimal))
+                    {
+                        tmp_int = decimal.ToInt32((decimal)tmp_obj);
+                        return tmp_int;
+                    }
+                    else if (Int32.TryParse(((DataRowView)bindingSource.Current)[FieldName].ToString(), out tmp_int))
+                    {
+                        return tmp_int;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+
+        //public bool SendEmailPerOutlook(
+        //  string pTo,
+        //  string Subject,
+        //  string Body,
+        //  List<string>? AttachmentsPath,
+        //  string Staff_EMail = "",
+        //  string BCC = "",
+        //  bool Display = false,
+        //  string CC = "")
+        //{
+        //    dynamic objEmailOutlook;
+        //    dynamic objApp;
+
+        //    try
+        //    {
+        //        Type ExcelType = Type.GetTypeFromProgID("Outlook.Application");
+        //        objApp = Activator.CreateInstance(ExcelType);
+        //        objEmailOutlook = objApp.CreateItem(OlItemType.olMailItem);
+
+        //        objEmailOutlook.To = pTo;
+
+        //        Encoding _encoding = Encoding.GetEncoding("ISO-8859-1");
+        //        byte[] _bytes = _encoding.GetBytes(Subject);
+        //        string uuEncoded = Convert.ToBase64String(_bytes);
+        //        string _encoded_subject = _encoding.GetString(System.Convert.FromBase64String(uuEncoded)).Trim();
+
+        //        objEmailOutlook.BodyFormat = 2; //HTML
+        //        objEmailOutlook.Subject = _encoded_subject; // Subject
+
+        //        string _signature = objEmailOutlook.HTMLBody;
+        //        objEmailOutlook.HTMLBody = Body + "<br>" + _signature;    //'.Replace(Chr(10), "<br>");
+
+        //        if (AttachmentsPath != null)
+        //        {
+        //            foreach (string Path in AttachmentsPath)
+        //                objEmailOutlook.Attachments.Add(Path);
+        //        }
+
+        //        if (!string.IsNullOrEmpty(Staff_EMail))
+        //            objEmailOutlook.To = Staff_EMail;
+
+        //        if (!string.IsNullOrEmpty(BCC))
+        //            objEmailOutlook.BCC = BCC;
+
+        //        if (!string.IsNullOrEmpty(CC))
+        //            objEmailOutlook.CC = CC;
+
+        //        if (Display)
+        //            objEmailOutlook.Display();
+        //        else
+        //        {
+        //            objEmailOutlook.Send();
+        //            MessageBox.Show("EMail wurde erfolgreich gesendet", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        objEmailOutlook = null;
+        //        objApp = null;
+        //    }
+        //}
 
     }
 
