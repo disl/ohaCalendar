@@ -64,6 +64,7 @@ namespace ohaCalendar
         private string m_email;
         private ohaCalendar.cOutlook m_outlook = new cOutlook();
 
+
         public Calendar()
         {
             InitializeComponent();
@@ -413,7 +414,7 @@ namespace ohaCalendar
                             // Days
                             if (row < 6)
                                 week_list_tmp = day_list_full.Take(new Range((row - 1) * 7, ((row - 1) * 7 + 7))).ToList();
-                            control = week_list_tmp[col - 1].Active && col <= 6 ? new LinkLabel() : new LinkLabel();
+                            control = week_list_tmp[col - 1].Active && col <= 6 ? new LinkLabel() : new Label();
                             holiday = IsHoliday(week_list_tmp[col - 1].Day);
                             is_today = week_list_tmp[col - 1].Day == m_basis_date;
 
@@ -1247,6 +1248,33 @@ namespace ohaCalendar
             {
                 return -1;
             }
+        }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
+            {
+                if (vScrollBar1.Value == 2)
+                    return;
+
+                if (e.NewValue == 1)
+                    m_active_month_no--;
+                else
+                    m_active_month_no++;
+
+                GetData();
+               
+                timer_scroll.Enabled = true;
+                timer_scroll.Start();
+            }
+        }
+
+        private void timer_scroll_Tick(object sender, EventArgs e)
+        {
+            vScrollBar1.Value = 2;
+
+            timer_scroll.Enabled = false;
+            timer_scroll.Stop();
         }
 
 

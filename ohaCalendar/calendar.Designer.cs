@@ -53,6 +53,7 @@ namespace ohaCalendar
             splitContainer1 = new SplitContainer();
             splitContainer5 = new SplitContainer();
             generalSplitContainer = new SplitContainer();
+            vScrollBar1 = new VScrollBar();
             tabControl1 = new TabControl();
             calendarTabPage = new TabPage();
             splitContainer9 = new SplitContainer();
@@ -80,6 +81,11 @@ namespace ohaCalendar
             startTextBox = new TextBox();
             birthdaysTabPage = new TabPage();
             dataGridView2 = new DataGridView();
+            staff_image = new DataGridViewImageColumn();
+            staff_thumbnail = new DataGridViewImageColumn();
+            full_name = new DataGridViewTextBoxColumn();
+            birthday = new DataGridViewTextBoxColumn();
+            send_emailColumn = new DataGridViewButtonColumn();
             rp_staff_jubileeBindingSource = new BindingSource(components);
             linkLabel1 = new LinkLabel();
             linkLabel2 = new LinkLabel();
@@ -174,11 +180,7 @@ namespace ohaCalendar
             pls_waitLabel = new Label();
             rp_staff_jubileeTableAdapter = new DataSet1TableAdapters.rp_staff_jubileeTableAdapter();
             holidaysTableAdapter = new DataSet1TableAdapters.holidaysTableAdapter();
-            staff_image = new DataGridViewImageColumn();
-            staff_thumbnail = new DataGridViewImageColumn();
-            full_name = new DataGridViewTextBoxColumn();
-            birthday = new DataGridViewTextBoxColumn();
-            send_emailColumn = new DataGridViewButtonColumn();
+            timer_scroll = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
@@ -413,10 +415,21 @@ namespace ohaCalendar
             // generalSplitContainer.Panel1
             // 
             generalSplitContainer.Panel1.Controls.Add(splitContainer1);
+            generalSplitContainer.Panel1.Controls.Add(vScrollBar1);
             // 
             // generalSplitContainer.Panel2
             // 
             generalSplitContainer.Panel2.Controls.Add(tabControl1);
+            // 
+            // vScrollBar1
+            // 
+            resources.ApplyResources(vScrollBar1, "vScrollBar1");
+            vScrollBar1.LargeChange = 1;
+            vScrollBar1.Maximum = 3;
+            vScrollBar1.Minimum = 1;
+            vScrollBar1.Name = "vScrollBar1";
+            vScrollBar1.Value = 2;
+            vScrollBar1.Scroll += vScrollBar1_Scroll;
             // 
             // tabControl1
             // 
@@ -630,6 +643,38 @@ namespace ohaCalendar
             resources.ApplyResources(dataGridView2, "dataGridView2");
             dataGridView2.Name = "dataGridView2";
             dataGridView2.CellMouseClick += dataGridView2_CellMouseClick;
+            // 
+            // staff_image
+            // 
+            staff_image.DataPropertyName = "staff_image";
+            resources.ApplyResources(staff_image, "staff_image");
+            staff_image.Name = "staff_image";
+            // 
+            // staff_thumbnail
+            // 
+            staff_thumbnail.DataPropertyName = "staff_thumbnail";
+            resources.ApplyResources(staff_thumbnail, "staff_thumbnail");
+            staff_thumbnail.Name = "staff_thumbnail";
+            // 
+            // full_name
+            // 
+            full_name.DataPropertyName = "full_name";
+            resources.ApplyResources(full_name, "full_name");
+            full_name.Name = "full_name";
+            // 
+            // birthday
+            // 
+            birthday.DataPropertyName = "birthday";
+            birthday.FillWeight = 50F;
+            resources.ApplyResources(birthday, "birthday");
+            birthday.Name = "birthday";
+            // 
+            // send_emailColumn
+            // 
+            send_emailColumn.DataPropertyName = "email";
+            send_emailColumn.FillWeight = 50F;
+            resources.ApplyResources(send_emailColumn, "send_emailColumn");
+            send_emailColumn.Name = "send_emailColumn";
             // 
             // rp_staff_jubileeBindingSource
             // 
@@ -1186,37 +1231,10 @@ namespace ohaCalendar
             // 
             holidaysTableAdapter.ClearBeforeFill = true;
             // 
-            // staff_image
+            // timer_scroll
             // 
-            staff_image.DataPropertyName = "staff_image";
-            resources.ApplyResources(staff_image, "staff_image");
-            staff_image.Name = "staff_image";
-            // 
-            // staff_thumbnail
-            // 
-            staff_thumbnail.DataPropertyName = "staff_thumbnail";
-            resources.ApplyResources(staff_thumbnail, "staff_thumbnail");
-            staff_thumbnail.Name = "staff_thumbnail";
-            // 
-            // full_name
-            // 
-            full_name.DataPropertyName = "full_name";
-            resources.ApplyResources(full_name, "full_name");
-            full_name.Name = "full_name";
-            // 
-            // birthday
-            // 
-            birthday.DataPropertyName = "birthday";
-            birthday.FillWeight = 50F;
-            resources.ApplyResources(birthday, "birthday");
-            birthday.Name = "birthday";
-            // 
-            // send_emailColumn
-            // 
-            send_emailColumn.DataPropertyName = "email";
-            send_emailColumn.FillWeight = 50F;
-            resources.ApplyResources(send_emailColumn, "send_emailColumn");
-            send_emailColumn.Name = "send_emailColumn";
+            timer_scroll.Interval = 1000;
+            timer_scroll.Tick += timer_scroll_Tick;
             // 
             // Calendar
             // 
@@ -1457,5 +1475,7 @@ namespace ohaCalendar
         private DataGridViewTextBoxColumn full_name;
         private DataGridViewTextBoxColumn birthday;
         private DataGridViewButtonColumn send_emailColumn;
+        private VScrollBar vScrollBar1;
+        private System.Windows.Forms.Timer timer_scroll;
     }
 }
