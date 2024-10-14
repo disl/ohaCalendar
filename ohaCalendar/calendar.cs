@@ -459,6 +459,10 @@ namespace ohaCalendar
                             {
                                 ((LinkLabel)control).LinkClicked += Calendar_LinkClicked;
                             }
+                            else
+                            {
+                                ((Label)control).Click += Calendar_LabelClick;  // Calendar_LinkClicked;
+                            }
                             // Holidays & Weekends
                             if (col >= 6 || (holiday != null && !string.IsNullOrEmpty(((structHolidays)holiday).description)))
                             {
@@ -533,6 +537,9 @@ namespace ohaCalendar
                                     control.ForeColor = is_my_holiday ? Color.Green : Color.Red;
                             }
                         }
+
+                        control.Cursor = Cursors.Hand;
+
                         panel.Controls.Add(control, col, row);
                     }
                 }
@@ -543,6 +550,12 @@ namespace ohaCalendar
                     Properties.Settings.Default.LoggingPerEmail,
                     Properties.Resources.msgCaptionError + " in: " + ToString(), g_client_name);
             }
+        }
+
+        private void Calendar_LabelClick(object? sender, EventArgs e)
+        {
+            if (sender != null)
+                ForLinkClicked(((Label)sender).Tag as CalendarItemType);
         }
 
         private bool Is_my_holiday(Control control, List<DateTime> myholiday_list)
