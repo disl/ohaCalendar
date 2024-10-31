@@ -511,8 +511,7 @@ namespace ohaCalendar
                         // Today
                         if (is_today)
                         {
-                            if (control is LinkLabel)
-                                control.BackColor = Color.Gold;
+                            control.BackColor = Color.Gold;
                             toolTip1.SetToolTip(control, Properties.Resources.today);
                         }
                         // Holiday (because of colours)
@@ -1276,7 +1275,7 @@ namespace ohaCalendar
                     m_active_month_no++;
 
                 GetData();
-               
+
                 timer_scroll.Enabled = true;
                 timer_scroll.Start();
             }
