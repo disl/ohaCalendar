@@ -3,6 +3,7 @@ using ohaCalendar.Models;
 using ohaCalendar.Services;
 using System.ComponentModel;
 using System.Data;
+using Microsoft.Web.WebView2.WinForms;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
@@ -77,6 +78,8 @@ namespace ohaCalendar
 
             try
             {
+                ShowProgress(true);
+
                 int? res_row_count = null;
                 m_all_birthdays = rp_staff_jubileeTableAdapter.GetDataByAll(g_clientsysid, g_current_culturesysid);
 
@@ -85,7 +88,7 @@ namespace ohaCalendar
                 m_betriebsurlaub_list = holidaysTableAdapter.GetData(g_clientsysid).ToList(); //.Where(x=>x.description.ToLower().Contains("betriebs")).ToList();
 
 
-                ShowProgress(true);
+            
 
                 m_current_culture_default = CultureInfo.CurrentCulture;
                 pls_waitLabel.Text = Properties.Resources.please_wait;
@@ -107,6 +110,7 @@ namespace ohaCalendar
                 await ForCalendar_load();
                 await GetData();
 
+
                 m_is_started = false;
 
                 countriesToolStripComboBox.ComboBox.SelectedValue = m_current_culture_str;
@@ -119,7 +123,7 @@ namespace ohaCalendar
                     tabControl1.SelectedTab = birthdaysTabPage;
                 }
 
-                ShowProgress(false);
+
 
                 //WindowState = FormWindowState.Normal;
             }
@@ -129,10 +133,16 @@ namespace ohaCalendar
                     Properties.Settings.Default.LoggingPerEmail,
                     Properties.Resources.msgCaptionError + " in: " + ToString(), g_client_name);
             }
+            finally
+            {
+                ShowProgress(false);
+            }
         }
 
         private void ShowProgress(bool InProgress)
         {
+            Application.DoEvents();
+
             pls_waitLabel.Visible = InProgress;
             splitContainer1.Visible = !InProgress;
             generalSplitContainer.Visible = !InProgress;
@@ -173,9 +183,7 @@ namespace ohaCalendar
                 )
                     return;
 
-                ShowProgress(true);
-
-                var _current_school_holiday = is_school_holidaysToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
+                var _current_school_holiday = is_school_holidaysToolStripComboBox.ComboBox.SelectedValue?.ToString()?.ToUpper();
                 if (_current_school_holiday == null || string.IsNullOrEmpty(_current_school_holiday))
                     return;
 
@@ -187,8 +195,6 @@ namespace ohaCalendar
                 await RefreshHolidays(true);
 
                 CollapseInfo();
-
-                ShowProgress(false);
             }
         }
 
@@ -212,8 +218,6 @@ namespace ohaCalendar
                     countriesToolStripComboBox.ComboBox.SelectedValue is string
                    )
                 {
-                    ShowProgress(true);
-
                     var _current_culture = countriesToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
                     if (_current_culture == null || string.IsNullOrEmpty(_current_culture))
                         return;
@@ -228,7 +232,6 @@ namespace ohaCalendar
                     await RefreshHolidays(true);
                     await ForCalendar_load();
                     CollapseInfo();
-                    ShowProgress(false);
                 }
             }
         }
@@ -654,7 +657,10 @@ namespace ohaCalendar
         {
             try
             {
+                checklist_for_release_answersBindingSource.SuspendBinding();
                 calendarDataSet.Calendar.Rows.Clear();
+                checklist_for_release_answersBindingSource.ResumeBinding();
+
                 var sel_obj = SelectedItem; //((LinkLabel)sender).Tag as CalendarItemType;
                 SelectedDay = sel_obj.Day;
 
@@ -664,25 +670,13 @@ namespace ohaCalendar
 
                 if (ShowOutlook)
                 {
-                    //var calendar = cOutlook.GetCurrentCalendar();
-                    //m_calendar_items = cOutlook.Outlook_GetCalendarItems(
-                    //    calendar,
-                    //    null, //m_calendar_name,
-                    //    null,
-                    //    null,
-                    //    ((DateTime)SelectedDay).AddDays(-1).AddHours(23),
-                    //    ((DateTime)SelectedDay).AddDays(1).AddMinutes(1),
-                    //    false,
-                    //    IsLightAlgorithmus: true
-                    //    );
-
                     var service = new OutlookCalendarService();
                     m_calendar_items = await service.GetCalendarItemsByUserAsync(
                         null,
                         new CalendarEventFilter
                         {
-                            Start = m_basis_date.AddMonths(m_active_month_no).AddMonths(-1).AddDays(-1),
-                            Ende = m_basis_date.AddMonths(m_active_month_no).AddMonths(2).AddDays(1),
+                            Start = ((DateTime)SelectedDay).AddDays(-1).AddHours(23),
+                            Ende = ((DateTime)SelectedDay).AddDays(1).AddMinutes(1),
                             IsLightAlgorithmus = true
                         });
 
@@ -722,6 +716,15 @@ namespace ohaCalendar
             finally
             {
                 Cursor = Cursors.Default;
+            }
+        }
+
+        private async Task RefreshWebView(string HTMLCode)
+        {
+            if (webView21 != null)
+            {                
+                await webView21.EnsureCoreWebView2Async();
+                webView21.CoreWebView2.NavigateToString(HTMLCode);
             }
         }
 
@@ -863,11 +866,13 @@ namespace ohaCalendar
             }
         }
 
-        private void checklist_for_release_answersBindingSource_CurrentChanged(object sender, EventArgs e)
+        private async void checklist_for_release_answersBindingSource_CurrentChanged(object sender, EventArgs e)
         {
             m_selected_calendar = null;
             if (checklist_for_release_answersBindingSource.Current != null)
                 m_selected_calendar = ((DataRowView)checklist_for_release_answersBindingSource.Current).Row as CalendarRow;
+
+            await RefreshWebView(m_selected_calendar != null && !m_selected_calendar.IsBodyNull() ? m_selected_calendar.Body : string.Empty);
         }
 
         private void dataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -891,7 +896,7 @@ namespace ohaCalendar
             }
         }
 
-        private async  void byDateToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void byDateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InputForm_date inputForm_Date = new InputForm_date();
             if (inputForm_Date.ShowDialog() == DialogResult.OK)
@@ -1123,7 +1128,7 @@ namespace ohaCalendar
                     var displayMember = name_obj.text;
                     AddRow(dt, displayMember, item.shortName);
                 }
-               
+
                 stateToolStripComboBox.ComboBox.DisplayMember = "DisplayMember";
                 stateToolStripComboBox.ComboBox.ValueMember = "ValueMember";
                 stateToolStripComboBox.ComboBox.DataSource = dt;
@@ -1168,8 +1173,6 @@ namespace ohaCalendar
                 )
                     return;
 
-                ShowProgress(true);
-
                 var _subdivisionCode = stateToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
 
                 if (_subdivisionCode != m_subdivisionCode)
@@ -1180,8 +1183,6 @@ namespace ohaCalendar
                 await RefreshHolidays(true);
 
                 CollapseInfo();
-
-                ShowProgress(false);
             }
         }
 
@@ -1310,76 +1311,7 @@ namespace ohaCalendar
 
             timer_scroll.Enabled = false;
             timer_scroll.Stop();
-        }
-
-
-        //public bool SendEmailPerOutlook(
-        //  string pTo,
-        //  string Subject,
-        //  string Body,
-        //  List<string>? AttachmentsPath,
-        //  string Staff_EMail = "",
-        //  string BCC = "",
-        //  bool Display = false,
-        //  string CC = "")
-        //{
-        //    dynamic objEmailOutlook;
-        //    dynamic objApp;
-
-        //    try
-        //    {
-        //        Type ExcelType = Type.GetTypeFromProgID("Outlook.Application");
-        //        objApp = Activator.CreateInstance(ExcelType);
-        //        objEmailOutlook = objApp.CreateItem(OlItemType.olMailItem);
-
-        //        objEmailOutlook.To = pTo;
-
-        //        Encoding _encoding = Encoding.GetEncoding("ISO-8859-1");
-        //        byte[] _bytes = _encoding.GetBytes(Subject);
-        //        string uuEncoded = Convert.ToBase64String(_bytes);
-        //        string _encoded_subject = _encoding.GetString(System.Convert.FromBase64String(uuEncoded)).Trim();
-
-        //        objEmailOutlook.BodyFormat = 2; //HTML
-        //        objEmailOutlook.Subject = _encoded_subject; // Subject
-
-        //        string _signature = objEmailOutlook.HTMLBody;
-        //        objEmailOutlook.HTMLBody = Body + "<br>" + _signature;    //'.Replace(Chr(10), "<br>");
-
-        //        if (AttachmentsPath != null)
-        //        {
-        //            foreach (string Path in AttachmentsPath)
-        //                objEmailOutlook.Attachments.Add(Path);
-        //        }
-
-        //        if (!string.IsNullOrEmpty(Staff_EMail))
-        //            objEmailOutlook.To = Staff_EMail;
-
-        //        if (!string.IsNullOrEmpty(BCC))
-        //            objEmailOutlook.BCC = BCC;
-
-        //        if (!string.IsNullOrEmpty(CC))
-        //            objEmailOutlook.CC = CC;
-
-        //        if (Display)
-        //            objEmailOutlook.Display();
-        //        else
-        //        {
-        //            objEmailOutlook.Send();
-        //            MessageBox.Show("EMail wurde erfolgreich gesendet", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return false;
-        //    }
-        //    finally
-        //    {
-        //        objEmailOutlook = null;
-        //        objApp = null;
-        //    }
-        //}
+        }       
 
     }
 

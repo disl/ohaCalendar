@@ -77,8 +77,8 @@ namespace ohaCalendar
             textBox3 = new TextBox();
             textBox4 = new TextBox();
             textBox2 = new TextBox();
-            richTextBoxEx1 = new RichTextBoxEx();
             startTextBox = new TextBox();
+            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             birthdaysTabPage = new TabPage();
             dataGridView2 = new DataGridView();
             staff_image = new DataGridViewImageColumn();
@@ -229,6 +229,7 @@ namespace ohaCalendar
             ((System.ComponentModel.ISupportInitialize)checklist_for_release_answersBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)calendarDataSet).BeginInit();
             tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             birthdaysTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)rp_staff_jubileeBindingSource).BeginInit();
@@ -577,8 +578,8 @@ namespace ohaCalendar
             tableLayoutPanel5.Controls.Add(textBox3, 0, 3);
             tableLayoutPanel5.Controls.Add(textBox4, 0, 2);
             tableLayoutPanel5.Controls.Add(textBox2, 0, 1);
-            tableLayoutPanel5.Controls.Add(richTextBoxEx1, 0, 5);
             tableLayoutPanel5.Controls.Add(startTextBox, 0, 0);
+            tableLayoutPanel5.Controls.Add(webView21, 0, 5);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
             // textBox5
@@ -609,19 +610,20 @@ namespace ohaCalendar
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
             // 
-            // richTextBoxEx1
-            // 
-            richTextBoxEx1.DataBindings.Add(new Binding("Text", checklist_for_release_answersBindingSource, "Body", true));
-            richTextBoxEx1.DetectUrls = true;
-            resources.ApplyResources(richTextBoxEx1, "richTextBoxEx1");
-            richTextBoxEx1.Name = "richTextBoxEx1";
-            richTextBoxEx1.ReadOnly = true;
-            // 
             // startTextBox
             // 
             resources.ApplyResources(startTextBox, "startTextBox");
             startTextBox.Name = "startTextBox";
             startTextBox.ReadOnly = true;
+            // 
+            // webView21
+            // 
+            webView21.AllowExternalDrop = true;
+            webView21.CreationProperties = null;
+            webView21.DefaultBackgroundColor = Color.White;
+            resources.ApplyResources(webView21, "webView21");
+            webView21.Name = "webView21";
+            webView21.ZoomFactor = 1D;
             // 
             // birthdaysTabPage
             // 
@@ -1248,7 +1250,6 @@ namespace ohaCalendar
             MainMenuStrip = menuStrip1;
             Name = "Calendar";
             ShowIcon = false;
-            WindowState = FormWindowState.Minimized;
             FormClosing += calendar_FormClosing;
             Load += calendar_Load;
             splitContainer2.Panel1.ResumeLayout(false);
@@ -1304,6 +1305,7 @@ namespace ohaCalendar
             ((System.ComponentModel.ISupportInitialize)calendarDataSet).EndInit();
             tableLayoutPanel5.ResumeLayout(false);
             tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             birthdaysTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)rp_staff_jubileeBindingSource).EndInit();
@@ -1451,7 +1453,6 @@ namespace ohaCalendar
         private TextBox textBox3;
         private TextBox textBox4;
         private TextBox textBox2;
-        private RichTextBoxEx richTextBoxEx1;
         private TabPage birthdaysTabPage;
         private DataSet1 calendarDataSet;
         private DataGridView dataGridView2;
@@ -1477,5 +1478,6 @@ namespace ohaCalendar
         private DataGridViewButtonColumn send_emailColumn;
         private VScrollBar vScrollBar1;
         private System.Windows.Forms.Timer timer_scroll;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
     }
 }
