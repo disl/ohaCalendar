@@ -1,7 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using ohaCalendar.Properties;
 using System.DirectoryServices;
-using System.Globalization;
 using System.Net.Mail;
 using System.Reflection;
 using System.Text;
@@ -1718,8 +1717,11 @@ namespace ohaCalendar
             Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
             Application = Activator.CreateInstance(OutlookType);
             mpnNamespace = Application.GetNamespace("MAPI");
+            mpnNamespace.Logon();
 
+            // Fehler passiert hier
             var recipient = mpnNamespace.CurrentUser;
+
             dynamic sharedFolder = mpnNamespace.GetSharedDefaultFolder(recipient, OlFolderType.olFolderCalendar);
             return sharedFolder;
         }
@@ -1738,25 +1740,18 @@ namespace ohaCalendar
         {
             dynamic Application;
             dynamic mpnNamespace;
-            // Dim oCalendar As Object
             dynamic oItems;
-            //dynamic oResultItems;
             List<OutlookCalendarItemType> oResultItems_obj;
             string PropTag = "https://schemas.microsoft.com/mapi/proptag/";
-            // dynamic strRestriction = null;
-            var date_format = CultureInfo.CreateSpecificCulture("en-US");
             OutlookCalendarItemType outlookCalendarItemType_obj;
             const string oUserPropertName = "ItemID";
             string oItemID = null;
 
-            //try
-            //{
             oResultItems_obj = new List<OutlookCalendarItemType>();
 
             if (Ende == new DateTime?() || Ende == DateTime.MinValue)
                 Ende = DateTime.Now;
 
-            //Application = Interaction.CreateObject("Outlook.Application", "");
             Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
             Application = Activator.CreateInstance(OutlookType);
             mpnNamespace = Application.GetNamespace("MAPI");
@@ -1764,8 +1759,6 @@ namespace ohaCalendar
 
             if (Calendar == null && string.IsNullOrEmpty(CalendarName))
                 Calendar = mpnNamespace.GetDefaultFolder(OlFolderType.olFolderCalendar);
-            //    Calendar = GetOutlookFolder(CalendarName, OlFolderType.olFolderCalendar, CalendarNameAlternate);
-
 
             if (Calendar == null)
                 throw new Exception("Kein Kalender '" + CalendarName + "' wurde gefunden!");
@@ -1773,16 +1766,14 @@ namespace ohaCalendar
             oItems = Calendar.Items;
             oItems.IncludeRecurrences = true;
             oItems.Sort("[Start]", Type.Missing);
-            //if (OnlyUnRead)
-            //    oResultItems = oItems.Find("[UnRead] = true");
-            //else
-            //    oResultItems = oItems;
-            //string filter = "[Start] >= '" + Start.ToString("g") + "' AND [End] <= '" + ((DateTime)Ende).ToString("g") + "'";
             string filter = "[Start] <= '" + ((DateTime)Ende).ToString("g") + "' AND [End] >= '" + Start.ToString("g") + "'";
             var restrictItems = oItems.Restrict(filter);
 
-            foreach (var item in restrictItems)
+            foreach (dynamic item in restrictItems)
             {
+                if (item.Class != 26) // Entspricht Outlook.OlItemType.olAppointmentItem
+                    continue;
+
                 bool to_add = false;
 
                 DateTime _creationTime = Convert.ToDateTime(item.CreationTime.ToString("g").Replace("#", ""));
@@ -1872,278 +1863,275 @@ namespace ohaCalendar
             }
 
             return oResultItems_obj;
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return null;
-            //}
-            //finally
-            //{
-            //    Application = null;
-            //}
         }
 
-        public static void CreateAppointment(string title, string body, DateTime start, string location, bool display = false, bool allDayEvent = true)
-        {
-            dynamic apptItem;
-            dynamic Application;
-            dynamic mpnNamespace;
-            dynamic oCalendar;
+        //public static void CreateAppointment(
 
-            //Application = Interaction.CreateObject("Outlook.Application", "");
-            Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
-            Application = Activator.CreateInstance(OutlookType);
-            mpnNamespace = Application.GetNamespace("MAPI");
-            oCalendar = mpnNamespace.GetDefaultFolder(OlFolderType.olFolderCalendar);
-            apptItem = Application.CreateItem(OlItemType.olAppointmentItem);
+        //    string title, 
+        //    string body, 
+        //    DateTime start, 
+        //    string location, 
+        //    bool display = false, 
+        //    bool allDayEvent = true)
+        //{
+        //    dynamic apptItem;
+        //    //dynamic Application;
+        //    //dynamic mpnNamespace;
+        //    //dynamic oCalendar;
 
-            {
-                var withBlock = apptItem;
-                withBlock.Subject = title;
-                withBlock.Body = body;
-                withBlock.Start = DateTime.Now;
-                withBlock.Location = location;
-                // .End = Date.Now.AddHours(1)
-                withBlock.ReminderSet = true;
-                withBlock.ReminderMinutesBeforeStart = 30;
-                withBlock.AllDayEvent = allDayEvent;
-                withBlock.Save();
-            }
+        //    //Application = Interaction.CreateObject("Outlook.Application", "");
+        //    Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
+        //    Application = Activator.CreateInstance(OutlookType);
+        //    mpnNamespace = Application.GetNamespace("MAPI");
+        //    oCalendar = mpnNamespace.GetDefaultFolder(OlFolderType.olFolderCalendar);
+        //    apptItem = Application.CreateItem(OlItemType.olAppointmentItem);
 
-            if (display)
-                apptItem.Display(true);
+        //    {
+        //        var withBlock = apptItem;
+        //        withBlock.Subject = title;
+        //        withBlock.Body = body;
+        //        withBlock.Start = DateTime.Now;
+        //        withBlock.Location = location;
+        //        // .End = Date.Now.AddHours(1)
+        //        withBlock.ReminderSet = true;
+        //        withBlock.ReminderMinutesBeforeStart = 30;
+        //        withBlock.AllDayEvent = allDayEvent;
+        //        withBlock.Save();
+        //    }
 
-            apptItem = null;
-            Application = null;
-        }
+        //    if (display)
+        //        apptItem.Display(true);
 
-        public static string UpdateInsertAppointment(
-            dynamic Calendar,
-            string CalendarName,
-            string ItemID,
-            string title,
-            string body,
-            DateTime start,
-            DateTime? end_,
-            double? duration,
-            string location,
-            List<string> attachments,
-            bool display = false,
-            string CalendarNameAlternate = null
-        )
-        {
-            dynamic apptItem = null;
-            dynamic Application;
-            dynamic mpnNamespace;
-            // Dim oCalendar As Object
-            dynamic oAttathments = null;
-            const string oUserPropertName = "ItemID";
-            string oItemID = null;
+        //    apptItem = null;
+        //    Application = null;
+        //}
 
-            try
-            {
-                //Application = Interaction.CreateObject("Outlook.Application", "");
-                Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
-                Application = Activator.CreateInstance(OutlookType);
-                mpnNamespace = Application.GetNamespace("MAPI");
+        //public static string UpdateInsertAppointment(
+        //    dynamic Calendar,
+        //    string CalendarName,
+        //    string ItemID,
+        //    string title,
+        //    string body,
+        //    DateTime start,
+        //    DateTime? end_,
+        //    double? duration,
+        //    string location,
+        //    List<string> attachments,
+        //    bool display = false,
+        //    string CalendarNameAlternate = null
+        //)
+        //{
+        //    dynamic apptItem = null;
+        //    dynamic Application;
+        //    dynamic mpnNamespace;
+        //    // Dim oCalendar As Object
+        //    dynamic oAttathments = null;
+        //    const string oUserPropertName = "ItemID";
+        //    string oItemID = null;
 
-                if (Calendar == null && string.IsNullOrEmpty(CalendarName))
-                    Calendar = GetOutlookFolder(CalendarName, OlFolderType.olFolderCalendar, CalendarNameAlternate);
+        //    try
+        //    {
+        //        //Application = Interaction.CreateObject("Outlook.Application", "");
+        //        Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
+        //        Application = Activator.CreateInstance(OutlookType);
+        //        mpnNamespace = Application.GetNamespace("MAPI");
 
-                if (Calendar == null)
-                    throw new Exception("Kein Kalender '" + CalendarName + "' wurde gefunden!");
+        //        if (Calendar == null && string.IsNullOrEmpty(CalendarName))
+        //            Calendar = GetOutlookFolder(CalendarName, OlFolderType.olFolderCalendar, CalendarNameAlternate);
 
-
-                if (string.IsNullOrEmpty(ItemID))
-                {
-
-                    // apptItem = Application.CreateItem(OlItemType.olAppointmentItem)
-                    apptItem = Calendar.Items.Add();
-
-                    apptItem.UserProperties.Add(oUserPropertName, OlUserPropertyType.olText);
-                    oItemID = Guid.NewGuid().ToString();
-                    apptItem.UserProperties["ItemID"] = oItemID;
-                }
-                else
-                {
-                    oItemID = ItemID;
-
-                    foreach (var item in Calendar.Items)
-                    {
-                        var itemID_prop = item.UserProperties.Find(oUserPropertName);
-                        if (itemID_prop == null)
-                            continue;
-                        if (itemID_prop.Value == ItemID)
-                        {
-                            apptItem = item;
-                            break;
-                        }
-                    }
-                }
-
-                if (apptItem == null)
-                    return null;
-
-                // Attathments
-                if (attachments.Count > 0)
-                {
-
-                    // Clear old Attathments
-                    while (apptItem.Attachments.Count > 0)
-                        apptItem.Attachments.Remove(1);
-
-                    foreach (var attachment in attachments)
-                        apptItem.Attachments.Add(attachment);
-                }
-
-                {
-                    var withBlock = apptItem;
-                    withBlock.Subject = title;
-                    withBlock.Body = body;
-                    withBlock.Start = start;
-                    withBlock.Location = location;
-                    withBlock.End = end_;
-                    withBlock.Duration = duration;
-                    // .ReminderSet = True
-                    withBlock.ReminderMinutesBeforeStart = 30;
-                    // .AllDayEvent = allDayEvent
-                    withBlock.Save();
-                }
-
-                if (display)
-                    apptItem.Display(true);
-
-                return oItemID;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                apptItem = null;
-                Application = null;
-            }
-        }
-
-        public static bool DeleteAppointment(dynamic Calendar, string CalendarName, string ItemID, string CalendarNameAlternate = null
-        )
-        {
-            dynamic apptItem = null;
-            dynamic Application;
-            dynamic mpnNamespace;
-            // Dim oCalendar As Object
-            dynamic oAttathments = null;
-            const string oUserPropertName = "ItemID";
-            string oItemID = null;
-
-            try
-            {
-                //Application = Interaction.CreateObject("Outlook.Application", "");
-                Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
-                Application = Activator.CreateInstance(OutlookType);
-                mpnNamespace = Application.GetNamespace("MAPI");
+        //        if (Calendar == null)
+        //            throw new Exception("Kein Kalender '" + CalendarName + "' wurde gefunden!");
 
 
-                // oCalendar = mpnNamespace.GetDefaultFolder(OlFolderType.olFolderCalendar)
+        //        if (string.IsNullOrEmpty(ItemID))
+        //        {
 
-                if (Calendar == null && string.IsNullOrEmpty(CalendarName))
-                    Calendar = GetOutlookFolder(CalendarName, OlFolderType.olFolderCalendar, CalendarNameAlternate);
+        //            // apptItem = Application.CreateItem(OlItemType.olAppointmentItem)
+        //            apptItem = Calendar.Items.Add();
 
-                if (Calendar == null)
-                    throw new Exception("Kein Kalender '" + CalendarName + "' wurde gefunden!");
+        //            apptItem.UserProperties.Add(oUserPropertName, OlUserPropertyType.olText);
+        //            oItemID = Guid.NewGuid().ToString();
+        //            apptItem.UserProperties["ItemID"] = oItemID;
+        //        }
+        //        else
+        //        {
+        //            oItemID = ItemID;
+
+        //            foreach (var item in Calendar.Items)
+        //            {
+        //                var itemID_prop = item.UserProperties.Find(oUserPropertName);
+        //                if (itemID_prop == null)
+        //                    continue;
+        //                if (itemID_prop.Value == ItemID)
+        //                {
+        //                    apptItem = item;
+        //                    break;
+        //                }
+        //            }
+        //        }
+
+        //        if (apptItem == null)
+        //            return null;
+
+        //        // Attathments
+        //        if (attachments.Count > 0)
+        //        {
+
+        //            // Clear old Attathments
+        //            while (apptItem.Attachments.Count > 0)
+        //                apptItem.Attachments.Remove(1);
+
+        //            foreach (var attachment in attachments)
+        //                apptItem.Attachments.Add(attachment);
+        //        }
+
+        //        {
+        //            var withBlock = apptItem;
+        //            withBlock.Subject = title;
+        //            withBlock.Body = body;
+        //            withBlock.Start = start;
+        //            withBlock.Location = location;
+        //            withBlock.End = end_;
+        //            withBlock.Duration = duration;
+        //            // .ReminderSet = True
+        //            withBlock.ReminderMinutesBeforeStart = 30;
+        //            // .AllDayEvent = allDayEvent
+        //            withBlock.Save();
+        //        }
+
+        //        if (display)
+        //            apptItem.Display(true);
+
+        //        return oItemID;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        apptItem = null;
+        //        Application = null;
+        //    }
+        //}
+
+        //public static bool DeleteAppointment(dynamic Calendar, string CalendarName, string ItemID, string CalendarNameAlternate = null
+        //)
+        //{
+        //    dynamic apptItem = null;
+        //    dynamic Application;
+        //    dynamic mpnNamespace;
+        //    // Dim oCalendar As Object
+        //    dynamic oAttathments = null;
+        //    const string oUserPropertName = "ItemID";
+        //    string oItemID = null;
+
+        //    try
+        //    {
+        //        //Application = Interaction.CreateObject("Outlook.Application", "");
+        //        Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
+        //        Application = Activator.CreateInstance(OutlookType);
+        //        mpnNamespace = Application.GetNamespace("MAPI");
 
 
-                if (!string.IsNullOrEmpty(ItemID))
-                {
-                    oItemID = ItemID;
+        //        // oCalendar = mpnNamespace.GetDefaultFolder(OlFolderType.olFolderCalendar)
 
-                    for (var i = Calendar.Items.Count; i >= 1; i += -1)
-                    {
-                        var itemID_prop = Calendar.Items(i).UserProperties.Find(oUserPropertName);
-                        if (itemID_prop == null)
-                            continue;
-                        if (itemID_prop.Value == ItemID)
-                        {
-                            Calendar.Items.Remove(i);
-                            return true;
-                        }
-                    }
-                }
+        //        if (Calendar == null && string.IsNullOrEmpty(CalendarName))
+        //            Calendar = GetOutlookFolder(CalendarName, OlFolderType.olFolderCalendar, CalendarNameAlternate);
 
-                if (apptItem == null)
-                    return false;
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                apptItem = null;
-                Application = null;
-            }
-        }
-
-        public static bool DeleteAppointment(dynamic Calendar, string CalendarName, DateTime startTime, DateTime endTime, string CalendarNameAlternate = null
-        )
-        {
-            dynamic Application;
-            dynamic mpnNamespace;
-            string oItemID = null;
-
-            try
-            {
-                //Application = Interaction.CreateObject("Outlook.Application", "");
-                Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
-                Application = Activator.CreateInstance(OutlookType);
-                mpnNamespace = Application.GetNamespace("MAPI");
+        //        if (Calendar == null)
+        //            throw new Exception("Kein Kalender '" + CalendarName + "' wurde gefunden!");
 
 
-                // oCalendar = mpnNamespace.GetDefaultFolder(OlFolderType.olFolderCalendar)
+        //        if (!string.IsNullOrEmpty(ItemID))
+        //        {
+        //            oItemID = ItemID;
 
-                if (Calendar == null && string.IsNullOrEmpty(CalendarName))
-                    Calendar = GetOutlookFolder(CalendarName, OlFolderType.olFolderCalendar, CalendarNameAlternate);
+        //            for (var i = Calendar.Items.Count; i >= 1; i += -1)
+        //            {
+        //                var itemID_prop = Calendar.Items(i).UserProperties.Find(oUserPropertName);
+        //                if (itemID_prop == null)
+        //                    continue;
+        //                if (itemID_prop.Value == ItemID)
+        //                {
+        //                    Calendar.Items.Remove(i);
+        //                    return true;
+        //                }
+        //            }
+        //        }
 
-                if (Calendar == null)
-                    throw new Exception("Kein Kalender '" + CalendarName + "' wurde gefunden!");
+        //        if (apptItem == null)
+        //            return false;
 
-                var filter = "[Start] = '" + startTime.ToString("g") + "' AND [End] = '" + endTime.ToString("g") + "'";
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        apptItem = null;
+        //        Application = null;
+        //    }
+        //}
 
-                var CalendarItems = Calendar.Items;
-                // CalendarItems.IncludeRecurrences = True
-                // CalendarItems.Sort("[Start]", Type.Missing)
-                var restrictItems = CalendarItems.Restrict(filter);
+        //public static bool DeleteAppointment(dynamic Calendar, string CalendarName, DateTime startTime, DateTime endTime, string CalendarNameAlternate = null
+        //)
+        //{
+        //    dynamic Application;
+        //    dynamic mpnNamespace;
+        //    string oItemID = null;
 
-                if (restrictItems.Count == 0)
-                    return false;
+        //    try
+        //    {
+        //        //Application = Interaction.CreateObject("Outlook.Application", "");
+        //        Type OutlookType = Type.GetTypeFromProgID("Outlook.Application");
+        //        Application = Activator.CreateInstance(OutlookType);
+        //        mpnNamespace = Application.GetNamespace("MAPI");
 
-                if (restrictItems.Count == 1)
-                {
-                    var item = restrictItems.GetFirst();
 
-                    item.Delete();
+        //        // oCalendar = mpnNamespace.GetDefaultFolder(OlFolderType.olFolderCalendar)
 
-                    // restrictItems.Delete()
+        //        if (Calendar == null && string.IsNullOrEmpty(CalendarName))
+        //            Calendar = GetOutlookFolder(CalendarName, OlFolderType.olFolderCalendar, CalendarNameAlternate);
 
-                    return true;
-                }
-                else
-                    return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                // apptItem = Nothing
-                Application = null;
-            }
-        }
+        //        if (Calendar == null)
+        //            throw new Exception("Kein Kalender '" + CalendarName + "' wurde gefunden!");
+
+        //        var filter = "[Start] = '" + startTime.ToString("g") + "' AND [End] = '" + endTime.ToString("g") + "'";
+
+        //        var CalendarItems = Calendar.Items;
+        //        // CalendarItems.IncludeRecurrences = True
+        //        // CalendarItems.Sort("[Start]", Type.Missing)
+        //        var restrictItems = CalendarItems.Restrict(filter);
+
+        //        if (restrictItems.Count == 0)
+        //            return false;
+
+        //        if (restrictItems.Count == 1)
+        //        {
+        //            var item = restrictItems.GetFirst();
+
+        //            item.Delete();
+
+        //            // restrictItems.Delete()
+
+        //            return true;
+        //        }
+        //        else
+        //            return false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        // apptItem = Nothing
+        //        Application = null;
+        //    }
+        //}
 
         public static dynamic? GetAndOpenAppointment(string EntryID, dynamic Calendar, string CalendarName, string CalendarNameAlternate = null, bool ShowItem = true)
         {
@@ -2815,8 +2803,9 @@ namespace ohaCalendar
             string Organizer,
             string RequiredAttendees,
             string Availability,
-            bool AllDayEvent
-            , int BusyStatus
+            bool AllDayEvent,
+            int BusyStatus,
+            string CalendarName = null
             )
         {
             {
@@ -2844,6 +2833,7 @@ namespace ohaCalendar
                 withBlock.Availability = Availability;
                 withBlock.AllDayEvent = AllDayEvent;
                 withBlock.BusyStatus = BusyStatus;
+                withBlock.CalendarName = CalendarName;
             }
         }
 
@@ -2898,6 +2888,20 @@ namespace ohaCalendar
                 return ret_val;
             }
         }
+
+        public string Id { get; internal set; }
+        public string BodyPreview { get; internal set; }
+        public string ItemId { get; internal set; }
+        public DateTime LastModifiedTime { get; internal set; }
+        public DateTime End { get; internal set; }
+        public string OptionalAttendees { get; internal set; }
+        public string OnlineMeetingUrl { get; internal set; }
+        public bool IsCancelled { get; internal set; }
+        public string RecurrencePattern { get; internal set; }
+        public string Sensitivity { get; internal set; }
+        public int Importance { get; internal set; }
+        public List<string> Categories { get; internal set; }
+        public string CalendarName { get; internal set; }
     }
 
     public class OutlookContactsItemType

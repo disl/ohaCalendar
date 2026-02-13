@@ -1,12 +1,13 @@
 ﻿using Microsoft.Win32;
 using ohaCalendar.Models;
+using ohaCalendar.Services;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
-using static ohaCalendar.cOutlook;
 using static ohaCalendar.DataSet1;
+using static ohaCalendar.Services.OutlookCalendarService;
 using Label = System.Windows.Forms.Label;
 
 namespace ohaCalendar
@@ -27,7 +28,7 @@ namespace ohaCalendar
         private List<DateTime> m_list_of_days;
         public DateTime? SelectedDay;
         private bool ShowOutlook = true;
-        private List<OutlookCalendarItemType> m_calendar_items;
+        private List<Services.OutlookCalendarItemType> m_calendar_items;
         int m_active_month_no = 0;
         private CalendarRow? m_selected_calendar;
         private DateTime m_basis_date = DateTime.Today;
@@ -62,7 +63,7 @@ namespace ohaCalendar
         private rp_staff_jubileeDataTable? m_all_birthdays = null;
         private List<holidaysRow> m_betriebsurlaub_list;
         private string m_email;
-        private ohaCalendar.cOutlook m_outlook = new cOutlook();
+        //private ohaCalendar.cOutlook m_outlook = new cOutlook();
 
 
         public Calendar()
@@ -70,7 +71,7 @@ namespace ohaCalendar
             InitializeComponent();
         }
 
-        private void calendar_Load(object sender, EventArgs e)
+        private async void calendar_Load(object sender, EventArgs e)
         {
             //rp_staff_jubileeTableAdapter.Connection = new Microsoft.Data.SqlClient.SqlConnection("...");
 
@@ -102,9 +103,9 @@ namespace ohaCalendar
                 is_school_holidaysToolStripComboBox.ComboBox.SelectedIndex = 0;
                 m_current_school_holiday = is_school_holidaysToolStripComboBox.ComboBox.SelectedValue.ToString().ToUpper();
 
-                FillCountriesCMB();
-                ForCalendar_load();
-                GetData();
+                await FillCountriesCMB();
+                await ForCalendar_load();
+                await GetData();
 
                 m_is_started = false;
 
@@ -183,7 +184,7 @@ namespace ohaCalendar
 
                 m_current_school_holiday = _current_school_holiday;
 
-                RefreshHolidays(true);
+                await RefreshHolidays(true);
 
                 CollapseInfo();
 
@@ -191,12 +192,12 @@ namespace ohaCalendar
             }
         }
 
-        private void ForCalendar_load()
+        private async Task ForCalendar_load()
         {
             m_holidays_file = Path.Combine(Path.GetTempPath(), "ohaCalendar_holidays.xml");
 
             ShowHideInfo();
-            GetData();
+            await GetData();
 
             bodyTextBox.SetSelectionLink(true);
             SetStartup();
@@ -223,9 +224,9 @@ namespace ohaCalendar
                     m_current_culture_str = _current_culture;
                     m_current_culture = new CultureInfo(m_current_culture_str);
 
-                    FillStateCMB();
-                    RefreshHolidays(true);
-                    ForCalendar_load();
+                    await FillStateCMB();
+                    await RefreshHolidays(true);
+                    await ForCalendar_load();
                     CollapseInfo();
                     ShowProgress(false);
                 }
@@ -251,7 +252,7 @@ namespace ohaCalendar
                 _key.SetValue(StartupValue, Application.ExecutablePath.ToString());
         }
 
-        private void GetData(DateTime? actDate = null)
+        private async Task GetData(DateTime? actDate = null)
         {
             try
             {
@@ -286,7 +287,7 @@ namespace ohaCalendar
                 m_first_day_of_week = info.DateTimeFormat.FirstDayOfWeek;
                 m_list_of_days = GetDaysByWeek(m_basis_date);
 
-                FillCalendarItems();
+                await FillCalendarItems();
 
                 int month_1 = active_date_minus_1.Month;
                 string month_1_str = new DateTime(year_1, month_1, 1).ToString("MMMM", CultureInfo.CurrentCulture);
@@ -332,18 +333,29 @@ namespace ohaCalendar
             MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
         }
 
-        private void FillCalendarItems()
+        private async Task FillCalendarItems()
         {
-            var calendar = cOutlook.GetCurrentCalendar();
-            m_calendar_items = cOutlook.Outlook_GetCalendarItems(
-                calendar,
-                null, //m_calendar_name,
-                null,
-                null,
-                m_basis_date.AddMonths(m_active_month_no).AddMonths(-1).AddDays(-1),
-                m_basis_date.AddMonths(m_active_month_no).AddMonths(2).AddDays(1),
-                false,
-                IsLightAlgorithmus: true);
+            var service = new OutlookCalendarService();
+            m_calendar_items = await service.GetCalendarItemsAsync(
+                new CalendarEventFilter
+                {
+                    Start = m_basis_date.AddMonths(m_active_month_no).AddMonths(-1).AddDays(-1),
+                    Ende = m_basis_date.AddMonths(m_active_month_no).AddMonths(2).AddDays(1),
+                    IsLightAlgorithmus = true
+                });
+
+
+
+            //var calendar = cOutlook.GetCurrentCalendar();
+            //m_calendar_items = cOutlook.Outlook_GetCalendarItems(
+            //    calendar,
+            //    null, //m_calendar_name,
+            //    null,
+            //    null,
+            //    m_basis_date.AddMonths(m_active_month_no).AddMonths(-1).AddDays(-1),
+            //    m_basis_date.AddMonths(m_active_month_no).AddMonths(2).AddDays(1),
+            //    false,
+            //    IsLightAlgorithmus: true);
         }
 
         private void FillDataTable(TableLayoutPanel panel, List<CalendarItemType> date_list, Label holidaysLabel)
@@ -431,7 +443,7 @@ namespace ohaCalendar
                                     var start_day = m_calendar_items.FirstOrDefault(
                                         x => x.Start.ToShortDateString() == week_list_tmp[col - 1].Day.ToShortDateString()).Start;
                                     var end_day = m_calendar_items.FirstOrDefault(
-                                        x => x.Start.ToShortDateString() == week_list_tmp[col - 1].Day.ToShortDateString()).End_;
+                                        x => x.Start.ToShortDateString() == week_list_tmp[col - 1].Day.ToShortDateString()).End;
 
                                     myholiday_list = new List<DateTime>();
                                     for (DateTime d = start_day; d < end_day; d = d.AddDays(1))
@@ -551,10 +563,10 @@ namespace ohaCalendar
             }
         }
 
-        private void Calendar_LabelClick(object? sender, EventArgs e)
+        private async void Calendar_LabelClick(object? sender, EventArgs e)
         {
             if (sender != null)
-                ForLinkClicked(((Label)sender).Tag as CalendarItemType);
+                await ForLinkClicked(((Label)sender).Tag as CalendarItemType);
         }
 
         private bool Is_my_holiday(Control control, List<DateTime> myholiday_list)
@@ -571,9 +583,9 @@ namespace ohaCalendar
             return ret_val;
         }
 
-        private void Label_Click(object? sender, EventArgs e)
+        private async void Label_Click(object? sender, EventArgs e)
         {
-            ForLinkClicked(((Label)sender).Tag as CalendarItemType);
+            await ForLinkClicked(((Label)sender).Tag as CalendarItemType);
         }
 
         private string? GetPotenz(int CountOfTermins)
@@ -632,13 +644,13 @@ namespace ohaCalendar
             return ((structHolidays)ret_val).date != DateTime.MinValue ? (structHolidays)ret_val : null;
         }
 
-        private void Calendar_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
+        private async void Calendar_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
             if (sender != null)
-                ForLinkClicked(((LinkLabel)sender).Tag as CalendarItemType);
+                await ForLinkClicked(((LinkLabel)sender).Tag as CalendarItemType);
         }
 
-        private void ForLinkClicked(CalendarItemType SelectedItem)
+        private async Task ForLinkClicked(CalendarItemType SelectedItem)
         {
             try
             {
@@ -652,23 +664,33 @@ namespace ohaCalendar
 
                 if (ShowOutlook)
                 {
-                    var calendar = cOutlook.GetCurrentCalendar();
-                    m_calendar_items = cOutlook.Outlook_GetCalendarItems(
-                        calendar,
-                        null, //m_calendar_name,
+                    //var calendar = cOutlook.GetCurrentCalendar();
+                    //m_calendar_items = cOutlook.Outlook_GetCalendarItems(
+                    //    calendar,
+                    //    null, //m_calendar_name,
+                    //    null,
+                    //    null,
+                    //    ((DateTime)SelectedDay).AddDays(-1).AddHours(23),
+                    //    ((DateTime)SelectedDay).AddDays(1).AddMinutes(1),
+                    //    false,
+                    //    IsLightAlgorithmus: true
+                    //    );
+
+                    var service = new OutlookCalendarService();
+                    m_calendar_items = await service.GetCalendarItemsByUserAsync(
                         null,
-                        null,
-                        ((DateTime)SelectedDay).AddDays(-1).AddHours(23),
-                        ((DateTime)SelectedDay).AddDays(1).AddMinutes(1),
-                        false,
-                        IsLightAlgorithmus: true
-                        );
+                        new CalendarEventFilter
+                        {
+                            Start = m_basis_date.AddMonths(m_active_month_no).AddMonths(-1).AddDays(-1),
+                            Ende = m_basis_date.AddMonths(m_active_month_no).AddMonths(2).AddDays(1),
+                            IsLightAlgorithmus = true
+                        });
 
                     Cursor = Cursors.WaitCursor;
 
                     if (m_calendar_items != null && m_calendar_items.Count > 0)
                     {
-                        foreach (OutlookCalendarItemType item in m_calendar_items)
+                        foreach (Services.OutlookCalendarItemType item in m_calendar_items)
                         {
                             calendarDataSet.Calendar.AddCalendarRow(
                                 item.Subject,
@@ -676,10 +698,10 @@ namespace ohaCalendar
                                 Convert.ToInt32(item.Duration),
                                 item.Location,
                                 item.Body,
-                                item.End_,
+                                item.End,
                                 item.Organizer,
                                 item.RequiredAttendees,
-                                item.EntryID,
+                                item.Id,
                                 item.AllDayEvent,
                                 item.BusyStatus
                                 );
@@ -774,9 +796,9 @@ namespace ohaCalendar
             return ret;
         }
 
-        private void getCalendarItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void getCalendarItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GetData();
+            await GetData();
         }
 
         private void close_openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -801,23 +823,23 @@ namespace ohaCalendar
             }
         }
 
-        private void move_calendar_backToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void move_calendar_backToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_active_month_no--;
-            GetData();
+            await GetData();
         }
 
-        private void move_calendar_forwardToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void move_calendar_forwardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_active_month_no++;
-            GetData();
+            await GetData();
         }
 
-        private void move_calendar_currentToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void move_calendar_currentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_basis_date = DateTime.Today;
             m_active_month_no = 0;
-            GetData();
+            await GetData();
         }
 
         private void bodyTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -857,7 +879,7 @@ namespace ohaCalendar
         {
             if (m_selected_calendar != null && !m_selected_calendar.IsEntryIDNull())
             {
-                var item = cOutlook.GetAndOpenAppointment(m_selected_calendar.EntryID, null, null);
+                //var item = cOutlook.GetAndOpenAppointment(m_selected_calendar.EntryID, null, null);
             }
         }
 
@@ -869,12 +891,12 @@ namespace ohaCalendar
             }
         }
 
-        private void byDateToolStripMenuItem_Click(object sender, EventArgs e)
+        private async  void byDateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InputForm_date inputForm_Date = new InputForm_date();
             if (inputForm_Date.ShowDialog() == DialogResult.OK)
             {
-                GetData(inputForm_Date.Value);
+                await GetData(inputForm_Date.Value);
             }
         }
 
@@ -904,7 +926,7 @@ namespace ohaCalendar
             }
         }
 
-        private void FillHolidayArray(int year, bool DeleteOld = true, bool DoAlways = false)
+        private async Task FillHolidayArray(int year, bool DeleteOld = true, bool DoAlways = false)
         {
             List<HolidayType?> m_holidays = null;
 
@@ -941,7 +963,7 @@ namespace ohaCalendar
                             "&validFrom=" + year +
                             "-01-01&validTo=" + year + "-12-31";
 
-                    var json = wc.GetStringAsync(url).Result;
+                    var json = await wc.GetStringAsync(url);
                     if (json != null)
                         m_holidays = JsonSerializer.Deserialize<List<HolidayType>>(json);
                 }
@@ -987,7 +1009,7 @@ namespace ohaCalendar
                         }
                     }
 
-                    GetData();
+                    await GetData();
                 }
                 m_old_year = year;
             }
@@ -1001,7 +1023,7 @@ namespace ohaCalendar
             }
         }
 
-        private void FillCountriesCMB()
+        private async Task FillCountriesCMB()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("DisplayMember", typeof(string));
@@ -1012,7 +1034,7 @@ namespace ohaCalendar
             using (HttpClient wc = new HttpClient())
             {
                 var url = "https://openholidaysapi.org/Countries";
-                var json = wc.GetStringAsync(url).Result;
+                var json = await wc.GetStringAsync(url);
                 if (json != null)
                     countriesList = JsonSerializer.Deserialize<List<CountriesType>>(json);
             }
@@ -1051,7 +1073,7 @@ namespace ohaCalendar
             }
         }
 
-        private void FillStateCMB()
+        private async Task FillStateCMB()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("DisplayMember", typeof(string));
@@ -1064,7 +1086,7 @@ namespace ohaCalendar
             using (HttpClient wc = new HttpClient())
             {
                 var url = "https://openholidaysapi.org/Subdivisions?countryIsoCode=" + m_current_culture_str;
-                var json = wc.GetStringAsync(url).Result;
+                var json = await wc.GetStringAsync(url);
                 if (json != null)
                 {
                     federalStateList = JsonSerializer.Deserialize<List<FederalStateType>>(json);
@@ -1101,9 +1123,10 @@ namespace ohaCalendar
                     var displayMember = name_obj.text;
                     AddRow(dt, displayMember, item.shortName);
                 }
-                stateToolStripComboBox.ComboBox.DataSource = dt;
+               
                 stateToolStripComboBox.ComboBox.DisplayMember = "DisplayMember";
                 stateToolStripComboBox.ComboBox.ValueMember = "ValueMember";
+                stateToolStripComboBox.ComboBox.DataSource = dt;
                 stateToolStripComboBox.ComboBox.SelectedIndex = 1;
 
                 stateToolStripComboBox.Visible = true;
@@ -1154,7 +1177,7 @@ namespace ohaCalendar
 
                 m_subdivisionCode = _subdivisionCode;
 
-                RefreshHolidays(true);
+                await RefreshHolidays(true);
 
                 CollapseInfo();
 
@@ -1162,13 +1185,13 @@ namespace ohaCalendar
             }
         }
 
-        private void RefreshHolidays(bool doAlways)
+        private async Task RefreshHolidays(bool doAlways)
         {
             if (year_1 > 0)
             {
-                FillHolidayArray(year_1, DoAlways: doAlways);
+                await FillHolidayArray(year_1, DoAlways: doAlways);
                 if (year_4 > year_1)
-                    FillHolidayArray(year_4, false, DoAlways: doAlways);
+                    await FillHolidayArray(year_4, false, DoAlways: doAlways);
             }
         }
 
@@ -1186,12 +1209,12 @@ namespace ohaCalendar
             {
                 if (!string.IsNullOrEmpty(m_email))
                 {
-                    m_outlook.SendEmailPerOutlook(
-                        m_email,
-                        Properties.Resources.Happy_birthday_subject,
-                        Properties.Resources.Happy_birthday,
-                        Display: true
-                        );
+                    //m_outlook.SendEmailPerOutlook(
+                    //    m_email,
+                    //    Properties.Resources.Happy_birthday_subject,
+                    //    Properties.Resources.Happy_birthday,
+                    //    Display: true
+                    //    );
                 }
             }
         }
@@ -1262,7 +1285,7 @@ namespace ohaCalendar
             }
         }
 
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private async void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
             if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
             {
@@ -1274,7 +1297,7 @@ namespace ohaCalendar
                 else
                     m_active_month_no++;
 
-                GetData();
+                await GetData();
 
                 timer_scroll.Enabled = true;
                 timer_scroll.Start();

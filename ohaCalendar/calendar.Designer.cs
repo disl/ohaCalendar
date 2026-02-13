@@ -178,8 +178,8 @@ namespace ohaCalendar
             stateToolStripComboBox = new ToolStripComboBox();
             is_school_holidaysToolStripComboBox = new ToolStripComboBox();
             pls_waitLabel = new Label();
-            rp_staff_jubileeTableAdapter = new DataSet1TableAdapters.rp_staff_jubileeTableAdapter();
-            holidaysTableAdapter = new DataSet1TableAdapters.holidaysTableAdapter();
+            rp_staff_jubileeTableAdapter = new ohaCalendar.DataSet1TableAdapters.rp_staff_jubileeTableAdapter();
+            holidaysTableAdapter = new ohaCalendar.DataSet1TableAdapters.holidaysTableAdapter();
             timer_scroll = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
